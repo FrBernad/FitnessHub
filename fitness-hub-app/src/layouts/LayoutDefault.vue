@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppBar></AppBar>
+    <HomeAppBar></HomeAppBar>
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -10,13 +10,13 @@
 
 <script>
   import Footer from '../components/Footer'
-  import AppBar from '../components/LandingAppBar'
+  import HomeAppBar from '../components/HomeAppBar'
 
   export default {
     name: 'LayoutDefault',
     components: {
       Footer,
-      AppBar
+      HomeAppBar
     },
   }
 </script>
