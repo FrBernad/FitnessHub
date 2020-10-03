@@ -5,34 +5,36 @@
     <v-row justify="center" align="center">
       <v-col cols="12">
         <v-container fluid>
-          <h1 class="text-center text-h1 font-weight-bold whiteCS--text shadow">Train yourself and<br>others.</h1>
-          <p class="text-center text-h4 font-weight-medium whiteCS--text shadow pa-5">High-quality workout routines
+          <h1 class="text-center text-h5 text-sm-h3 text-md-h1 font-weight-bold whiteCS--text shadow">Train yourself and<br>others.</h1>
+          <p class="text-center ma-0 text-subtitle-1 text-sm-h5 text-md-h4 font-weight-medium whiteCS--text shadow px-5 pt-5">High-quality workout routines
             <br> anywhere, anytime.</p>
         </v-container>
       </v-col>
-      <v-col cols="6">
-        <v-row align="center" justify="space-around">
-          <v-col cols="3">
-            <v-btn @click="registerOverlay=true"
-                   x-large min-width="180px"
-                   min-height="45px"
-                   elevation="5"
-                   id="register"
-            >
-              + Register
-            </v-btn>
-          </v-col>
-          <v-col cols="3">
-            <v-btn @click="loginOverlay=true"
-                   x-large min-width="180px"
-                   min-height="45px"
-                   outlined
-                   color="#F8F9FA" elevation="5"
-            >
-              Login
-            </v-btn>
-          </v-col>
-        </v-row>
+      <v-col cols="7" md="5" lg="4">
+        <v-container fluid>
+          <v-row align="center" justify="space-around">
+            <v-col cols="12" sm="6" class="d-flex justify-center">
+              <v-btn @click="registerOverlay=true"
+                     x-large min-width="96%"
+                     min-height="45px"
+                     elevation="5"
+                     id="register"
+              >
+                + Register
+              </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6" class="d-flex justify-center">
+              <v-btn @click="loginOverlay=true"
+                     x-large min-width="96%"
+                     min-height="45px"
+                     outlined
+                     color="#F8F9FA" elevation="5"
+              >
+                Login
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
@@ -74,11 +76,6 @@
   }
 
   .bg {
-    background-image: url("../assets/imgs/landingPageBG.jpg");
-    height: 100%;
-
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: transparent;
   }
 </style>

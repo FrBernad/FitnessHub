@@ -16,6 +16,17 @@ const routes = [
     ]
   },
   {
+    path: '/userHome',
+    component: () => import('../layouts/LayoutDefault'),
+    children: [
+      {
+        path: '',
+        name: 'UserHome',
+        component: () => import('../views/UserHome')
+      }
+    ]
+  },
+  {
     path: '*',
     redirect: '/404',
     component: () => import('../layouts/LayoutLandingPage'),

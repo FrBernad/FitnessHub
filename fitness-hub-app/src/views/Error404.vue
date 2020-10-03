@@ -15,8 +15,3 @@
   }
 </script>
 
-<style scoped>
-  * {
-    background-color: #DEE2E6;
-  }
-</style>

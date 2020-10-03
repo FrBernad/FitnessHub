@@ -9,7 +9,7 @@
 
 <script>
   import Footer from '../components/Footer'
-  import AppBar from '../components/AppBar'
+  import AppBar from '../components/LandingAppBar'
 
   export default {
     name: 'LayoutDefault',
