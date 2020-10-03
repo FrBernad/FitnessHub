@@ -6,19 +6,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '',
-    component: () => import('../layouts/LayoutNoAppBar'),
+    component: () => import('../layouts/LayoutLandingPage'),
     children: [
       {
         path: '',
-        name: 'Home',
-        component: () => import('../views/Home')
+        name: 'LandingPage',
+        component: () => import('../views/LandingPage')
       }
     ]
   },
   {
     path: '*',
     redirect: '/404',
-    component: () => import('../layouts/LayoutNoAppBar'),
+    component: () => import('../layouts/LayoutLandingPage'),
     children: [
       {
         path: '',
