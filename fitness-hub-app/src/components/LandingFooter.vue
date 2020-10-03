@@ -1,5 +1,5 @@
 <template>
-  <v-footer app color="rgb(33, 37, 41)" elevation="3" padless tile absolute>
+  <v-footer app color="rgba(33, 37, 41, 0.75)" elevation="3" padless tile>
     <v-row align="center">
       <v-col cols="4" class="d-flex align-center justify-center offset-4">
         <p class="text-center text-caption mb-0">Copyright © 2020 FitnessHub inc.<br>All rights reserved.</p>
@@ -8,10 +8,10 @@
         <v-btn href="https://www.facebook.com/" target="_blank" icon color="rgb(173, 181, 189)">
           <v-icon>mdi-facebook</v-icon>
         </v-btn>
-        <v-btn href="https://www.twitter.com/" target="_blank"icon color="rgb(173, 181, 189)">
+        <v-btn href="https://www.twitter.com/" target="_blank" icon color="rgb(173, 181, 189)">
           <v-icon>mdi-twitter</v-icon>
         </v-btn>
-        <v-btn href="https://www.instragram.com/" target="_blank" icon color="rgb(173, 181, 189)">
+        <v-btn href="https://www.instagram.com/" target="_blank" icon color="rgb(173, 181, 189)">
           <v-icon>mdi-instagram</v-icon>
         </v-btn>
       </v-col>
@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: "Footer"
+    name: "LandingFooter"
   }
 </script>
 

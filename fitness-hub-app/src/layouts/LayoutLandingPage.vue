@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import Footer from '../components/Footer'
+  import Footer from '../components/LandingFooter'
   import AppBar from '../components/LandingAppBar'
 
   export default {

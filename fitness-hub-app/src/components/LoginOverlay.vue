@@ -72,6 +72,7 @@
 
 <script>
   export default {
+    name: "LoginOverlay",
     props: {
       lOn: {
         type: Boolean,
@@ -80,13 +81,12 @@
         default: false
       }
     },
-    name: "LoginOverlay",
     data() {
       return {
         show: false,
         password: '',
         rules: {
-          min: v => v.length >= 8 || 'At leat 8 characters long',
+          min: v => v.length >= 8 || 'At leat 8 characters long'
         },
       }
     },

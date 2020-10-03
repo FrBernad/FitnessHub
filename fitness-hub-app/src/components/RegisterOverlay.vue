@@ -22,7 +22,7 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn color="primary" :to="{name : 'UserHome'}" large width="90%">Entrar</v-btn>
+              <v-btn color="primary" :to="{name : 'CreateRoutine'}" large width="90%">Entrar</v-btn>
             </v-form>
 
             <div class="mt-3">
