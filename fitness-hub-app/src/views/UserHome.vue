@@ -1,27 +1,27 @@
 <template>
-
-  <v-container fluid fill-height class="pa-0">
+  <v-container fluid fill-height class="pa-0 bg">
     <v-row justify="center" align="center" class="fill-height">
-        <v-col cols="4" class="fill-height pa-0">
-          <v-card rounded="0" height="100%" class="workoutsBG iluminate d-flex align-center justify-center">
-            <v-card-title class="font-weight-bold text-h3 white--text">WORKOUTS</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col cols="4" class="fill-height pa-0">
-          <v-card rounded="0" height="100%" class="createRoutineBG iluminate d-flex align-center justify-center">
-            <v-card-title class="font-weight-bold text-h3 white--text">CREATE ROUTINE</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col cols="4" class="fill-height pa-0">
-          <v-card rounded="0" height="100%" class="myRoutineBG iluminate d-flex align-center justify-center">
-            <v-card-title class="font-weight-bold text-h3 white--text">MY ROUTINES</v-card-title>
-
-          </v-card>
-
-
-        </v-col>
+      <v-col cols="4" class="fill-height pa-0">
+        <v-card to="workouts" rounded="0" height="100%" class="workoutsBG iluminate d-flex align-center justify-center">
+          <v-card-title class="font-weight-bold text-center text-body-2 text-sm-h5 text-md-h4 whiteCS--text shadow">WORKOUTS</v-card-title>
+        </v-card>
+      </v-col>
+      <v-col cols="4" class="fill-height pa-0">
+        <v-card to="/userHome/createRoutine" rounded="0" height="100%"
+                class="createRoutineBG iluminate d-flex align-center text-center justify-center">
+          <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h4 whiteCS--text shadow">
+            CREATE <br v-if="$vuetify.breakpoint.smAndDown">ROUTINE</v-card-title>
+        </v-card>
+      </v-col>
+      <v-col cols="4" class="fill-height pa-0">
+        <v-card to="myRoutines" rounded="0" height="100%"
+                class="myRoutineBG iluminate d-flex align-center justify-center">
+          <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-center text-md-h4 whiteCS--text shadow">
+            MY <br v-if="$vuetify.breakpoint.smAndDown">ROUTINES
+          </v-card-title>
+        </v-card>
+      </v-col>
     </v-row>
-
   </v-container>
 </template>
 
@@ -32,31 +32,41 @@
 </script>
 
 <style scoped>
-  .createRoutineBG{
-      height: 100%;
-      background: url("../assets/imgs/createRoutinesImg.jpg") no-repeat center;
-      background-size: cover;
-      opacity: 1;
+  .shadow {
+    text-shadow: 2px 2px 4px #1C1C1C;
   }
 
-  .workoutsBG{
+  .bg {
+    background-color: rgb(171, 171, 171);
+  }
+
+  .createRoutineBG {
+    height: 100%;
+    background: url("../assets/imgs/createRoutinesImg.jpg") no-repeat center;
+    background-size: cover;
+    opacity: 1;
+  }
+
+  .workoutsBG {
     height: 100%;
     background: url("../assets/imgs/WorkoutsHome.png") no-repeat center;
     background-size: cover;
     opacity: 1;
   }
 
-  .myRoutineBG{
+  .myRoutineBG {
     height: 100%;
     background: url("../assets/imgs/myRoutinesHome.jpg") no-repeat center;
     background-size: cover;
     opacity: 1;
   }
-  .iluminate{
-    transition: opacity .3s ease-in-out ;
+
+  .iluminate {
+    transition: opacity .3s ease-in-out;
   }
-  .iluminate:hover{
-    opacity: 0.8;
+
+  .iluminate:hover {
+    opacity: 0.7;
   }
 
 </style>

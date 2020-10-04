@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <HomeAppBar></HomeAppBar>
+    <AppBar></AppBar>
+    <NavDrawer></NavDrawer>
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -10,13 +11,15 @@
 
 <script>
   import Footer from '../components/Footer'
-  import HomeAppBar from '../components/HomeAppBar'
+  import AppBar from '../components/AppBar'
+  import NavDrawer from '../components/NavDrawer'
 
   export default {
     name: 'LayoutDefault',
     components: {
       Footer,
-      HomeAppBar
+      AppBar,
+      NavDrawer
     },
   }
 </script>

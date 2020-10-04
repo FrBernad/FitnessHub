@@ -25,7 +25,7 @@ const routes = [
         component: () => import('../views/UserHome')
       },
       {
-        path: '/CreateRoutine',
+        path: 'createRoutine',
         name: 'CreateRoutine',
         component: () => import('../views/CreateRoutine')
       }
