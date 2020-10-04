@@ -30,10 +30,19 @@
         sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"]
       }
     },
-    }
+  }
 </script>
 
 <style scoped>
+  .bg {
+    height: 100%;
+    background: linear-gradient(
+      rgba(33, 37, 41, 0.65),
+      rgba(33, 37, 41, 0.65)
+    ), url("../assets/imgs/createRoutineBG.jpg") no-repeat center;
+    background-size: cover;
+  }
+
   .bgColor {
     background-color: rgb(52, 58, 64);
   }
