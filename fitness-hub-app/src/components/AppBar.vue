@@ -15,7 +15,7 @@
           <v-tab>WORKOUTS</v-tab>
           <v-tab to="/userHome/createRoutine" exact>CREATE ROUTINE</v-tab>
           <v-tab>MY ROUTINES</v-tab>
-          <v-tab>
+          <v-tab to="/userHome/profile" exact>
             <v-icon class="px-1">mdi-account</v-icon>
             JOE
           </v-tab>

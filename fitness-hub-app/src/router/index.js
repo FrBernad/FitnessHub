@@ -28,6 +28,11 @@ const routes = [
         path: 'createRoutine',
         name: 'CreateRoutine',
         component: () => import('../views/CreateRoutine')
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('../views/Profile')
       }
     ]
   },
