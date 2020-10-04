@@ -23,7 +23,7 @@
         <v-list-item to="/userHome/createRoutine" exact>
           <v-list-item-title>CREATE ROUTINE</v-list-item-title>
         </v-list-item>
-        <v-list-item>
+        <v-list-item to="/userHome/profile" exact>
           <v-list-item-icon>
             <v-icon class="px-1">mdi-account</v-icon>
           </v-list-item-icon>
