@@ -30,6 +30,16 @@ const routes = [
         component: () => import('../views/CreateRoutine')
       },
       {
+        path: 'communityWorkouts',
+        name: 'CommunityWorkouts',
+        component: () => import('../views/CommunityWorkouts')
+      },
+      {
+        path: 'myRoutines',
+        name: 'MyRoutines',
+        component: () => import('../views/MyRoutines')
+      },
+      {
         path: 'profile',
         name: 'Profile',
         component: () => import('../views/Profile')
