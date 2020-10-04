@@ -6,7 +6,7 @@
           <v-img src="../assets/imgs/brand.png" class="mt-2 my-4" contain max-width="220" max-height="50">
           </v-img>
         </router-link>
-        <v-list-item>
+        <v-list-item to="/userHome/profile" exact>
           <v-list-item-icon>
             <v-icon class="px-1">mdi-account</v-icon>
           </v-list-item-icon>

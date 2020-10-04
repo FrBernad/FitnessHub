@@ -2,7 +2,7 @@
   <v-container fluid fill-height class="pa-0 bg">
     <v-row justify="center" class="align-self-start fill-height">
       <v-col justify="center" cols="8">
-        <v-card class="fill-height">
+        <v-card class="fill-height" color="rgb(233, 236, 239)" dark>
           <v-img height="25%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
           <v-col style="position:relative">
             <v-avatar size="180" style="position:absolute; top: -100px" class="ml-6 elevation-5">
@@ -29,7 +29,7 @@ export default {
 
 <style>
 .bg {
-  background-color: #E9ECEF;
+  background-color: rgb(52, 58, 64);
 }
 </style>
 
