@@ -9,12 +9,30 @@
               <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar>
           </v-col>
-          <v-list-item color="rgba(0, 0, 0, .4)">
-            <v-list-item-content>
-              <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+          <v-col justify="center" align="left" offset-md="3">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="black--text">Marcus Obrien</v-list-item-title>
+                <v-list-item-title class="black--text">Age: 20</v-list-item-title>
+                <v-list-item-title class="black--text">Country: Argentina</v-list-item-title>
+
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col justify="center" align="left">
+            <v-container fluid>
+              <v-textarea
+                label="Bio"
+                outlined
+                rows="4"
+                row-height="15"
+                no-resize
+                counter
+                :rules="rules"
+                :value="value"
+              ></v-textarea>
+            </v-container>
+          </v-col>
         </v-card>
       </v-col>
     </v-row>
@@ -23,7 +41,11 @@
 
 <script>
 export default {
-  name: "Profile"
+  name: "Profile",
+  data: () => ({
+    rules: [v => v.length <= 100 || 'Max 100 characters'],
+    value:'Eras assimilant in tolosa! Core, mystery, and vision. All children like shreded chocolates in orange juice and garlic. Dimension is not one in chaos, the kingdom, or private places, but everywhere..' ,
+  }),
 }
 </script>
 
