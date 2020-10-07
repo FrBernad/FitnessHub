@@ -1,20 +1,20 @@
 <template>
   <v-card class="pa-5 rounded-corner">
     <v-row align="start" justify="center">
-      <v-col cols="12 d-flex justify-center align-center" >
+      <v-col cols="12" class="d-flex justify-center align-center" >
       <v-img class="rounded-corner " src="../assets/imgs/routineCard.jpg" max-width="250" max-height="200"></v-img>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" class="d-flex justify-center align-center" lg="6">
         <h4>MUSCLE & STRENGHT</h4>
       </v-col>
-      <v-col cols="4" class="d-flex justify-center align-center">
+      <v-col cols="8" lg="4" class="d-flex justify-center align-center">
         <v-icon>mdi-star-outline</v-icon>
         <v-icon>mdi-star-outline</v-icon>
         <v-icon>mdi-star-outline</v-icon>
         <v-icon>mdi-star-outline</v-icon>
         <v-icon>mdi-star-outline</v-icon>
       </v-col>
-      <v-col cols="2" class="d-flex justify-start align-center">
+      <v-col cols="4" lg="2" class="d-flex justify-start align-center">
         <v-icon>mdi-heart-outline</v-icon>
       </v-col>
       <v-col cols="9">
