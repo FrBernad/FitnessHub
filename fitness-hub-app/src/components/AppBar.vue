@@ -14,7 +14,6 @@
           <v-tab to="/userHome" exact>HOME</v-tab>
           <v-tab to="/userHome/communityWorkouts" exact>COMMUNITY WORKOUTS</v-tab>
           <v-tab to="/userHome/myRoutines" exact>MY ROUTINES</v-tab>
-          <v-tab to="/userHome/createRoutine" exact>CREATE ROUTINE</v-tab>
           <v-tab to="/userHome/profile" exact>
             <v-icon class="px-1">mdi-account</v-icon>
             JOE
