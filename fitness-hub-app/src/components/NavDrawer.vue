@@ -30,21 +30,12 @@
 </template>
 
 <script>
+  import {sync} from 'vuex-pathify'
+
   export default {
     name: "NavDrawer",
     computed: {
-      drawer: {
-        get() {
-          return this.$store.state.drawer;
-        },
-        set(value) {
-          this.$store.commit("changeDrawer", value);
-        }
-      }
+     drawer: sync('app/drawer')
     },
   }
 </script>
-
-<style scoped>
-
-</style>

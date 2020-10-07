@@ -2,7 +2,7 @@
   <v-container fluid style="height: 100%" class="pa-0 bg">
     <v-row align="start" justify="center">
       <v-col cols="12" class="pa-0">
-        <v-card color="rgb(233, 236, 239)">
+        <v-card color="rgb(52, 58, 64)" dark>
           <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="300px"
                  style="position: relative">
           </v-img>
@@ -15,13 +15,13 @@
                 >
                   <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
                 </v-avatar>
-                <h1 class="black--text">John Doe</h1>
+                <h1 class="whiteCS--text">John Doe</h1>
               </v-container>
             </v-col>
           </v-row>
           <v-row align="start" justify="space-around">
             <v-col cols="12" md="6" class="pt-0">
-              <v-card class="pa-2 ma-8" color="rgb(233, 236, 239)" elevation="3">
+              <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
                 <v-card-title>Personal data</v-card-title>
                 <v-autocomplete
                   class="ma-4" style="width: 80%"
@@ -72,9 +72,9 @@
               </v-card>
             </v-col>
             <v-col cols="12" md="6" class="pt-0">
-              <v-card class="pa-2 ma-8" color="rgb(233, 236, 239)" elevation="3">
-                <v-card-title>Favorites</v-card-title>
-                <v-list color="rgb(233, 236, 239)">
+              <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
+                <v-card-title>Favorite exercises</v-card-title>
+                <v-list color="rgb(73, 80, 87)">
                   <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Exercise 1</v-list-item-title>

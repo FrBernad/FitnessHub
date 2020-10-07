@@ -1,27 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import pathify from "vuex-pathify";
+
+import * as modules from './modules'
+
 Vue.use(Vuex)
 
+const store = {
+  modules
+}
+
 export default new Vuex.Store({
-  state: {
-    drawer:false
-  },
-  getters:{
-    drawer: state => {
-      return state.drawer;
-    }
-  },
-  mutations: {
-    activateDrawer: state => {
-      state.drawer=true;
-    },
-    changeDrawer: (state,payload) => {
-      state.drawer=payload;
-    }
-  },
-  actions: {
-  },
-  modules: {
-  }
+  plugins: [pathify.plugin],
+  ...store
 })

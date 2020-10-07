@@ -2,7 +2,7 @@
   <v-app-bar app color="rgb(33, 37, 41)" elevation="0">
     <v-app-bar-nav-icon
       class="hidden-md-and-up whiteCS--text"
-      @click="activateDrawer">
+      @click="drawer=!drawer">
     </v-app-bar-nav-icon>
     <template v-if="$vuetify.breakpoint.smAndUp">
       <router-link to="/userHome">
@@ -26,19 +26,12 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
+  import {sync} from 'vuex-pathify'
 
   export default {
     name: "AppBar",
-    methods: {
-      ...mapMutations([
-        'activateDrawer'
-      ])
-    }
+    computed: {
+      ...sync('app', ['drawer'])
+    },
   }
 </script>
-
-<style scoped>
-
-</style>
-
