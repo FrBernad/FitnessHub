@@ -1,8 +1,6 @@
 <template>
   <v-container fluid style="height: 100%" class="pa-0 ma-0 d-flex-align-start bg">
     <v-row class="titleBg align-start align-self-start">
-      <v-col cols="12" class="'pa-0">
-        <v-row class="align-self-start align-start">
           <v-col cols="4" class="d-flex align-center justify-center ">
             <v-select hide-details dark hide-selected  height="52px" class="selectBG" dense label="SORT BY" color="#F8F9FA"  outlined></v-select>
           </v-col>
@@ -15,8 +13,6 @@
             </v-btn>
           </v-col>
         </v-row>
-      </v-col>
-    </v-row>
 
     <v-row class="cardsBG  ma-0 pa-0">
         <v-col cols="6" class="ma-0 pa-0">
@@ -27,8 +23,8 @@
     </v-col>
     </v-row>
 
-    <v-row>
-      <v-col>
+    <v-row class="align-self-end pb-0">
+      <v-col class="pb-0">
         <v-pagination class="paginationBg" length="3"  prev-icon="mdi-arrow-left-circle-outline" next-icon="mdi-arrow-right-circle-outline"></v-pagination>
       </v-col>
     </v-row>
