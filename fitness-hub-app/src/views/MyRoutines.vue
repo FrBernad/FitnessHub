@@ -27,13 +27,18 @@
     </v-col>
     </v-row>
 
+    <v-row>
+      <v-col>
+        <v-pagination class="paginationBg" length="3" prev-icon="mdi-arrow-left-circle-outline" next-icon="mdi-arrow-right-circle-outline"></v-pagination>
+      </v-col>
+    </v-row>
+
 
   </v-container>
 </template>
 
 <script>
 import RoutinesCard from "@/components/RoutinesCard";
-
 export default {
   name: "MyRoutines.vue",
   components: {RoutinesCard}
@@ -58,5 +63,8 @@ export default {
 .selectBG{
   color: #F8F9FA;
   border: thin solid #F8F9FA;
+}
+.paginationBg{
+  background-color: #343A40;
 }
 </style>

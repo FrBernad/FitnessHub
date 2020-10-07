@@ -20,7 +20,7 @@
       <v-col cols="9" class="pl-10 pt-0">
         <h5>by JOE</h5>
       </v-col>
-      <v-col cols="3"class="d-flex justify-end align-center pr-10" >
+      <v-col cols="3"class="d-flex justify-end align-center pr-10 pt-0" >
         <h5>15 min</h5>
       </v-col>
     </v-row>
