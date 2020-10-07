@@ -25,7 +25,7 @@
           <v-list-item-icon>
             <v-icon class="px-1">mdi-account</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>JOE</v-list-item-title>
+          <v-list-item-title>FAUS</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>

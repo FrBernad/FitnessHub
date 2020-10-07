@@ -7,30 +7,33 @@
           >
           </v-img>
           <v-row>
-            <v-col cols="12">
+            <v-col cols="12" class="pa-0">
               <v-container fluid fill-height class="d-flex justify-center align-center pb-0">
                 <v-row align="center" justify="center">
-                  <v-col cols="4" style="position: relative">
-                    <v-avatar size="200px"
-                              class="avBorder"
-                              style="bottom: 20px; position: absolute"
-                    >
-                      <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
-                    </v-avatar>
-                    <v-btn
-                      class="mx-2"
-                      fab
-                      dark
-                      small
-                      color="primary"
-                      elevation="5"
-                      style="position:absolute; bottom: 15px; right: 40px"
-                    >
-                      <v-icon>mdi-camera</v-icon>
-                    </v-btn>
+                  <v-col cols="6" class="d-flex align-center justify-center" style="position: relative">
+                    <div style="position: absolute; bottom: 15px">
+                      <v-avatar size="200px"
+                                class="avBorder elevation-5"
+                      >
+                        <img src="../assets/imgs/fausDuro.jpg">
+                      </v-avatar>
+                      <v-btn
+                        class="mx-2"
+                        fab
+                        dark
+                        small
+                        color="primary"
+                        elevation="5"
+                        style="position:absolute; bottom:0;right:10px"
+                        @click="openPicPicker"
+                      >
+                        <v-icon>mdi-camera</v-icon>
+                      </v-btn>
+                      <input type="file" style="display: none" ref="picInput" @change="changePicture">
+                    </div>
                   </v-col>
                   <v-col cols="12" class="pa-0">
-                    <h1 class="whiteCS--text text-center">John Doe</h1>
+                    <h1 class="whiteCS--text text-center">FAUS</h1>
                   </v-col>
                 </v-row>
               </v-container>
@@ -39,13 +42,24 @@
           <v-row align="start" justify="space-around">
             <v-col cols="12" md="6" class="pt-0">
               <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
-                <v-card-title>Personal data</v-card-title>
+                <v-row align="center" justify="space-between">
+                  <v-col cols="9" class="pt-0">
+                    <v-card-title>
+                      Personal data
+                    </v-card-title>
+                  </v-col>
+                  <v-col cols="3" class="d-flex justify-center">
+                    <v-btn icon @click="editData = !editData">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </v-col>
+                </v-row>
                 <v-autocomplete
                   class="ma-4" style="width: 80%"
                   ref="country"
                   v-model="country"
                   :items="countries"
-                  readonly
+                  :readonly="editData"
                   label="Country"
                   placeholder="Select..."
                 ></v-autocomplete>
@@ -55,6 +69,7 @@
                   :close-on-content-click="false"
                   transition="scale-transition"
                   offset-y
+                  :disabled="editData"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
@@ -67,12 +82,11 @@
                       class="ma-4" style="width: 80%"
                     ></v-text-field>
                   </template>
-                  <v-date-picker
+                  <v-date-picker v-if="!editData"
                     ref="picker"
                     v-model="date"
                     :max="new Date().toISOString().substr(0, 10)"
                     min="1950-01-01"
-                    disabled
                     width="500px"
                   ></v-date-picker>
                 </v-menu>
@@ -80,17 +94,21 @@
                   :rules="rules"
                   counter="100"
                   placeholder="Enter your biography here"
-                  label="Biography (optional)"
+                  label="Biography"
                   class="ma-4" style="width: 80%"
                   :value="bio"
-                  readonly
+                  :readonly="editData"
                   no-resize
                 ></v-textarea>
               </v-card>
             </v-col>
             <v-col cols="12" md="6" class="pt-0">
               <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
-                <v-card-title>Favorite exercises</v-card-title>
+                <v-row align="center" justify="space-between">
+                  <v-col cols="9" class="pt-0">
+                    <v-card-title>Favorite exercises</v-card-title>
+                  </v-col>
+                </v-row>
                 <v-list color="rgb(73, 80, 87)">
                   <v-list-item>
                     <v-list-item-content>
@@ -122,8 +140,21 @@
       name: null,
       country: null,
       rules: [v => v.length <= 100 || 'Max 100 characters'],
-      bio: ""
+      bio: "",
+      editData: true
     }),
+    methods: {
+      openPicPicker() {
+        this.$refs.picInput.click();
+      },
+      changePicture(event) {
+        console.log(event.target.files);
+        console.log(event.target.value);
+      },
+      print(aux){
+        console.log(aux);
+      }
+    }
   }
 </script>
 

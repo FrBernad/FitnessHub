@@ -16,7 +16,7 @@
           <v-tab to="/userHome/myRoutines" exact>MY ROUTINES</v-tab>
           <v-tab to="/userHome/profile" exact>
             <v-icon class="px-1">mdi-account</v-icon>
-            JOE
+            Faus
           </v-tab>
         </v-tabs>
       </template>
