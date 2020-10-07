@@ -8,8 +8,8 @@
 
       <v-col cols="12" class="'pa-0">
         <v-row class="align-self-start align-start">
-          <v-col cols="4" class="d-flex align-center justify-center ">
-            <v-select hide-details hide-selected  height="52px" class="selectBG" dense label="Sort by" color="#F8F9FA"  outlined></v-select>
+          <v-col cols="4" class="d-flex align-center justify-center">
+            <v-select hide-details hide-selected dark height="52px" class="selectBG" dense label="Sort by"  outlined></v-select>
           </v-col>
           <v-col col="2" class="d-flex align-center justify-center">
             <v-btn min-height="52px" outlined color="#F8F9FA" ><v-icon>mdi-filter-variant</v-icon>Filter</v-btn>

@@ -4,18 +4,35 @@
       <v-col cols="12" class="pa-0">
         <v-card color="rgb(52, 58, 64)" dark>
           <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="300px"
-                 style="position: relative">
+          >
           </v-img>
           <v-row>
             <v-col cols="12">
               <v-container fluid fill-height class="d-flex justify-center align-center pb-0">
-                <v-avatar size="200px"
-                          class="avBorder"
-                          style="top: 120px; position: absolute"
-                >
-                  <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
-                </v-avatar>
-                <h1 class="whiteCS--text">John Doe</h1>
+                <v-row align="center" justify="center">
+                  <v-col cols="4" style="position: relative">
+                    <v-avatar size="200px"
+                              class="avBorder"
+                              style="bottom: 20px; position: absolute"
+                    >
+                      <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
+                    </v-avatar>
+                    <v-btn
+                      class="mx-2"
+                      fab
+                      dark
+                      small
+                      color="primary"
+                      elevation="5"
+                      style="position:absolute; bottom: 15px; right: 40px"
+                    >
+                      <v-icon>mdi-camera</v-icon>
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="12" class="pa-0">
+                    <h1 class="whiteCS--text text-center">John Doe</h1>
+                  </v-col>
+                </v-row>
               </v-container>
             </v-col>
           </v-row>
