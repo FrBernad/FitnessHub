@@ -21,6 +21,12 @@
         <v-list-item to="/userHome/myRoutines" exact>
           <v-list-item-title>MY ROUTINES</v-list-item-title>
         </v-list-item>
+        <v-list-item to="/userHome/profile" exact>
+          <v-list-item-icon>
+            <v-icon class="px-1">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>JOE</v-list-item-title>
+        </v-list-item>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
