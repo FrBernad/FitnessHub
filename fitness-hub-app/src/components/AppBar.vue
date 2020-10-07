@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="rgb(33, 37, 41)" elevation="0">
+  <v-app-bar app color="rgb(33, 37, 41)" elevation="4">
     <v-app-bar-nav-icon
       class="hidden-md-and-up whiteCS--text"
       @click="drawer=!drawer">
