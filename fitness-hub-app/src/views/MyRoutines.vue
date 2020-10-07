@@ -8,31 +8,47 @@
 
       <v-col cols="12" class="'pa-0">
         <v-row class="align-self-start align-start">
-          <v-col cols="4" class="d-flex align-center justify-center">
-            <v-select label="Most popular" color="#F8F9FA" item-color="red" outlined></v-select>
+          <v-col cols="4" class="d-flex align-center justify-center ">
+            <v-select hide-details hide-selected  height="52px" class="selectBG" dense label="Sort by" color="#F8F9FA"  outlined></v-select>
           </v-col>
-          <v-col col="2" fill-height class="d-flex align-center justify-center">
-            <v-btn outlined color="#F8F9FA" ><v-icon>mdi-filter-variant</v-icon>Filter</v-btn>
+          <v-col col="2" class="d-flex align-center justify-center">
+            <v-btn min-height="52px" outlined color="#F8F9FA" ><v-icon>mdi-filter-variant</v-icon>Filter</v-btn>
           </v-col>
-          <v-col cols="6" class="d-flex align-center justify-center">
+          <v-col cols="6"  class="d-flex align-center justify-center ">
             <v-btn x-large min-height="45px" elevation="5" id="create" class="align">
               CREATE ROUTINE
             </v-btn>
-
           </v-col>
         </v-row>
-
       </v-col>
-
     </v-row>
+
+    <v-row class="cardsBG">
+        <v-col cols="6">
+          <RoutinesCard>
+
+          </RoutinesCard>
+        </v-col>
+      <v-col cols="6">
+        <RoutinesCard>
+
+        </RoutinesCard>
+      </v-col>
+    </v-row>
+
+
+
 
 
   </v-container>
 </template>
 
 <script>
+import RoutinesCard from "@/components/RoutinesCard";
+
 export default {
-  name: "MyRoutines.vue"
+  name: "MyRoutines.vue",
+  components: {RoutinesCard}
 }
 </script>
 
@@ -42,8 +58,16 @@ export default {
 }
 
 
+.cardsBG{
+  background-color: #E9ECEF;
+}
+
 #create {
   background-color: rgba(248, 249, 250, 0.25);
+  color: #F8F9FA;
+  border: thin solid #F8F9FA;
+}
+.selectBG{
   color: #F8F9FA;
   border: thin solid #F8F9FA;
 }
