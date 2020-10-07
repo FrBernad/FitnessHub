@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid style="height: 100%" class="pa-0 ma-0 d-flex-align-start bg">
+  <v-container fluid fill-height class="pa-0 ma-0 d-flex-align-start bg">
     <v-row class="titleBg align-start align-self-start">
           <v-col cols="12" sm="8" md="6" class="d-flex align-center justify-center ">
             <v-select hide-details dark hide-selected   :items="items" height="52px" class="selectBG" dense label="SORT BY" color="#F8F9FA"  outlined></v-select>
@@ -24,11 +24,20 @@
       <v-col cols="12"  sm="6" md="4">
         <RoutinesCard></RoutinesCard>
       </v-col>
+      <v-col cols="12"  sm="6" md="4">
+        <RoutinesCard></RoutinesCard>
+      </v-col>
+      <v-col cols="12"  sm="6" md="4">
+        <RoutinesCard></RoutinesCard>
+      </v-col>
+      <v-col cols="12"  sm="6" md="4">
+        <RoutinesCard></RoutinesCard>
+      </v-col>
+      <v-col cols="12"  sm="6" md="4">
+        <RoutinesCard></RoutinesCard>
+      </v-col>
 
     </v-row>
-
-
-
 
   </v-container>
 </template>
