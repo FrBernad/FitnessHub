@@ -5,9 +5,6 @@
         <v-img class="pa-0 ma-0" src="../assets/imgs/CommunityWorkouts.jpg">WORKOUTS </v-img>
       </v-col>
     </v-row>
-
-
-
   </v-container>
 </template>
 
