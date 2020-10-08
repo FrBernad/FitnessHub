@@ -2,7 +2,7 @@
   <v-container fluid style="height: 100%" class="pa-0 bg">
     <v-row align="start" justify="center">
       <v-col cols="12" class="pa-0">
-        <v-card color="rgb(52, 58, 64)" dark>
+        <v-card color="rgb(233 236 239)">
           <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="300px"
           >
           </v-img>
@@ -22,26 +22,26 @@
                         fab
                         dark
                         small
-                        color="primary"
+                        color="#f8f9fa"
                         elevation="5"
                         style="position:absolute; bottom:0;right:10px"
                         @click="openPicPicker"
                       >
-                        <v-icon>mdi-camera</v-icon>
+                        <v-icon color="#202121">mdi-camera</v-icon>
                       </v-btn>
                       <input type="file" style="display: none" ref="picInput" @change="changePicture">
                     </div>
                   </v-col>
                   <v-col cols="12" class="pa-0">
-                    <h1 class="whiteCS--text text-center">FAUS</h1>
+                    <h1 class="black--text text-center">FAUS</h1>
                   </v-col>
                 </v-row>
               </v-container>
             </v-col>
           </v-row>
           <v-row align="start" justify="space-around">
-            <v-col cols="12" md="6" class="pt-0">
-              <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
+            <v-col cols="12" md="6" class="pt-0 pl-md-9">
+              <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3">
                 <v-row align="center" justify="space-between">
                   <v-col cols="9" class="pt-0">
                     <v-card-title>
@@ -102,14 +102,14 @@
                 ></v-textarea>
               </v-card>
             </v-col>
-            <v-col cols="12" md="6" class="pt-0">
-              <v-card class="pa-2 ma-8" color="rgb(73, 80, 87)" elevation="3">
+            <v-col cols="12" md="6" class="pt-0 pr-md-9">
+              <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3">
                 <v-row align="center" justify="space-between">
                   <v-col cols="9" class="pt-0">
                     <v-card-title>Favorite exercises</v-card-title>
                   </v-col>
                 </v-row>
-                <v-list color="rgb(73, 80, 87)">
+                <v-list color="#F8F9FA">
                   <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Exercise 1</v-list-item-title>

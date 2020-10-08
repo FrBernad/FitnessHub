@@ -39,7 +39,6 @@
 </script>
 
 <style scoped>
-
   .cardType {
     background-color: #F8F9FA;
     border-radius: 5%;

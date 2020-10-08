@@ -73,7 +73,6 @@
       pages: 0,
       sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
     }),
-
     methods: {
       seedEntries() {
         for (let i = 0; i < 42; i++) {
@@ -101,11 +100,9 @@
   .titleBg {
     background-color: #212529;
   }
-
   .bg {
     background-color: #E9ECEF;
   }
-
   #create {
     background-color: rgba(248, 249, 250, 0.25);
     color: #F8F9FA;
