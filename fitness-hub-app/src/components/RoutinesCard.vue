@@ -1,37 +1,39 @@
 <template>
   <v-card class="pa-5 cardType">
     <v-row align="start" justify="space-around">
-      <v-col cols="12 d-flex justify-center align-center">
+      <v-col cols="12 d-flex justify-center align-center pt-0">
         <v-img class="rounded-corner "
                src="../assets/imgs/routineCard.jpg"
                max-height="200">
         </v-img>
       </v-col>
-      <v-col cols="12" class="d-flex justify-lg-start justify-center align-center" lg="6">
-        <h4>MUSCLE & STRENGHT</h4>
+      <v-col cols="12" class="d-flex align-center" lg="6">
+        <h4>{{ routineData.title }}</h4>
       </v-col>
-      <v-col cols="4" lg="4" class="d-flex justify-center align-center">
-        <v-icon v-for="(num,index) in 5" :key="index">mdi-star-outline</v-icon>
+      <v-col cols="4" class="d-flex justify-center align-center">
+        <template v-for="num in 5">
+          <v-icon v-if="routineData.rating>=num">mdi-star</v-icon>
+          <v-icon v-else>mdi-star-outline</v-icon>
+        </template>
       </v-col>
-      <v-col cols="2" lg="2" class="d-flex justify-center align-center">
-        <v-icon>mdi-heart-outline</v-icon>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <v-icon v-if="routineData.fav">mdi-heart</v-icon>
+        <v-icon v-else>mdi-heart-outline</v-icon>
       </v-col>
       <v-col cols="9">
-        <h5>by JOE</h5>
+        <h5>by {{routineData.owner.toUpperCase()}}</h5>
       </v-col>
       <v-col cols="3">
-        <h5 class="text-center">15 min</h5>
+        <h5 class="text-center">{{routineData.time}} min</h5>
       </v-col>
     </v-row>
-    </v-card>
+  </v-card>
 </template>
 
 <script>
   export default {
     name: "RoutinesCard",
-    data: () => ({
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    }),
+    props: ["routineData"],
   }
 
 </script>
