@@ -21,7 +21,7 @@
 
       <v-col cols="8"  sm="4" class="d-flex align-center justify-center ">
         <v-select hide-details dark hide-selected
-                  :items="items" height="52px"
+                  :items="sortBy" height="52px"
                   dense label="SORT BY"
                   background-color="#212529" color="#F8F9FA"  outlined solo>
         </v-select>
@@ -80,15 +80,9 @@ export default {
     page: 1,
     totalPages: entries.length,
     itemsPerPage: 6,
-    pages: Math.ceil((this.totalPages / this.itemsPerPage))
+    pages: Math.ceil((this.totalPages / this.itemsPerPage)),
+    sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
   }),
-  computed:{
-    items() {
-      let item = ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category'];
-      return item;
-    }
-  },
-
   methods: {
     changePage() {
 

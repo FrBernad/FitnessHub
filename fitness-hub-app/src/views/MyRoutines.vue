@@ -71,14 +71,9 @@
       totalPages: 0,
       itemsPerPage: 6,
       pages: 0,
-      sortBy: ["name", "popularity", "most used"]
+      sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
     }),
-    computed:{
-      items() {
-        let item = ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category'];
-        return item;
-      }
-    },
+
     methods: {
       seedEntries() {
         for (let i = 0; i < 42; i++) {
