@@ -15,7 +15,7 @@
         ></v-select>
       </v-col>
       <v-col cols="6" sm="4" md="2" class="d-flex align-center justify-space-around">
-        <v-btn min-height="52px" outlined color="#F8F9FA">
+        <v-btn to="/userHome/routine" min-height="52px" outlined color="#F8F9FA">
           <v-icon class="mr-2">mdi-filter-variant</v-icon>
           <span>Filter</span>
         </v-btn>

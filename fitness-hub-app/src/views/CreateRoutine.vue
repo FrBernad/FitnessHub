@@ -11,7 +11,7 @@
           elevation="5"
           id="create"
         >
-          CREATE
+          CREATE ROUTINE
         </v-btn>
       </v-col>
     </v-row>

@@ -42,7 +42,7 @@
 
   .createRoutineBG {
     height: 100%;
-    background: url("../assets/imgs/createRoutinesImg.jpg") no-repeat center;
+    background: url("../assets/imgs/createRoutines.jpg") no-repeat center;
     background-size: cover;
     opacity: 1;
   }
