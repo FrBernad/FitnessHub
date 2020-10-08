@@ -7,16 +7,16 @@
                max-height="200">
         </v-img>
       </v-col>
-      <v-col cols="12" class="d-flex align-center" lg="6">
+      <v-col cols="6" class="d-flex align-center justify-start" lg="6">
         <h4>{{ routineData.title }}</h4>
       </v-col>
-      <v-col cols="4" class="d-flex justify-center align-center">
+      <v-col cols="4" md="4" class="d-flex justify-md-center justify-sm-end justify-start align-center">
         <template v-for="num in 5">
           <v-icon v-if="routineData.rating>=num">mdi-star</v-icon>
           <v-icon v-else>mdi-star-outline</v-icon>
         </template>
       </v-col>
-      <v-col cols="2" class="d-flex justify-center align-center">
+      <v-col cols="2" class="d-flex justify-md-center justify-end justify-sm-start align-center">
         <v-icon v-if="routineData.fav">mdi-heart</v-icon>
         <v-icon v-else>mdi-heart-outline</v-icon>
       </v-col>
