@@ -38,7 +38,7 @@
     <div class="text-center">
       <v-container>
         <v-row justify="center">
-          <v-col cols="6">
+          <v-col cols="10" md="6">
             <v-container class="max-width">
               <v-pagination
                 v-model="page"

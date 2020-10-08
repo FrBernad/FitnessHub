@@ -2,26 +2,24 @@
   <v-container fluid style="height: 100%" class="pa-0 bg">
     <v-row>
       <v-col cols="12" class="pa-0 d-flex justify-center align-center">
-        <v-img src="../assets/imgs/CommunityWorkouts.jpg"></v-img>
+        <v-img src="../assets/imgs/CommunityWorkouts.jpg" height="400px"></v-img>
       </v-col>
     </v-row>
     <v-row class="bgText justify-center">
-      <v-col cols="12" md="10" lg="7" class="d-flex justify-center align-center">
-        <h1 class="font-weight-bold font-italic  whiteCS--text text-center">Fueled by our own community, this workouts
+      <v-col cols="10" class="d-flex justify-center align-center">
+        <h1 class="font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Fueled by our own community, this workouts
           will give what
           you need to get to the next level</h1>
       </v-col>
     </v-row>
-    <v-row class="bgText justify-center">
-
-      <v-col cols="12" sm="6" class="" pa-auto>
+    <v-row class="bgText justify-space-around">
+      <v-col cols="12" md="6" class="pl-sm-12 px-10 pr-md-0">
         <v-text-field outlined background-color="#212529" dense dark hide-details height="52px"
                       append-icon="mdi-magnify" solo label="Search workouts, plans and more"
                       clearable
         ></v-text-field>
       </v-col>
-
-      <v-col cols="8" sm="4" class="d-flex align-center justify-center ">
+      <v-col cols="7" sm="8" md="4" class="d-flex align-center pl-sm-12 pl-10 pl-md-4 pr-sm-0 justify-center">
         <v-select
           dark
           hide-details
@@ -34,8 +32,8 @@
           outlined
         ></v-select>
       </v-col>
-      <v-col cols="4" sm="2" class="d-flex align-center justify-space-around">
-        <v-btn min-height="52px" outlined color="#F8F9FA">
+      <v-col cols="5" sm="4" md="2" class="d-flex align-center justify-center pr-10">
+        <v-btn min-height="52px" outlined color="#F8F9FA" width="95%">
           <v-icon class="mr-2">mdi-filter-variant</v-icon>
           <span>Filter</span>
         </v-btn>
@@ -50,7 +48,7 @@
     <div class="text-center">
       <v-container>
         <v-row justify="center">
-          <v-col cols="6">
+          <v-col cols="10" md="6">
             <v-container class="max-width">
               <v-pagination
                 v-model="page"
