@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-5 rounded-corner">
+  <v-card class="pa-5 cardType">
     <v-row align="start" justify="space-around">
       <v-col cols="12 d-flex justify-center align-center">
         <v-img class="rounded-corner "
@@ -7,13 +7,13 @@
                max-height="200">
         </v-img>
       </v-col>
-      <v-col cols="12" class="d-flex justify-center align-center" lg="6">
+      <v-col cols="12" class="d-flex justify-lg-start justify-center align-center" lg="6">
         <h4>MUSCLE & STRENGHT</h4>
       </v-col>
-      <v-col cols="4" class="d-flex justify-center align-center">
+      <v-col cols="4" lg="4" class="d-flex justify-center align-center">
         <v-icon v-for="(num,index) in 5" :key="index">mdi-star-outline</v-icon>
       </v-col>
-      <v-col cols="2" class="d-flex justify-center align-center">
+      <v-col cols="2" lg="2" class="d-flex justify-center align-center">
         <v-icon>mdi-heart-outline</v-icon>
       </v-col>
       <v-col cols="9">
@@ -38,7 +38,8 @@
 
 <style scoped>
 
-  .rounded-corner {
+  .cardType {
+    background-color: #F8F9FA;
     border-radius: 5%;
   }
 </style>

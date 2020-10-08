@@ -70,11 +70,17 @@
       itemsPerPage: 6,
       pages: Math.ceil((this.totalPages / this.itemsPerPage))
     }),
+    computed:{
+      items() {
+        let item = ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category'];
+        return item;
+      }
+    },
     methods: {
       changePage() {
 
       }
-    }
+    },
   }
 </script>
 
