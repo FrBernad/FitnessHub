@@ -100,7 +100,7 @@
   }
   .routinesBG{
 
-    background-image: url("../assets/imgs/MyRoutines.jpg");
+    background-image: url("../assets/imgs/myRoutines.jpg");
     height: 300px;
     background-position: center;
     background-position-y: 25%;
@@ -108,7 +108,7 @@
   }
   .routinesBG{
 
-    background-image: url("../assets/imgs/MyRoutines.jpg");
+    background-image: url("../assets/imgs/myRoutines.jpg");
     height: 400px;
     background-position: center;
     background-position-y: 25%;
