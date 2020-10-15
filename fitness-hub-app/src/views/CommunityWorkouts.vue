@@ -96,7 +96,7 @@
     background-position: center;
     background-position-y: 25%;
     margin: 0 auto;
-    height: 30%;
+    height: 400px;
     width: auto;
     background-size: cover;
 
