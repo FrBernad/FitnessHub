@@ -10,7 +10,7 @@
           <v-list-item-icon>
             <v-icon class="px-1">mdi-account</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>FAUS</v-list-item-title>
+          <v-list-item-title>{{username}}</v-list-item-title>
         </v-list-item>
         <v-list-item to="/home" exact>
           <v-list-item-title>HOME</v-list-item-title>
@@ -20,6 +20,12 @@
         </v-list-item>
         <v-list-item to="/home/myRoutines" exact>
           <v-list-item-title>MY ROUTINES</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="logout">
+          <v-list-item-icon>
+            <v-icon class="px-1">mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>LOGOUT</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -32,7 +38,17 @@
   export default {
     name: "NavDrawer",
     computed: {
-     drawer: sync('app/drawer')
+      drawer: sync('app/drawer'),
+      ...sync('user', ['username']),
     },
+    methods: {
+      async logout() {
+        try {
+          await this.$store.dispatch('logout');
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    }
   }
 </script>
