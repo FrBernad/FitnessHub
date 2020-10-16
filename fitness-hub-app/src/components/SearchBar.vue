@@ -20,21 +20,33 @@
         outlined
       ></v-select>
     </v-col>
+
+
     <v-col cols="5" sm="4" md="2" class="d-flex align-center justify-center pr-10">
-      <v-btn to="/home/routine" min-height="52px" outlined color="#F8F9FA" width="95%">
-        <v-icon class="mr-2">mdi-filter-variant</v-icon>
-        <span>Filter</span>
-      </v-btn>
+      <v-dialog v-model="dialog"  persistent width="800px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn min-height="52px" v-bind="attrs" v-on="on" outlined color="#F8F9FA" width="95%">
+            <v-icon class="mr-2">mdi-filter-variant</v-icon>
+            <span>Filter</span>
+          </v-btn>
+        </template>
+        <FilterDialog @filterClose="dialog=false"></FilterDialog>
+      </v-dialog>
+
     </v-col>
   </v-row>
 </v-container>
 </template>
 
 <script>
+import FilterDialog from "@/components/FilterDialog";
+
 export default {
 name: "SearchBar",
+  components:{FilterDialog},
   data: () => ({
-    sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
+    sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category'],
+    dialog: false,
   })
 }
 </script>
