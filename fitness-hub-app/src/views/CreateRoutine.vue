@@ -1,10 +1,11 @@
 <template>
   <v-container fluid class="bg pa-0" style="height: 100%">
-    <v-row align="stretch" justify="space-around" class="fill-height">
-      <v-col class="d-flex align-self-center" v-for="section in sections" :key="section" cols="12" md="4">
+    <v-row align="center" justify="space-around" class="fill-height">
+      <v-col v-for="section in sections"
+             :key="section" cols="10" md="4">
         <RoutineSection :title="section"></RoutineSection>
       </v-col>
-      <v-col class="d-flex align-center justify-center align-self-end py-6 bgColor">
+      <v-col class="d-flex align-center justify-center align-self-end py-6 bgColor" cols="12">
         <v-btn
           x-large
           min-height="45px"

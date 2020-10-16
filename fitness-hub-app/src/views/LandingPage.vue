@@ -56,11 +56,6 @@
         registerOverlay: false
       }
     },
-    methods: {
-      deactivateLoginOverlay() {
-        this.loginOverlay = false;
-      }
-    }
   }
 </script>
 
