@@ -1,42 +1,14 @@
 export default {
-  async signUp(context, payload) {
-    await context.dispatch('auth', {
-      ...payload,
-      mode: "signUp"
-    });
-
-    const userData = {
-      username: payload.username,
-    };
-    await context.dispatch('user/addUserToDB', userData);
-  },
 
   async signIn(context, payload) {
-    await context.dispatch('auth', {
-      ...payload,
-      mode: "signIn"
-    });
-  },
-
-  async auth(context, payload) {
-    let url;
-
-    if (payload.mode === "signIn")
-      url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCJpNwyGsEvaSuId3AqI9j4zoVC8zwPKls";
-    else if (payload.mode === "signUp")
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCJpNwyGsEvaSuId3AqI9j4zoVC8zwPKls`
-    else
-      throw new Error("invalid mode");
-
-    let response = await fetch(url, {
+    let response = await fetch(`${context.getters.baseUrl}/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: payload.email,
+        username: payload.username,
         password: payload.password,
-        returnSecureToken: true
       })
     })
 
@@ -47,96 +19,64 @@ export default {
       throw new Error(responseData.message);
     }
 
-    localStorage.setItem('token', responseData.idToken);
-    localStorage.setItem('userId', responseData.localId);
+    localStorage.setItem('token', responseData.token);
 
     const userAuth = {
-      token: responseData.idToken,
-      userId: responseData.localId,
+      token: responseData.token,
     }
 
     context.commit('setUser', userAuth);
+  },
 
-    url = `https://listy-itba-app.firebaseio.com/users/${userAuth.userId}.json?auth=` +
-      userAuth.token;
+  async logout(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/user/logout`, {
+      method: 'POST',
+    });
 
-    response = await fetch(url);
-
-    responseData = await response.json();
+    let responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error("Error getting user data in login");
+      console.log(responseData);
+      throw new Error(responseData.message);
     }
 
-    let userData = {username: ""};
-    for (const key in responseData) {
-      userData.username = responseData[key].username
+    localStorage.removeItem('token');
+
+    const userAuth = {
+      token: null,
     }
 
-    context.commit("user/setUserData", userData);
+    context.commit('setUser', userAuth);
   },
 
   async tryLogin(context) {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
 
-    if (token && userId) {
+    if (token) {
       context.commit('setUser', {
         token: token,
-        userId: userId,
       });
 
-      const url = `https://listy-itba-app.firebaseio.com/users/${userId}.json?auth=` +
-        token;
+      const url = `${context.getters.baseUrl}/user/current`
 
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`
+        },
+      });
 
       const responseData = await response.json();
 
       if (!response.ok) {
         throw new Error("Error getting user data in login");
       }
-      let userData = {username: ""};
-      for (const key in responseData) {
-        userData.username = responseData[key].username
-      }
+
+      let userData = {username: responseData.username};
+
       context.commit("user/setUserData", userData);
     }
   }
   ,
 
-  logout(context) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
 
-    context.commit('setUser', {
-      token: null,
-      userId: null,
-    })
-  },
-
-  async addUserToDB(context, payload) {
-    const userId = context.rootGetters.userId
-    const token = context.rootGetters.token
-
-    const response = await fetch(`https://listy-itba-app.firebaseio.com/users/${userId}.json?auth=` +
-      token,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload),
-      });
-
-    if (!response.ok) {
-      throw new Error("Error loading user data to db");
-    }
-
-    const user = {
-      username: payload.username
-    };
-
-    context.commit("setUserData", user);
-  },
 }

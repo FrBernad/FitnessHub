@@ -33,14 +33,18 @@
             <v-divider class="mt-4 mb-6"/>
             <v-form>
               <v-text-field
+                @blur="$v.username.$touch()"
+                :error-messages=usernameErrors
+                v-model="username"
                 label="Username"
                 outlined
                 append-icon="mdi-account"
               ></v-text-field>
               <v-text-field
+                @blur="$v.password.$touch()"
+                :error-messages=passwordErrors
                 v-model="password"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.min]"
                 :type="show ? 'text' : 'password'"
                 name="input-10-1"
                 label="Password"
@@ -49,7 +53,7 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn color="primary" :to="{name : 'UserHome'}" large width="80%">Sign in</v-btn>
+              <v-btn color="primary" large width="80%" @click="processData">Sign in</v-btn>
             </v-form>
             <div class="mt-3">
               <v-hover
@@ -70,13 +74,13 @@
 </template>
 
 <script>
+  import {required, maxLength, minLength} from 'vuelidate/lib/validators'
+
   export default {
     name: "LoginOverlay",
     props: {
       lOn: {
         type: Boolean,
-        // Object or array defaults must be returned from
-        // a factory function
         default: false
       }
     },
@@ -84,15 +88,67 @@
       return {
         show: false,
         password: '',
-        rules: {
-          min: v => v.length >= 8 || 'At leat 8 characters long'
-        },
+        username: '',
+        signInError: false
       }
     },
+
     methods: {
       closeOverlay() {
         this.$emit('closeLoginOverlay');
+      },
+      async processData() {
+        if (this.$v.$invalid) {
+          console.log("the form is missing something");
+          return;
+        }
+        try {
+          await this.$store.dispatch('signIn', {
+            username: this.username,
+            password: this.password
+          })
+
+          await this.$router.replace('/userHome');
+        } catch (e) {
+          console.log(e);
+          this.signInError = true;
+          setTimeout(this.resetForm, 4000);
+        }
+      },
+      resetForm() {
+        this.$v.$reset();
+        this.email = "";
+        this.password = "";
+        this.signInError = false;
       }
+    },
+
+    validations: {
+      username: {
+        required, minLenght: minLength(5), maxLength: maxLength(15)
+      },
+      password: {
+        required, minLenght: minLength(8)
+      }
+    },
+
+    computed: {
+      passwordErrors() {
+        const errors = []
+        if (!this.$v.password.$dirty) return errors
+        !this.$v.password.minLenght && errors.push('At least 8 characters long.')
+        !this.$v.password.required && errors.push('Password is required.')
+        return errors
+      },
+      usernameErrors() {
+        const errors = []
+        if (!this.$v.username.$dirty) return errors
+        !this.$v.username.minLenght && errors.push('Invalid username.')
+        !this.$v.username.maxLength && errors.push('Invalid username.')
+        !this.$v.username.required && errors.push('Username is required.')
+        return errors
+      }
+      ,
     }
   }
 </script>
