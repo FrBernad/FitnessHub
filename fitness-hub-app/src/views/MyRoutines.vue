@@ -1,20 +1,19 @@
 <template>
   <v-container fluid style="height: 100%" class="pa-0 bg">
-    <v-row class="routinesBG" >
+    <v-row class="routinesBG">
       <v-col cols="12" class=" d-flex justify-center align-center">
-              <v-btn to="/userHome/createRoutine" exact
-                     x-large min-height="70px" min-width="500px" elevation="5" id="create"
-                     class="align"
-              >CREATE ROUTINE
-              </v-btn>
-        </v-col>
+        <v-btn to="/home/createRoutine" exact
+               x-large min-height="70px" min-width="500px" elevation="5" id="create"
+               class="align"
+        >CREATE ROUTINE
+        </v-btn>
+      </v-col>
     </v-row>
-
-
 
     <v-row class="titleBg justify-center">
       <v-col cols="10" class="d-flex justify-center align-center">
-        <h1 class=" font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Create and edit your very own routines, add your distinctive touch and make training fun!</h1>
+        <h1 class=" font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Create
+          and edit your very own routines, add your distinctive touch and make training fun!</h1>
       </v-col>
     </v-row>
     <SearchBar></SearchBar>
@@ -61,7 +60,7 @@
       totalPages: 0,
       itemsPerPage: 6,
       pages: 0,
-      sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
+      sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date', 'Sports', 'Level', 'Category']
     }),
     methods: {
       seedEntries() {
@@ -72,7 +71,7 @@
             owner: "John",
             rating: Math.floor((Math.random() * 5) + 1),
             fav: Math.floor((Math.random() * 10) + 1) >= 5,
-            time: 8+Math.floor((Math.random() * 20) + 1)
+            time: 8 + Math.floor((Math.random() * 20) + 1)
           }
         }
         this.totalPages = this.entries.length;
@@ -90,15 +89,18 @@
   .titleBg {
     background-color: #212529;
   }
+
   .bg {
     background-color: #E9ECEF;
   }
+
   #create {
     background-color: rgba(248, 249, 250, 0.25);
     color: #F8F9FA;
     border: thin solid #F8F9FA;
   }
-  .routinesBG{
+
+  .routinesBG {
 
     background-image: url("../assets/imgs/myRoutines.jpg");
     height: 300px;
@@ -106,7 +108,8 @@
     background-position-y: 25%;
     margin: 0 auto;
   }
-  .routinesBG{
+
+  .routinesBG {
 
     background-image: url("../assets/imgs/myRoutines.jpg");
     height: 400px;
