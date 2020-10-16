@@ -13,8 +13,7 @@
                   <v-col cols="6" class="d-flex align-center justify-center" style="position: relative">
                     <div style="position: absolute; bottom: 15px">
                       <v-avatar size="200px"
-                                class="avBorder elevation-5"
-                      >
+                                class="avBorder elevation-5">
                         <img src="../assets/imgs/fausDuro.jpg">
                       </v-avatar>
                       <v-btn
@@ -33,7 +32,7 @@
                     </div>
                   </v-col>
                   <v-col cols="12" class="pa-0">
-                    <h1 class="black--text text-center">FAUS</h1>
+                    <h1 class="nameProfile text-center">FAUS</h1>
                   </v-col>
                 </v-row>
               </v-container>
@@ -41,87 +40,10 @@
           </v-row>
           <v-row align="start" justify="space-around">
             <v-col cols="12" md="6" class="pt-0 pl-md-9">
-              <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3">
-                <v-row align="center" justify="space-between">
-                  <v-col cols="9" class="pt-0">
-                    <v-card-title>
-                      Personal data
-                    </v-card-title>
-                  </v-col>
-                  <v-col cols="3" class="d-flex justify-center">
-                    <v-btn icon @click="editData = !editData">
-                      <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                  </v-col>
-                </v-row>
-                <v-autocomplete
-                  class="ma-4" style="width: 80%"
-                  ref="country"
-                  v-model="country"
-                  :items="countries"
-                  :readonly="editData"
-                  label="Country"
-                  placeholder="Select..."
-                ></v-autocomplete>
-                <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  :disabled="editData"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="date"
-                      placeholder="Birthday"
-                      label="Birthday date"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                      class="ma-4" style="width: 80%"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker v-if="!editData"
-                    ref="picker"
-                    v-model="date"
-                    :max="new Date().toISOString().substr(0, 10)"
-                    min="1950-01-01"
-                    width="500px"
-                  ></v-date-picker>
-                </v-menu>
-                <v-textarea
-                  :rules="rules"
-                  counter="100"
-                  placeholder="Enter your biography here"
-                  label="Biography"
-                  class="ma-4" style="width: 80%"
-                  :value="bio"
-                  :readonly="editData"
-                  no-resize
-                ></v-textarea>
-              </v-card>
+              <PersonalData></PersonalData>
             </v-col>
             <v-col cols="12" md="6" class="pt-0 pr-md-9">
-              <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3">
-                <v-row align="center" justify="space-between">
-                  <v-col cols="9" class="pt-0">
-                    <v-card-title>Favorite exercises</v-card-title>
-                  </v-col>
-                </v-row>
-                <v-list color="#F8F9FA">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>Exercise 1</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>Exercise 1</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-card>
+              <FavoriteProfile></FavoriteProfile>
             </v-col>
           </v-row>
         </v-card>
@@ -131,8 +53,11 @@
 </template>
 
 <script>
+  import PersonalData from "@/components/PersonalData";
+  import FavoriteProfile from "@/components/FavoriteProfile";
   export default {
     name: "Profile",
+    components: {FavoriteProfile, PersonalData},
     data: () => ({
       date: null,
       menu: false,
@@ -165,6 +90,9 @@
 
   .avBorder {
     border: 4px solid white;
+  }
+  .nameProfile{
+    color:#212529;
   }
 </style>
 
