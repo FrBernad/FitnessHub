@@ -3,8 +3,8 @@
     <v-row class="routinesBG">
       <v-col cols="12" class=" d-flex justify-center align-center">
         <v-btn to="/home/createRoutine" exact
-               x-large min-height="70px" min-width="500px" elevation="5" id="create"
-               class="align"
+               x-large min-height="70px" min-width="35%" elevation="5" id="create"
+               class="align-center justify-center"
         >CREATE ROUTINE
         </v-btn>
       </v-col>
@@ -100,14 +100,6 @@
     border: thin solid #F8F9FA;
   }
 
-  .routinesBG {
-
-    background-image: url("../assets/imgs/myRoutines.jpg");
-    height: 300px;
-    background-position: center;
-    background-position-y: 25%;
-    margin: 0 auto;
-  }
 
   .routinesBG {
 
