@@ -96,13 +96,14 @@
                 <v-col cols="4" class="d-flex justify-center ">
                   <v-btn @click="addOverlay=true" large width="80%" color="rgb(52, 58, 64)">
                     <v-row justify="space-around">
-                      <span class="whiteCS--text">ADD</span>
+                      <span class="whiteCS--text">DONE</span>
                       <v-icon right color="rgb(248, 249, 250)">
                         mdi-plus-thick
                       </v-icon>
                     </v-row>
                   </v-btn>
                 </v-col>
+
               </v-row>
             </v-card>
           </v-card>
@@ -114,7 +115,7 @@
 
 <script>
   export default {
-    name: "AddOverlay",
+    name: "EditOverlay",
     props: {
       isOn: {
         type: Boolean,
@@ -128,9 +129,12 @@
     },
     methods: {
       closeOverlay() {
-        this.$emit('closeAddOverlay');
+        this.$emit('closeEditOverlay');
       }
     }
   }
 </script>
 
+<style scoped>
+
+</style>

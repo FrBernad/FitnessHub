@@ -51,7 +51,6 @@
               ></v-text-field>
               <v-btn color="primary" :to="{name : 'UserHome'}" large width="80%">Sign in</v-btn>
             </v-form>
-
             <div class="mt-3">
               <v-hover
                 v-slot:default="{ hover }"
