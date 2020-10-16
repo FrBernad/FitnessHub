@@ -79,7 +79,9 @@ const router = new VueRouter({
   routes
 })
 
-store.dispatch('tryLogin');
+store.dispatch('tryLogin').catch((e)=>{
+  console.log(e);
+});
 
 router.beforeEach(function (to, from, next) {
   if (to.meta.requiresAuth && !store.get('isAuthenticated')) {

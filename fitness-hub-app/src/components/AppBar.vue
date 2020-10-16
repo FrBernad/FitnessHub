@@ -16,7 +16,10 @@
           <v-tab to="/home/myRoutines" exact>MY ROUTINES</v-tab>
           <v-tab to="/home/profile" exact>
             <v-icon class="px-1">mdi-account</v-icon>
-            Faus
+            {{username}}
+          </v-tab>
+          <v-tab @click="logout" style="width: 100px">
+            <v-icon class="px-1">mdi-logout</v-icon>
           </v-tab>
         </v-tabs>
       </template>
@@ -30,7 +33,17 @@
   export default {
     name: "AppBar",
     computed: {
-      ...sync('app', ['drawer'])
+      drawer: sync('app/drawer'),
+      ...sync('user', ['username']),
     },
+    methods: {
+      async logout() {
+        try {
+          await this.$store.dispatch('logout');
+        }catch (e) {
+          console.log(e);
+        }
+      }
+    }
   }
 </script>
