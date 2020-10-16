@@ -2,19 +2,19 @@
   <v-container fluid fill-height class="pa-0 bg">
     <v-row justify="center" align="center" class="fill-height">
       <v-col cols="4" class="fill-height pa-0">
-        <v-card to="/userHome/communityWorkouts" rounded="0" height="100%" class="workoutsBG iluminate d-flex align-center justify-center">
+        <v-card to="/userHome/communityWorkouts" exact rounded="0" height="100%" class="workoutsBG iluminate d-flex align-center justify-center">
           <v-card-title class="font-weight-bold text-center text-body-2 text-sm-h5 text-md-h4 whiteCS--text shadow">COMMUNITY<br>WORKOUTS</v-card-title>
         </v-card>
       </v-col>
       <v-col cols="4" class="fill-height pa-0">
-        <v-card to="/userHome/createRoutine" rounded="0" height="100%"
+        <v-card to="/userHome/createRoutine" exact rounded="0" height="100%"
                 class="createRoutineBG iluminate d-flex align-center text-center justify-center">
           <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h4 whiteCS--text shadow">
             CREATE <br v-if="$vuetify.breakpoint.smAndDown">ROUTINE</v-card-title>
         </v-card>
       </v-col>
       <v-col cols="4" class="fill-height pa-0">
-        <v-card to="/userHome/myRoutines" rounded="0" height="100%"
+        <v-card to="/userHome/myRoutines" exact rounded="0" height="100%"
                 class="myRoutineBG iluminate d-flex align-center justify-center">
           <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-center text-md-h4 whiteCS--text shadow">
             MY <br v-if="$vuetify.breakpoint.smAndDown">ROUTINES

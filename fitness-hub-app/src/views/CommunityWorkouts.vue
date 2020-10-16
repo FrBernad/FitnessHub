@@ -1,10 +1,12 @@
 <template>
   <v-container fluid style="height: 100%" class="pa-0 bg">
-    <v-row>
-      <v-col cols="12" class="pa-0 d-flex justify-center align-center">
-        <v-img src="../assets/imgs/CommunityWorkouts.jpg" height="400px"></v-img>
+    <v-row class="communityWorkoutsBG" >
+      <v-col cols="12" class=" d-flex justify-center align-center">
       </v-col>
     </v-row>
+
+
+
     <v-row class="bgText justify-center">
       <v-col cols="10" class="d-flex justify-center align-center">
         <h1 class="font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Fueled by our own community, this workouts
@@ -12,33 +14,7 @@
           you need to get to the next level</h1>
       </v-col>
     </v-row>
-    <v-row class="bgText justify-space-around">
-      <v-col cols="12" md="6" class="pl-sm-12 px-10 pr-md-0">
-        <v-text-field outlined background-color="#212529" dense dark hide-details height="52px"
-                      append-icon="mdi-magnify" solo label="Search workouts, plans and more"
-                      clearable
-        ></v-text-field>
-      </v-col>
-      <v-col cols="7" sm="8" md="4" class="d-flex align-center pl-sm-12 pl-10 pl-md-4 pr-sm-0 justify-center">
-        <v-select
-          dark
-          hide-details
-          :items="sortBy"
-          height="52px"
-          color="#F8F9FA"
-          label="SORT BY"
-          menu-props="auto"
-          dense
-          outlined
-        ></v-select>
-      </v-col>
-      <v-col cols="5" sm="4" md="2" class="d-flex align-center justify-center pr-10">
-        <v-btn min-height="52px" outlined color="#F8F9FA" width="95%">
-          <v-icon class="mr-2">mdi-filter-variant</v-icon>
-          <span>Filter</span>
-        </v-btn>
-      </v-col>
-    </v-row>
+    <SearchBar></SearchBar>
 
     <v-row class="cardsBG px-8 pt-4" justify="space-around">
       <v-col cols="12" md="6" lg="4" v-for="(entry,index) in currentEntries" :key="index">
@@ -67,10 +43,11 @@
 
 <script>
   import RoutinesCard from "../components/RoutinesCard";
+  import SearchBar from "@/components/SearchBar";
 
   export default {
     name: "Workouts.vue",
-    components: {RoutinesCard},
+    components: {RoutinesCard,SearchBar},
     created() {
       this.seedEntries();
     },
@@ -80,8 +57,7 @@
       page: 1,
       totalPages: 0,
       itemsPerPage: 6,
-      pages: 0,
-      sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date','Sports','Level','Category']
+      pages: 0
     }),
     methods: {
       seedEntries() {
@@ -112,8 +88,19 @@
     background-color: #212529;
   }
 
-
   .bg {
     background-color: #E9ECEF;
   }
+  .communityWorkoutsBG{
+    background-image: url("../assets/imgs/communityWorkouts.jpg");
+    background-position: center;
+    background-position-y: 25%;
+    margin: 0 auto;
+    height: 400px;
+    width: auto;
+    background-size: cover;
+
+  }
+
+
 </style>
