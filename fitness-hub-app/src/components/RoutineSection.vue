@@ -7,8 +7,11 @@
           <v-card-title class="whiteCS--text d-flex align-center justify-center">
             <h1 class="text-lg-h4 text-md-h5 text-h6 font-weight-bold ">{{title}}</h1>
           </v-card-title>
+
           <v-card color="rgb(73, 80, 87)" class="mx-2 mb-2 py-1">
+
             <v-virtual-scroll height="250px" :items="exercises" bench="0" item-height="50px">
+
               <template v-slot="{ item }">
                 <v-list-item :key="item" >
                   <v-list-item-content>
@@ -28,7 +31,9 @@
                   </v-list-item-content>
                 </v-list-item>
               </template>
+
             </v-virtual-scroll>
+
             <v-row align="center" justify="space-around" class="py-2">
               <v-col cols="5">
                 <v-btn large width="80%" color="rgb(52, 58, 64)" @click="canEdit=!canEdit">

@@ -80,6 +80,7 @@
 
     methods: {
       closeOverlay() {
+        this.resetForm();
         this.$emit('closeRegisterOverlay');
       },
 

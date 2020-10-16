@@ -80,6 +80,7 @@
 
     methods: {
       closeOverlay() {
+        this.resetForm();
         this.$emit('closeLoginOverlay');
       },
       async processData() {
@@ -101,6 +102,7 @@
           setTimeout(this.resetForm, 4000);
         }
       },
+
       resetForm() {
         this.$v.$reset();
         this.email = "";
