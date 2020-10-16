@@ -52,17 +52,9 @@
       </v-col>
     </v-row>
 
-    <v-list color="#F8F9FA">
-      <v-list-item>
-        <v-list-item-content class="justify-center">
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+    <v-list class="pa-0" color="#F8F9FA">
+      <Exercise></Exercise>
+      <Exercise></Exercise>
     </v-list>
 
     <v-row class="align-center  textBG2">
@@ -71,17 +63,9 @@
       </v-col>
     </v-row>
 
-    <v-list color="#F8F9FA">
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+    <v-list  class="pa-0" color="#F8F9FA">
+      <Exercise></Exercise>
+      <Exercise></Exercise>
     </v-list>
 
     <v-row class="align-center  textBG2">
@@ -90,17 +74,9 @@
       </v-col>
     </v-row>
 
-    <v-list color="#F8F9FA">
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Exercise 1</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+    <v-list  class="pa-0" color="#F8F9FA">
+      <Exercise></Exercise>
+      <Exercise></Exercise>
     </v-list>
 
 
@@ -111,8 +87,10 @@
 </template>
 
 <script>
+import Exercise from "@/components/Exercise";
 export default {
-name: "Routine"
+name: "Routine",
+  components: {Exercise}
 }
 </script>
 
