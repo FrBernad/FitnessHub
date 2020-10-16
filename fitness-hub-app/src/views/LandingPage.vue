@@ -5,14 +5,17 @@
     <v-row justify="center" align="center">
       <v-col cols="12">
         <v-container fluid>
-          <h1 class="text-center text-h5 text-sm-h3 text-md-h1 font-weight-bold whiteCS--text shadow">Train yourself and<br>others.</h1>
-          <p class="text-center ma-0 text-subtitle-1 text-sm-h5 text-md-h4 font-weight-medium whiteCS--text shadow px-5 pt-5">High-quality workout routines
+          <h1 class="text-center text-h5 text-sm-h3 text-md-h1 font-weight-bold whiteCS--text shadow">Train yourself and<br>others.
+          </h1>
+          <p
+            class="text-center ma-0 text-subtitle-1 text-sm-h5 text-md-h4 font-weight-medium whiteCS--text shadow px-5 pt-5">
+            High-quality workout routines
             <br> anywhere, anytime.</p>
         </v-container>
       </v-col>
       <v-col cols="7" md="5" lg="4">
         <v-container fluid>
-          <v-row align="center" justify="space-around">
+          <v-row align="center" justify="space-around" class="mt-5">
             <v-col cols="12" sm="6" class="d-flex justify-center">
               <v-btn @click="registerOverlay=true"
                      x-large min-width="96%"

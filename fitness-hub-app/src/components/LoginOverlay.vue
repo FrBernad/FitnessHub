@@ -5,32 +5,16 @@
         <v-col cols="11" sm="8" md="5" lg="4">
           <v-card class="px-8 pb-8 pt-4 text-center" color="#212529">
             <v-row justify="start" align="center">
-              <v-icon @click="closeOverlay" small color="#B9BABB">
-                mdi-alpha-x-circle-outline
-              </v-icon>
+              <v-col cols="10">
+                <h1 class="text-left">LOGIN</h1>
+              </v-col>
+              <v-col cols="2">
+                <v-icon @click="closeOverlay" color="#B9BABB">
+                  mdi-alpha-x-circle-outline
+                </v-icon>
+              </v-col>
             </v-row>
-            <v-form>
-              <v-btn class="mx-2 my-3" left color="#1877F2" :to="{name : 'UserHome'}" large width="90%"
-              >
-                <v-row justify="start" align="center" class="pl-4">
-                  <v-icon large left color="#0F9D58">
-                    mdi-google
-                  </v-icon>
-                  <span class="pl-3">Sign in with Google</span>
-                </v-row>
-              </v-btn>
-              <v-btn class="mx-2 my-3" left color="#5C5CF5" :to="{name : 'UserHome'}"
-                     large width="90%"
-              >
-                <v-row justify="start" class="pl-4">
-                  <v-icon left large color="white darken-2">
-                    mdi-facebook
-                  </v-icon>
-                  <span class="pl-3">Sign in with Facebook</span>
-                </v-row>
-              </v-btn>
-            </v-form>
-            <v-divider class="mt-4 mb-6"/>
+            <v-divider class="mb-8 mt-2"></v-divider>
             <v-form>
               <v-text-field
                 @blur="$v.username.$touch()"
@@ -38,6 +22,7 @@
                 v-model="username"
                 label="Username"
                 outlined
+                hint="At least 5 characters long."
                 append-icon="mdi-account"
               ></v-text-field>
               <v-text-field
@@ -48,7 +33,7 @@
                 :type="show ? 'text' : 'password'"
                 name="input-10-1"
                 label="Password"
-                hint="Minimo 8 caracteres"
+                hint="Al least 8 characters long."
                 outlined
                 counter
                 @click:append="show = !show"
@@ -99,6 +84,7 @@
       },
       async processData() {
         if (this.$v.$invalid) {
+          this.$v.$touch();
           console.log("the form is missing something");
           return;
         }
@@ -108,7 +94,7 @@
             password: this.password
           })
 
-          await this.$router.replace('/userHome');
+          await this.$router.replace('/home');
         } catch (e) {
           console.log(e);
           this.signInError = true;
@@ -143,8 +129,8 @@
       usernameErrors() {
         const errors = []
         if (!this.$v.username.$dirty) return errors
-        !this.$v.username.minLenght && errors.push('Invalid username.')
-        !this.$v.username.maxLength && errors.push('Invalid username.')
+        !this.$v.username.minLenght && errors.push('At least 5 characters long.')
+        !this.$v.username.maxLength && errors.push('At least 5 characters long.')
         !this.$v.username.required && errors.push('Username is required.')
         return errors
       }
