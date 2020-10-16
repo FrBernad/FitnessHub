@@ -10,14 +10,14 @@ export default {
   state,
   mutations:{
      ...make.mutations(state),
-    mutations
+    ...mutations
   },
   actions:{
     ...make.actions(state),
-    actions
+    // actions
   },
   getters:{
     ...make.getters(state),
-    getters
+    // getters
   },
 };
