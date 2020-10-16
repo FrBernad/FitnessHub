@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,7 @@ const routes = [
     component: () => import('../layouts/LayoutLandingPage'),
     children: [
       {
+        meta: {requiresUnauth: true},
         path: '',
         name: 'LandingPage',
         component: () => import('../views/LandingPage')
@@ -16,35 +18,41 @@ const routes = [
     ]
   },
   {
-    path: '/userHome',
+    path: '/home',
     component: () => import('../layouts/LayoutDefault'),
     children: [
       {
+        meta: {requiresAuth: true},
         path: '',
-        name: 'UserHome',
-        component: () => import('../views/UserHome')
+        name: 'Home',
+        component: () => import('../views/Home')
       },
       {
+        meta: {requiresAuth: true},
         path: 'createRoutine',
         name: 'CreateRoutine',
         component: () => import('../views/CreateRoutine')
       },
       {
+        meta: {requiresAuth: true},
         path: 'communityWorkouts',
         name: 'CommunityWorkouts',
         component: () => import('../views/CommunityWorkouts')
       },
       {
+        meta: {requiresAuth: true},
         path: 'myRoutines',
         name: 'MyRoutines',
         component: () => import('../views/MyRoutines')
       },
       {
+        meta: {requiresAuth: true},
         path: 'profile',
         name: 'Profile',
         component: () => import('../views/Profile')
       },
       {
+        meta: {requiresAuth: true},
         path: 'routine',
         name: 'Routine',
         component: () => import('../views/Routine')
@@ -70,5 +78,17 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+store.dispatch('tryLogin');
+
+router.beforeEach(function (to, from, next) {
+  if (to.meta.requiresAuth && !store.get('isAuthenticated')) {
+    next('/');
+  } else if (to.meta.requiresUnauth && store.get('isAuthenticated')) {
+    next('/home');
+  } else {
+    next();
+  }
+});
 
 export default router
