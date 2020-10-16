@@ -1,6 +1,6 @@
 <template>
 
-<v-dialog v-model="dialog" persistent width="500px">
+<v-dialog v-model="dialog"  persistent width="500px">
 
 <template v-slot:activator="{ on, attrs }">
   <v-list-item  class="elevation-1 listItem">
@@ -14,28 +14,27 @@
   </v-list-item>
 </template>
 
-  <v-card>
-    <v-row class="">
-      <v-col cols="12" class="d-flex ">
-        <v-btn @click="dialog = false"><v-icon>mdi-information</v-icon></v-btn>
-      </v-col>
-    </v-row>
-    <v-card-title class="text-h4 font-weight-bold d-flex justify-center">Exercise 1</v-card-title>
-    <v-container>
+  <v-card class="pa-3">
+      <v-row class="pa-0 align-center justify-center">
+        <v-col cols="12" class="py-0 d-flex align-center justify-end">
+          <v-btn icon @click="dialog = false"><v-icon>mdi-close-circle-outline</v-icon></v-btn>
+        </v-col>
+      </v-row>
+      <v-card-title class="text-h4 font-weight-bold d-flex justify-center">Exercise 1</v-card-title>
       <v-row class="align-center justify-center">
         <v-col cols="6"><v-card-text class="text-h5  d-flex align-center justify-center font-weight-bold pa-0 ">PICTURE</v-card-text></v-col>
         <v-col cols="6"><v-card-text class="text-h5  d-flex align-center justify-center font-weight-bold pa-0">VIDEO</v-card-text></v-col>
       </v-row>
       <v-row class="align-center justify-center">
-        <v-col cols="6" class="d-flex align-center justify-center"><v-img src="../assets/imgs/routines.jpg" max-height="100" max-width="100"></v-img></v-col>
-        <v-col cols="6" class="d-flex align-center justify-center"><v-img src="../assets/imgs/routines.jpg" max-height="100" max-width="100"></v-img></v-col>
+        <v-col cols="6" class="d-flex align-center justify-center"><v-img src="../assets/imgs/routines.jpg" contain max-height="200"></v-img></v-col>
+        <v-col cols="6" class="d-flex align-center justify-center"><v-img src="../assets/imgs/routines.jpg" contain max-height="200"></v-img></v-col>
       </v-row>
       <v-row class="align-center justify-center">
         <v-col cols="12" class="text-center">
           <v-card-text class="text-h5 font-weight-bold d-flex align-center justify-center pa-0">
             DESCRIPTION
           </v-card-text>
-          <v-card-text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</v-card-text>
+          <v-card-text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</v-card-text>
         </v-col>
       </v-row>
       <v-row>
@@ -43,7 +42,6 @@
         <v-card-text class="text-h5 font-weight-bold d-flex align-center justify-center pa-0">REPS/TIME: 15</v-card-text>
         </v-col>
       </v-row>
-    </v-container>
   </v-card>
 
 </v-dialog>
