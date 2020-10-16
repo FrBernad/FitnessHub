@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    name: "UserHome"
+    name: "Home"
   }
 </script>
 

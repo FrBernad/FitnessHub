@@ -24,7 +24,7 @@ const routes = [
       {
         meta: {requiresAuth: true},
         path: '',
-        name: 'UserHome',
+        name: 'Home',
         component: () => import('../views/Home')
       },
       {
