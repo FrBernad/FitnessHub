@@ -2,15 +2,19 @@
   <v-container fluid fill-height class="pa-0 bg">
     <v-row justify="center" align="center" class="fill-height">
       <v-col cols="4" class="fill-height pa-0">
-        <v-card to="/home/communityWorkouts" rounded="0" height="100%" class="workoutsBG iluminate d-flex align-center justify-center">
-          <v-card-title class="font-weight-bold text-center text-body-2 text-sm-h5 text-md-h4 whiteCS--text shadow">COMMUNITY<br>WORKOUTS</v-card-title>
+        <v-card to="/home/communityWorkouts" rounded="0" height="100%"
+                class="workoutsBG iluminate d-flex align-center justify-center">
+          <v-card-title class="font-weight-bold text-center text-body-2 text-sm-h5 text-md-h4 whiteCS--text shadow">
+            COMMUNITY<br>WORKOUTS
+          </v-card-title>
         </v-card>
       </v-col>
       <v-col cols="4" class="fill-height pa-0">
         <v-card to="/home/createRoutine" rounded="0" height="100%"
                 class="createRoutineBG iluminate d-flex align-center text-center justify-center">
           <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h4 whiteCS--text shadow">
-            CREATE <br v-if="$vuetify.breakpoint.smAndDown">ROUTINE</v-card-title>
+            CREATE <br v-if="$vuetify.breakpoint.smAndDown">ROUTINE
+          </v-card-title>
         </v-card>
       </v-col>
       <v-col cols="4" class="fill-height pa-0">
