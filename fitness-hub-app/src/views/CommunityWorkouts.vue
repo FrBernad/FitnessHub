@@ -5,8 +5,6 @@
       </v-col>
     </v-row>
 
-
-
     <v-row class="bgText justify-center">
       <v-col cols="10" class="d-flex justify-center align-center">
         <h1 class="font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Fueled by our own community, this workouts
@@ -14,6 +12,7 @@
           you need to get to the next level</h1>
       </v-col>
     </v-row>
+
     <SearchBar></SearchBar>
 
     <v-row class="cardsBG px-8 pt-4" justify="space-around">

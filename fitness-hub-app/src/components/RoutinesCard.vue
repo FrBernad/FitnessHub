@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-5 cardType">
+  <v-card to="/home/routine" class=" iluminate pa-5 cardType">
     <v-row align="start" justify="space-around">
       <v-col cols="12 d-flex justify-center align-center pt-0">
         <v-img class="rounded-corner "
@@ -28,6 +28,7 @@
       </v-col>
     </v-row>
   </v-card>
+
 </template>
 
 <script>
@@ -42,5 +43,12 @@
   .cardType {
     background-color: #F8F9FA;
     border-radius: 5%;
+  }
+  .iluminate {
+    transition: box-shadow .1s ease-in-out;
+  }
+
+  .iluminate:hover {
+    box-shadow: 0px 20px 30px 0px;
   }
 </style>

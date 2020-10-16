@@ -3,7 +3,7 @@
     <v-row align="start" justify="center">
       <v-col cols="12" class="pa-0">
         <v-card color="rgb(233 236 239)">
-          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="300px"
+          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="400px"
           >
           </v-img>
           <v-row>
