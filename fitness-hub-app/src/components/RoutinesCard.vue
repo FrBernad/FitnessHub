@@ -8,23 +8,19 @@
         </v-img>
       </v-col>
       <v-col cols="6" class="d-flex align-center justify-start" lg="6">
-        <h4>{{ routineData.title }}</h4>
+        <h4>{{ routineData.name.toUpperCase() }}</h4>
       </v-col>
-      <v-col cols="4" md="4" class="d-flex justify-md-center justify-sm-end justify-start align-center">
+      <v-col cols="6" class="d-flex justify-end align-center">
         <template v-for="num in 5">
-          <v-icon v-if="routineData.rating>=num">mdi-star</v-icon>
+          <v-icon v-if="routineData.avarageRating>=num">mdi-star</v-icon>
           <v-icon v-else>mdi-star-outline</v-icon>
         </template>
       </v-col>
-      <v-col cols="2" class="d-flex justify-md-center justify-end justify-sm-start align-center">
-        <v-icon v-if="routineData.fav">mdi-heart</v-icon>
-        <v-icon v-else>mdi-heart-outline</v-icon>
-      </v-col>
       <v-col cols="9">
-        <h5>by {{routineData.owner.toUpperCase()}}</h5>
+        <h5>by {{routineData.creator.username.toUpperCase()}}</h5>
       </v-col>
       <v-col cols="3">
-        <h5 class="text-center">{{routineData.time}} min</h5>
+        <h5 class="text-center">{{routineData.difficulty.toUpperCase()}}</h5>
       </v-col>
     </v-row>
   </v-card>

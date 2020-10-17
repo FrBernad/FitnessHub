@@ -1,5 +1,7 @@
 export default {
+
   async signIn(context, payload) {
+
     let response = await fetch(`${context.getters.baseUrl}/user/login`, {
       method: 'POST',
       headers: {
@@ -14,8 +16,8 @@ export default {
     let responseData = await response.json();
 
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
+        console.log(responseData);
+        throw new Error(responseData.message);
     }
 
     localStorage.setItem('token', responseData.token);
@@ -131,9 +133,9 @@ export default {
         name: "Get ripped",
         detail: "Get ripped with this awesome routine",
         isPublic: true,
-        difficulty: "intermediate",
+        difficulty: "beginner",
         category: {
-          id: 3
+          id: 1
         }
       },
       {
@@ -142,7 +144,7 @@ export default {
         isPublic: true,
         difficulty: "advanced",
         category: {
-          id: 2
+          id: 1
         }
       },
       {
@@ -167,9 +169,9 @@ export default {
         name: "Explosive action",
         detail: "Burn your legs with this non stop routine",
         isPublic: true,
-        difficulty: "intermediate",
+        difficulty: "beginner",
         category: {
-          id: 3
+          id: 2
         }
       },
       {
@@ -197,7 +199,7 @@ export default {
         isPublic: true,
         difficulty: "beginner",
         category: {
-          id: 3
+          id: 2
         }
       },
       {
@@ -222,7 +224,7 @@ export default {
         name: "Abs-Abs-Abs",
         detail: "You want a sixpack, you need this routine",
         isPublic: true,
-        difficulty: "Intermidiate",
+        difficulty: "intermediate",
         category: {
           id: 1
         }
@@ -231,7 +233,7 @@ export default {
         name: "Intense UpperBody Workout",
         detail: "Work all your UpperBody like never before",
         isPublic: true,
-        difficulty: "Advance",
+        difficulty: "advanced",
         category: {
           id: 2
         }
@@ -240,16 +242,16 @@ export default {
         name: "Chest Day",
         detail: "Intense routine focused on increasing muscle mass and chest strenght",
         isPublic: true,
-        difficulty: "Advance",
+        difficulty: "advanced",
         category: {
-          id: 3
+          id: 2
         }
       },
       {
         name: "Legs Day",
         detail: "Grow your legs like never before",
         isPublic: true,
-        difficulty: "Advance",
+        difficulty: "advanced",
         category: {
           id: 1
         }
@@ -258,7 +260,7 @@ export default {
         name: "Quick Warm Up",
         detail: "Warmp up yor entire body easly",
         isPublic: true,
-        difficulty: "Beginer",
+        difficulty: "intermediate",
         category: {
           id: 1
         }
@@ -267,7 +269,7 @@ export default {
         name: "Quick Warm Up",
         detail: "Warmp up yor entire body easly",
         isPublic: true,
-        difficulty: "Beginer",
+        difficulty: "intermediate",
         category: {
           id: 1
         }
@@ -285,8 +287,9 @@ export default {
           ...routine
         })
       });
-
+      const responseData = await response.json();
       if (!response.ok) {
+        console.log(responseData);
         throw new Error(response.statusText);
       }
     }

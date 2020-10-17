@@ -79,7 +79,7 @@
         try {
           const routines = await this.$store.dispatch('getRoutines', data);
           console.log(routines);
-          this.totalPages = routines.size;
+          this.totalPages = routines.totalCount;
           this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
           this.currentEntries = routines.results;
         } catch (e) {
