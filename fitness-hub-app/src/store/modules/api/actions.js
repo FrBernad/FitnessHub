@@ -106,6 +106,8 @@ export default {
   },
 
   async getRoutines(context, payload) {
+    console.log(payload);
+
     let response = await fetch(`${context.getters.baseUrl}/routines`, {
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
