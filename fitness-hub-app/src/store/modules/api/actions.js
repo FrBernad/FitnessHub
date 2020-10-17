@@ -131,6 +131,24 @@ export default {
 
   async createRoutine(context,payload){
     console.log(payload);
+    let response = await fetch(`${context.getters.baseUrl}/routines`, {
+      body: JSON.stringify({...payload}),
+      method: 'POST',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    console.log(responseData);
+
   },
 
   async seedDataBase(context) {

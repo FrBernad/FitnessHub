@@ -49,9 +49,9 @@
           return {
             sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"],
             title:'Routine name',
-            dialog: false,
+            dialog: false
           }
-        },
+        }
       }
     </script>
 

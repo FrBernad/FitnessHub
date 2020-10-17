@@ -102,7 +102,6 @@
           setTimeout(this.resetForm, 4000);
         }
       },
-
       resetForm() {
         this.$v.$reset();
         this.email = "";

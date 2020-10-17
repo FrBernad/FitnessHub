@@ -11,7 +11,7 @@
 
           <v-card color="rgb(73, 80, 87)" class="mx-2 mb-2 py-1">
 
-            <v-virtual-scroll height="250px" :items="exercises" bench="0" item-height="50px">
+            <v-virtual-scroll height="250px" bench="0" item-height="50px">
               <template v-slot="{ item }">
                 <v-list-item :key="item" >
                   <v-list-item-content>
