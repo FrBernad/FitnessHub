@@ -1,6 +1,6 @@
 <template>
-  <v-list-item class="pb-3" >
-  <v-card to="/home/routine" class=" iluminate pa-2 cardType">
+  <v-list-item class="pb-3">
+  <v-card to="/home/routine" class=" iluminate pa-2 cardType" width="100%">
     <v-row align="start" justify="space-around">
       <v-col cols="6" class="d-flex align-center justify-start" lg="6">
         <h4>{{ routineData.name}}</h4>
