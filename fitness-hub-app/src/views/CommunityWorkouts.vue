@@ -17,7 +17,7 @@
 
     <SearchBar></SearchBar>
 
-    <v-row class="cardsBG px-8 pt-4" justify="space-around">
+    <v-row class="px-8 pt-4" justify="space-around">
       <v-col cols="12" md="6" lg="4" v-for="(entry,index) in currentEntries" :key="index">
         <RoutinesCard :routineData="entry"></RoutinesCard>
       </v-col>
