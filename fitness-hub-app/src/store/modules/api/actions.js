@@ -50,7 +50,7 @@ export default {
 
     context.commit("user/setUserData", userData);
 
-    // await context.dispatch("seedDataBase");
+    //await context.dispatch("seedDataBase");
   },
 
 
@@ -127,6 +127,10 @@ export default {
     }
 
     return responseData;
+  },
+
+  async createRoutine(context,payload){
+    console.log(payload);
   },
 
   async seedDataBase(context) {

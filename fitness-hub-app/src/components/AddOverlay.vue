@@ -94,7 +94,7 @@
               </v-form>
               <v-row align="center" justify="center">
                 <v-col cols="4" class="d-flex justify-center ">
-                  <v-btn @click="addOverlay=true" large width="80%" color="rgb(52, 58, 64)">
+                  <v-btn @click="addExcercise" large width="80%" color="rgb(52, 58, 64)">
                     <v-row justify="space-around">
                       <span class="whiteCS--text">ADD</span>
                       <v-icon right color="rgb(248, 249, 250)">
@@ -129,7 +129,8 @@
     methods: {
       closeOverlay() {
         this.$emit('closeAddOverlay');
-      }
+      },
+
     }
   }
 </script>

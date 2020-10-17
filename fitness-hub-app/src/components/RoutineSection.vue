@@ -1,7 +1,8 @@
 <template>
+  <v-dialog v-model="dialog" persistent width="500px">
+    <template v-slot:activator="{ on, attrs }">
   <v-container fluid fill-height>
-    <AddOverlay :is-on="addOverlay" @closeAddOverlay="addOverlay=false"></AddOverlay>
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col cols="12" lg="11">
         <v-card color="rgb(52, 58, 64)" class="pa-1">
           <v-card-title class="whiteCS--text d-flex align-center justify-center">
@@ -11,7 +12,6 @@
           <v-card color="rgb(73, 80, 87)" class="mx-2 mb-2 py-1">
 
             <v-virtual-scroll height="250px" :items="exercises" bench="0" item-height="50px">
-
               <template v-slot="{ item }">
                 <v-list-item :key="item" >
                   <v-list-item-content>
@@ -22,7 +22,7 @@
                           <span class="pa-2 text-subtitle-2">{{item}}</span>
                         </v-col>
                         <v-col class="py-0 d-flex align-center" cols="2" v-if="canEdit">
-                          <v-btn icon small color="black" @click="editOverlay=true">
+                          <v-btn icon small color="black" v-bind="attrs" v-on="on" @click="editOverlay=true">
                             <v-icon small>mdi-pencil</v-icon>
                           </v-btn>
                         </v-col>
@@ -46,7 +46,7 @@
                 </v-btn>
               </v-col>
               <v-col cols="5" class="d-flex align-center justify-end">
-                <v-btn @click="addOverlay=true" large width="80%" color="rgb(52, 58, 64)">
+                <v-btn @click="addOverlay=true" v-bind="attrs" v-on="on" large width="80%" color="rgb(52, 58, 64)">
                   <v-row justify="space-around">
                     <span class="whiteCS--text">Add</span>
                     <v-icon right color="rgb(248, 249, 250)">
@@ -61,15 +61,19 @@
       </v-col>
     </v-row>
   </v-container>
+ </template>
+    <AddDialog @exerciseClose="dialog=false"></AddDialog>
+  </v-dialog>
+
 </template>
 
 <script>
-  import AddOverlay from "./AddOverlay";
   import EditOverlay from "./EditOverlay";
+  import AddDialog from "@/components/AddDialog";
 
   export default {
     name: "RoutineSection",
-    components: {AddOverlay, EditOverlay},
+    components: {EditOverlay,AddDialog},
     props: {
       title: {
         type: String
@@ -77,10 +81,9 @@
     },
     data() {
       return {
-        addOverlay: false,
         editOverlay: false,
         canEdit: false,
-        exercises: ["Bench Press", "Inchworms", "Burpies","Bench Press", "Inchworms", "Burpies","Bench Press", "Inchworms", "Burpies"]
+        dialog:false,
       }
     },
   }

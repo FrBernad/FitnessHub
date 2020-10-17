@@ -2,9 +2,14 @@
 
       <v-container fluid class="bg pa-0" style="height: 100%">
         <v-row align="center" justify="space-around" class="fill-height">
-          <v-col v-for="section in sections"
-                 :key="section" cols="10" md="4">
-            <RoutineSection :title="section"></RoutineSection>
+          <v-col cols="10" md="4">
+            <RoutineSection title="WARM UP"></RoutineSection>
+          </v-col>
+          <v-col cols="10" md="4">
+            <RoutineSection title="MAIN EXERCISES"></RoutineSection>
+          </v-col>
+          <v-col cols="10" md="4">
+            <RoutineSection title="COOL DOWN"></RoutineSection>
           </v-col>
           <v-col class="d-flex align-center justify-center align-self-end py-6 bgColor" cols="12">
             <v-dialog v-model="dialog" persistent width="500px">
@@ -44,7 +49,7 @@
           return {
             sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"],
             title:'Routine name',
-            dialog: false
+            dialog: false,
           }
         },
       }
