@@ -17,6 +17,8 @@
               clearable
             ></v-text-field>
           </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="6" class="d-flex align-center justify-center">
             <h1 class="text-h6 font-weight-bold textColor ">PICTURE</h1>
           </v-col>
@@ -32,7 +34,8 @@
           <v-col cols="6" class="d-flex align-center justify-center">
             <v-btn><v-icon >mdi-plus-thick</v-icon></v-btn>
           </v-col>
-
+        </v-row>
+        <v-row>
           <v-col cols="12">
             <v-textarea
               class="pa-0"
@@ -49,36 +52,36 @@
               @blur="$v.exercise.detail.$touch()"
             ></v-textarea>
           </v-col>
-
-          <v-form class="px-4 mt-0">
-            <v-radio-group class="mt-0" light v-model="radios">
-              <v-row class="ma-0 pa-0" align="center">
-                <v-col cols="12" class="ma-0 pa-0">
-                  <v-row class="ma-0 pa-0" align="center">
-                    <v-col cols="6" class="ma-0 pa-0 d-flex align-center">
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-radio-group row class="mt-0" light v-model="radios">
+                    <v-col cols="3" class="ma-0 pa-0 d-flex align-center justify-start">
                       <v-radio color="#212529" value="time" @click="cleanReps" label="TIME"></v-radio>
                     </v-col>
-                    <v-col cols="6" class="ma-0 pa-0">
+                    <v-col cols="5" class="ma-0 pa-0 d-flex align-center justify-center">
                       <v-radio  color="#212529" value="reps" @click="cleanTime" label="REPETITIONS"></v-radio>
                     </v-col>
-                  </v-row>
-                </v-col>
-                <v-col cols="12" class="ma-0 pa-0">
-                    <v-row justify="center" align="center" v-if="radios==='time'">
-                    <v-col cols="3" class="d-flex justify-center">
+                    <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-if="radios==='time'">
                       <v-text-field color="#212529" label="SECS" hide-details :error-messages="timeError" @blur="$v.exercise.duration.$touch()" v-model="exercise.duration" >{{exercise.duration}}</v-text-field>
                     </v-col>
-                  </v-row>
-                  <v-row justify="center" align="center" v-else>
-                    <v-col cols="3" class="d-flex justify-center">
+                    <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-else>
                       <v-text-field color="#212529" label="REPS" hide-details :error-messages="repsError" @blur="$v.exercise.repetitions.$touch()" v-model="exercise.repetitions">{{exercise.repetitions}}</v-text-field>
                     </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
             </v-radio-group>
-          </v-form>
+          </v-col>
+        </v-row>
 
+        <v-row>
+          <v-col cols="4">
+            <v-select
+              :items="['exercise','rest']"
+              label="Type"
+              required
+              v-model="exercise.type"
+              color="#212529"
+            ></v-select>
+          </v-col>
         </v-row>
       </v-container>
     </v-card-text>
