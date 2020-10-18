@@ -12,6 +12,8 @@
               required
               color="textColor"
               v-model="exercise.name"
+              :error-messages="nameError"
+              @blur="$v.exercise.name.$touch()"
               clearable
             ></v-text-field>
           </v-col>
@@ -42,7 +44,8 @@
               color="rgb(33, 37, 41)"
               background-color="rgb(248, 249, 250)"
               label="Description"
-              hide-details
+              :error-messages="detailError"
+              @blur="$v.exercise.detail.$touch()"
             ></v-textarea>
           </v-col>
           <v-form class="px-4 mt-0">
@@ -64,12 +67,12 @@
                       <v-text-field color="#212529" label="MINS" hide-details></v-text-field>
                     </v-col>
                     <v-col cols="3" class="d-flex justify-center">
-                      <v-text-field color="#212529" label="SECS" hide-details></v-text-field>
+                      <v-text-field color="#212529" label="SECS" v-model="exercise.duration" hide-details></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row justify="center" align="center" v-else>
                     <v-col cols="3" class="d-flex justify-center">
-                      <v-text-field color="#212529" label="REPS" hide-details></v-text-field>
+                      <v-text-field color="#212529" label="REPS" v-model="exercise.repetitions" hide-details></v-text-field>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -92,7 +95,7 @@
       <v-btn
         color="#212529"
         text
-        @click="exerciseClose"
+        @click="addExercise"
       >
         ADD
       </v-btn>
@@ -101,11 +104,36 @@
 </template>
 
 <script>
+import {maxLength, minLength,required} from 'vuelidate/lib/validators'
+
 export default {
 name: "AddDialog",
   methods:{
     exerciseClose(){
+      this.resetForm();
       this.$emit('exerciseClose');
+    },
+    async addExercise() {
+      if(this.$v.$invalid) {
+        this.$v.$touch();
+        console.log("the form is missing something");
+        return;
+      }
+
+      try {
+        await this.$store.dispatch('addExercise', this.exercise);
+        await this.$router.replace('home/createRoutine');
+      } catch(e) {
+        console.log(e);
+      }
+    },
+    resetForm() {
+      this.$v.$reset();
+      this.exercise.name = "";
+      this.exercise.detail = "";
+      this.exercise.type = "";
+      this.exercise.duration= 0;
+      this.exercise.repetitions = 0;
     }
   },
   data() {
@@ -121,6 +149,36 @@ name: "AddDialog",
       default: false
     }
   },
+  validations: {
+    exercise: {
+      name:{required,minLength: minLength(3),maxLength:maxLength(100)},
+      detail: {required, minLength: minLength(5), maxLength: maxLength(200)}
+    }
+  },
+  computed: {
+    detailError() {
+      const errors = [];
+      if(!this.$v.exercise.detail.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
+      !this.$v.exercise.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+      !this.$v.exercise.detail.required && errors.push('Detail is required');
+
+      return errors;
+    },
+    nameError(){
+      const errors = [];
+      if(!this.$v.exercise.name.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.name.minLength && errors.push('Name must be at least 3 characters long');
+      !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 100 characters");
+      !this.$v.exercise.name.required && errors.push('Name is required');
+
+      return errors;
+    }
+  }
 }
 </script>
 
