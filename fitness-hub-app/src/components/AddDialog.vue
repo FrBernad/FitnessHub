@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="px-8">
-      <span class="headline textColor">{{title}}</span>
+      <span class="headline textColor">{{exercise.name}}</span>
     </v-card-title>
     <v-card-text class="pb-0">
       <v-container>
@@ -11,7 +11,7 @@
               label="Exercise name"
               required
               color="textColor"
-              v-model="title"
+              v-model="exercise.name"
               clearable
             ></v-text-field>
           </v-col>
@@ -38,9 +38,10 @@
               no-resize
               filled
               pb-0
+              v-model="exercise.detail"
               color="rgb(33, 37, 41)"
               background-color="rgb(248, 249, 250)"
-              placeholder="Description"
+              label="Description"
               hide-details
             ></v-textarea>
           </v-col>
@@ -111,7 +112,7 @@ name: "AddDialog",
     return {
       title:'Exercise name',
       radios: "time",
-
+      exercise: {name:'',detail:'',type:'',duration:0,repetitions:0},
     }
   },
   props: {
