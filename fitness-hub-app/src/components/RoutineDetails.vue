@@ -17,7 +17,9 @@
               clearable
             ></v-text-field>
           </v-col>
-          <v-col cols="12">
+        </v-row>
+        <v-row class="justify-center align-center">
+        <v-col cols="12">
             <v-textarea
               class="pa-0"
               light
@@ -32,15 +34,39 @@
               label="Description"
             ></v-textarea>
           </v-col>
-          <v-col cols="12" sm="6"
-          >
+        </v-row>
+        <v-row class="justify-center align-center">
+        <v-col cols="6" sm="6">
             <v-select
               :items="[1,2,3,4]"
               label="Category"
               required
               v-model="routine.category.id"
               color="#212529"
+              :error-messages="categoryError"
+              @blur="$v.routine.category.id.$touch()"
+              @change="$v.routine.category.id.$touch()"
             ></v-select>
+          </v-col>
+          <v-col cols="6" sm="6">
+            <v-select
+              :items="['rookie','beginner','intermediate','advanced','expert']"
+              label="Difficulty"
+              required
+              v-model="routine.difficulty"
+              color="#212529"
+              :error-messages="difficultyError"
+              @blur="$v.routine.difficulty.$touch()"
+              @change="$v.routine.difficulty.$touch()"
+            ></v-select>
+          </v-col>
+        </v-row>
+        <v-row class="justify-center align-center">
+          <v-col cols="4">
+            <v-checkbox
+              v-model="routine.isPublic"
+              label="Public"
+            ></v-checkbox>
           </v-col>
         </v-row>
       </v-container>
@@ -72,7 +98,7 @@ export default {
   name: "RoutineDetails",
   data() {
     return {
-      routine: {name: '', detail: '', category: {id:1},isPublic:true, difficulty:'rookie',dateCreated: Date.now(), averageRating:0.0},
+      routine: {name: '', detail: '', category: {id:undefined},isPublic:true, difficulty:'',dateCreated: Date.now(), averageRating:0.0},
     }
   },
   methods: {
@@ -98,16 +124,20 @@ export default {
       this.$v.$reset();
       this.routine.name = "";
       this.routine.detail = "";
-      this.routine.category = 1;
+      this.routine.category.id = undefined;
       this.routine.isPublic = true;
-      this.routine.difficulty = "rookie";
+      this.routine.difficulty = '';
       this.routine.dateCreated = Date.now();
     }
   },
   validations: {
       routine: {
         name:{required,minLength: minLength(3),maxLength:maxLength(100)},
-        detail: {required, minLength: minLength(5), maxLength: maxLength(200)}
+        detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
+        category: {
+          id: {required}
+        },
+        difficulty: {required}
     }
   },
   computed: {
@@ -130,6 +160,24 @@ export default {
       !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
       !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
       !this.$v.routine.name.required && errors.push('Name is required');
+
+      return errors;
+    },
+    categoryError(){
+      const errors = [];
+      if(!this.$v.routine.category.id.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.category.id.required && errors.push('Category is required');
+
+      return errors;
+    },
+    difficultyError(){
+      const errors = [];
+      if(!this.$v.routine.difficulty.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.difficulty.required && errors.push('Difficulty is required');
 
       return errors;
     }
