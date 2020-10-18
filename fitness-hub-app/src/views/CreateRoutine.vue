@@ -3,7 +3,7 @@
       <v-container fluid class="bg pa-0" style="height: 100%">
         <v-row align="center" justify="space-around" class="fill-height">
           <v-col cols="10" md="4">
-            <RoutineSection title="WARM UP"></RoutineSection>
+            <RoutineSection  title="WARM UP"></RoutineSection>
           </v-col>
           <v-col cols="10" md="4">
             <RoutineSection title="MAIN EXERCISES"></RoutineSection>

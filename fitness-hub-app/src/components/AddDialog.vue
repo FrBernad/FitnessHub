@@ -39,6 +39,7 @@
               light
               no-resize
               filled
+              height="150px"
               pb-0
               v-model="exercise.detail"
               color="rgb(33, 37, 41)"
@@ -48,31 +49,29 @@
               @blur="$v.exercise.detail.$touch()"
             ></v-textarea>
           </v-col>
+
           <v-form class="px-4 mt-0">
             <v-radio-group class="mt-0" light v-model="radios">
               <v-row class="ma-0 pa-0" align="center">
                 <v-col cols="12" class="ma-0 pa-0">
                   <v-row class="ma-0 pa-0" align="center">
                     <v-col cols="6" class="ma-0 pa-0 d-flex align-center">
-                      <v-radio color="#212529" value="time" label="TIME"></v-radio>
+                      <v-radio color="#212529" value="time" @click="cleanReps" label="TIME"></v-radio>
                     </v-col>
                     <v-col cols="6" class="ma-0 pa-0">
-                      <v-radio  color="#212529" value="reps" label="REPETITIONS"></v-radio>
+                      <v-radio  color="#212529" value="reps" @click="cleanTime" label="REPETITIONS"></v-radio>
                     </v-col>
                   </v-row>
                 </v-col>
                 <v-col cols="12" class="ma-0 pa-0">
-                  <v-row justify="center" align="center" v-if="radios==='time'">
+                    <v-row justify="center" align="center" v-if="radios==='time'">
                     <v-col cols="3" class="d-flex justify-center">
-                      <v-text-field color="#212529" label="MINS" hide-details></v-text-field>
-                    </v-col>
-                    <v-col cols="3" class="d-flex justify-center">
-                      <v-text-field color="#212529" label="SECS" v-model="exercise.duration" hide-details></v-text-field>
+                      <v-text-field color="#212529" label="SECS" hide-details :error-messages="timeError" @blur="$v.exercise.duration.$touch()" v-model="exercise.duration" >{{exercise.duration}}</v-text-field>
                     </v-col>
                   </v-row>
                   <v-row justify="center" align="center" v-else>
                     <v-col cols="3" class="d-flex justify-center">
-                      <v-text-field color="#212529" label="REPS" v-model="exercise.repetitions" hide-details></v-text-field>
+                      <v-text-field color="#212529" label="REPS" hide-details :error-messages="repsError" @blur="$v.exercise.repetitions.$touch()" v-model="exercise.repetitions">{{exercise.repetitions}}</v-text-field>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -104,7 +103,9 @@
 </template>
 
 <script>
-import {maxLength, minLength,required} from 'vuelidate/lib/validators'
+import {maxLength, minLength,required,minValue,requiredIf,helpers} from 'vuelidate/lib/validators'
+
+
 
 export default {
 name: "AddDialog",
@@ -121,8 +122,9 @@ name: "AddDialog",
       }
 
       try {
-        await this.$store.dispatch('addExercise', this.exercise);
-        await this.$router.replace('home/createRoutine');
+         console.log(this.exercise);
+        // await this.$store.dispatch('addExercise', this.exercise);
+        // await this.$router.replace('home/createRoutine');
       } catch(e) {
         console.log(e);
       }
@@ -134,7 +136,13 @@ name: "AddDialog",
       this.exercise.type = "";
       this.exercise.duration= 0;
       this.exercise.repetitions = 0;
-    }
+    },
+    cleanReps(){
+      this.exercise.repetitions=0;
+    },
+    cleanTime(){
+      this.exercise.duration=0;
+    },
   },
   data() {
     return {
@@ -151,8 +159,10 @@ name: "AddDialog",
   },
   validations: {
     exercise: {
-      name:{required,minLength: minLength(3),maxLength:maxLength(100)},
-      detail: {required, minLength: minLength(5), maxLength: maxLength(200)}
+      name:{required,minLength: minLength(3),maxLength: maxLength(100)},
+      detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
+      duration:{required: requiredIf(function(){return this.radios==="time"})},
+      repetitions: {required: requiredIf(function(){return this.radios!=="time"})}
     }
   },
   computed: {
@@ -177,7 +187,24 @@ name: "AddDialog",
       !this.$v.exercise.name.required && errors.push('Name is required');
 
       return errors;
-    }
+    },
+    timeError(){
+      const errors = [];
+      if(!this.$v.exercise.duration.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.duration.minValue && errors.push('Value must be greater than 0');
+
+      return errors;
+    },
+    repsError(){
+      const errors = [];
+      if(!this.$v.exercise.repetitions.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
+      return errors;
+    },
   }
 }
 </script>
