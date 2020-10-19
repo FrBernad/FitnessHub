@@ -2,7 +2,9 @@
   <v-app>
     <AppBar></AppBar>
     <v-main>
-      <router-view></router-view>
+      <v-fade-transition appear>
+        <router-view></router-view>
+      </v-fade-transition>
     </v-main>
     <Footer></Footer>
   </v-app>

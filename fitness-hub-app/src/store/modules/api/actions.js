@@ -121,7 +121,6 @@ export default {
 
       const response = await fetch(url, {
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `bearer ${token}`
         },
       });

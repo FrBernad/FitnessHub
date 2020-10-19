@@ -11,7 +11,7 @@
 
             <v-virtual-scroll height="250px" :items="exercises" bench="0" item-height="50px">
               <template v-slot="{item,index}">
-                <v-fade-transition appear leave-absolute>
+                <v-fade-transition appear>
                   <v-list-item :key="index">
                     <v-list-item-content>
                       <v-card color="rgb(248, 249, 250)" class="px-3">

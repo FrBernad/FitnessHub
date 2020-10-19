@@ -50,9 +50,11 @@
   export default {
     name: "MyRoutines.vue",
     components: {SearchBar, RoutinesCard},
+
     created() {
       this.seedEntries();
     },
+
     data: () => ({
       entries: [],
       currentEntries: [],
@@ -62,25 +64,45 @@
       pages: 0,
       sortBy: ['Rating', 'Duration', 'Favorites', 'Creation date', 'Sports', 'Level', 'Category']
     }),
+
     methods: {
-      seedEntries() {
-        for (let i = 0; i < 42; i++) {
-          this.entries[i] = {
-            id: 1,
-            title: "Routine Name",
-            owner: "John",
-            rating: Math.floor((Math.random() * 5) + 1),
-            fav: Math.floor((Math.random() * 10) + 1) >= 5,
-            time: 8 + Math.floor((Math.random() * 20) + 1)
-          }
+      async seedEntries() {
+        const data = {
+          page: this.page-1,
+          size: this.itemsPerPage,
+          orderBy: `id`,
+          direction: `desc`
         }
-        this.totalPages = this.entries.length;
-        this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
-        this.currentEntries = this.entries.slice(this.page - 1, (this.page - 1) * this.itemsPerPage + this.itemsPerPage);
+        try {
+          const routines = await this.$store.dispatch('getRoutines', data);
+          console.log(routines);
+          this.totalPages = routines.totalCount;
+          this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
+          this.currentEntries = routines.results;
+        } catch (e) {
+          console.log(e);
+        }
+
       },
-      changePage() {
-        this.currentEntries = this.entries.slice((this.page - 1) * this.itemsPerPage, (this.page - 1) * this.itemsPerPage + this.itemsPerPage);
+
+      async changePage() {
+        const data = {
+          page: this.page-1,
+          size: this.itemsPerPage,
+          orderBy: `id`,
+          direction: `desc`
+        };
+
+        try {
+
+          const routines = await this.$store.dispatch('getRoutines', data);
+          this.currentEntries = routines.results;
+
+        } catch (e) {
+          console.log(e);
+        }
       }
+
     },
   }
 </script>
