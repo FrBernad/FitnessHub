@@ -1,7 +1,11 @@
 <template>
   <v-container fill-height fluid class="bg">
-    <LoginOverlay :l-on="loginOverlay" @closeLoginOverlay="loginOverlay=false"></LoginOverlay>
-    <RegisterOverlay :r-on="registerOverlay" @closeRegisterOverlay="registerOverlay=false"></RegisterOverlay>
+    <v-fade-transition>
+      <LoginOverlay v-if="loginOverlay" :l-on="loginOverlay" @closeLoginOverlay="loginOverlay=false"></LoginOverlay>
+    </v-fade-transition>
+    <v-fade-transition>
+      <RegisterOverlay v-if="registerOverlay" :r-on="registerOverlay" @closeRegisterOverlay="registerOverlay=false"></RegisterOverlay>
+    </v-fade-transition>
     <v-row justify="center" align="center">
       <v-col cols="12">
         <v-container fluid>

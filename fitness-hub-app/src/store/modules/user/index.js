@@ -18,6 +18,6 @@ export default {
   },
   getters:{
     ...make.getters(state),
-    // getters
+    ...getters
   },
 };

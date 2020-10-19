@@ -54,6 +54,35 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog
+      v-model="loading"
+      width="500px"
+    >
+      <v-card color="#E9ECEF" width="500px" height="250px">
+        <v-container fill-height fluid>
+          <v-row align="center" justify="center">
+            <v-fade-transition>
+              <v-col v-if="!errorMessage" cols="5" class="d-flex align-center justify-center">
+                <v-progress-circular
+                  :size="70"
+                  :width="7"
+                  color="purple"
+                  indeterminate
+                ></v-progress-circular>
+              </v-col>
+            </v-fade-transition>
+            <v-fade-transition>
+              <v-col cols="8" v-if="errorMessage" class="mt-8">
+                <h2 v-if="error" class="text-h5 text-center red--text">{{errorMessage}}</h2>
+                <h2 v-else class="text-h5 text-center light-green--text">{{errorMessage}}</h2>
+              </v-col>
+            </v-fade-transition>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-dialog>
+
   </v-overlay>
 </template>
 
@@ -74,7 +103,9 @@
         password: '',
         username: '',
         email: '',
-        signInError: false
+        loading: false,
+        errorMessage: "",
+        error: false
       }
     },
 
@@ -90,15 +121,36 @@
           console.log("the form is missing something");
           return;
         }
-
-        // await this.$router.replace('/verifyEmail');
+        const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+        try {
+          this.loading = true;
+          await sleep(1000);
+          await this.$store.dispatch('signUp', {
+            email: this.email,
+            username: this.username,
+            password: this.password
+          })
+          this.errorMessage = "Account created succesfully";
+          await sleep(2000);
+          this.loading = false;
+          this.errorMessage = "";
+          await this.$router.push('/verifyAccount');
+        } catch (e) {
+          this.error = true;
+          this.errorMessage = e;
+          await setTimeout(() => {
+            this.errorMessage = "";
+            this.loading = false;
+            this.error = false;
+            this.resetForm();
+          }, 3500);
+        }
       },
 
       resetForm() {
         this.$v.$reset();
         this.email = "";
         this.password = "";
-        this.signInError = false;
       }
     },
 

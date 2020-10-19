@@ -1,6 +1,7 @@
 const state = {
   username: "",
-  userID: null
+  userID: null,
+  email: "",
 };
 
 export default state

@@ -1,5 +1,37 @@
 export default {
 
+  async signUp(context, payload) {
+
+    let response = await fetch(`${context.getters.baseUrl}/user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...payload,
+        fullName: "",
+        gender: "male",
+        birthdate: 284007600000,
+      })
+    })
+
+    let responseData = await response.json();
+    let errorMessage = "";
+    if (!response.ok) {
+      switch (responseData.code) {
+        case 2:
+          errorMessage = "There is already a user registered under that email"
+          break;
+        default:
+          errorMessage = responseData.description;
+          break;
+      }
+      throw new Error(errorMessage);
+    }
+
+    context.commit("user/setUserData", responseData);
+  },
+
   async signIn(context, payload) {
 
     let response = await fetch(`${context.getters.baseUrl}/user/login`, {
@@ -14,10 +46,17 @@ export default {
     })
 
     let responseData = await response.json();
-
+    let errorMessage = "";
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
+      switch (responseData.code) {
+        case 4:
+          errorMessage = "Username or password incorrect"
+          break;
+        default:
+          errorMessage = responseData.description;
+          break;
+      }
+      throw new Error(errorMessage);
     }
 
     localStorage.setItem('token', responseData.token);
@@ -43,16 +82,10 @@ export default {
       throw new Error("Failed to fetch data after login");
     }
 
-    let userData = {
-      username: responseData.username,
-      userID: responseData.id,
-    };
+    context.commit("user/setUserData", responseData);
 
-    context.commit("user/setUserData", userData);
-
-    //await context.dispatch("seedDataBase");
+    // await context.dispatch("seedDataBase");
   },
-
 
   async logout(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/user/logout`, {
@@ -99,24 +132,50 @@ export default {
         throw new Error("Could not auto login");
       }
 
-      let userData = {username: responseData.username};
+      context.commit("user/setUserData", responseData);
+    }
+  },
 
-      context.commit("user/setUserData", userData);
+  async verifyAccount(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/user/verify_email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: payload.email,
+        code: payload.code,
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+  },
+
+  async resendVerification(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/user/resend_verification`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: payload.email,
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
   },
 
   async getRoutines(context, payload) {
-    console.log(payload);
-
-    let response = await fetch(`${context.getters.baseUrl}/routines`, {
+    let response = await fetch(`${context.getters.baseUrl}/routines?` + new URLSearchParams({
+      ...payload
+    }), {
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
-        'difficulty': `${payload.difficulty}`,
-        'page': `${payload.page}`,
-        'size': `${payload.size}`,
-        'orderBy': `${payload.orderBy}`,
-        'direction': `${payload.direction}`
-      },
+      }
     });
 
     let responseData = await response.json();

@@ -14,7 +14,13 @@ const routes = [
         path: '',
         name: 'LandingPage',
         component: () => import('../views/LandingPage')
-      }
+      },
+      {
+        meta: {requiresUnauth: true},
+        path: 'verifyAccount',
+        name: 'VerifyAccount',
+        component: () => import('../views/VerifyAccount')
+      },
     ]
   },
   {

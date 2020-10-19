@@ -70,7 +70,6 @@
     methods: {
       async seedEntries() {
         const data = {
-          difficulty: null,
           page: this.page-1,
           size: this.itemsPerPage,
           orderBy: `id`,
@@ -90,19 +89,15 @@
 
       async changePage() {
         const data = {
-          difficulty: null,
           page: this.page-1,
           size: this.itemsPerPage,
           orderBy: `id`,
           direction: `desc`
         };
 
-        console.log(data);
-
         try {
 
           const routines = await this.$store.dispatch('getRoutines', data);
-          console.log(routines);
           this.currentEntries = routines.results;
 
         } catch (e) {

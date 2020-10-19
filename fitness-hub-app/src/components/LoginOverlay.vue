@@ -38,23 +38,41 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn color="primary" large width="80%" @click="processData">Sign in</v-btn>
+              <v-btn color="primary" class="mt-3" large width="80%" @click="processData">Sign in</v-btn>
             </v-form>
-            <div class="mt-3">
-              <v-hover
-                v-slot:default="{ hover }"
-              >
-                <a id="forgot"
-                   :class="{'text-decoration-underline':hover}"
-                   class="text-center">
-                  Forgot your username or password?
-                </a>
-              </v-hover>
-            </div>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog
+      v-model="loading"
+      width="500px"
+    >
+      <v-card color="#E9ECEF" width="500px" height="250px">
+        <v-container fill-height fluid>
+          <v-row align="center" justify="center">
+            <v-fade-transition>
+              <v-col v-if="!errorMessage" cols="5" class="d-flex align-center justify-center">
+                <v-progress-circular
+                  :size="70"
+                  :width="7"
+                  color="purple"
+                  indeterminate
+                ></v-progress-circular>
+              </v-col>
+            </v-fade-transition>
+            <v-fade-transition>
+              <v-col cols="8" v-if="errorMessage" class="mt-8">
+                <h2 v-if="error" class="text-h5 text-center red--text">{{errorMessage}}</h2>
+                <h2 v-else class="text-h5 text-center light-green--text">{{errorMessage}}</h2>
+              </v-col>
+            </v-fade-transition>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-dialog>
+
   </v-overlay>
 </template>
 
@@ -74,7 +92,9 @@
         show: false,
         password: '',
         username: '',
-        signInError: false
+        loading: false,
+        errorMessage: "",
+        error: false
       }
     },
 
@@ -89,24 +109,32 @@
           console.log("the form is missing something");
           return;
         }
+        const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
         try {
+          this.loading = true;
+          await sleep(1000);
           await this.$store.dispatch('signIn', {
             username: this.username,
             password: this.password
           })
-
+          await sleep(1000);
+          this.loading = false;
           await this.$router.replace('/home');
         } catch (e) {
-          console.log(e);
-          this.signInError = true;
-          setTimeout(this.resetForm, 4000);
+          this.error = true;
+          this.errorMessage = e;
+          await setTimeout(() => {
+            this.errorMessage = "";
+            this.loading = false;
+            this.error = false;
+            this.resetForm();
+          }, 4000);
         }
       },
       resetForm() {
         this.$v.$reset();
         this.email = "";
         this.password = "";
-        this.signInError = false;
       }
     },
 
@@ -131,7 +159,7 @@
         const errors = []
         if (!this.$v.username.$dirty) return errors
         !this.$v.username.minLenght && errors.push('At least 5 characters long.')
-        !this.$v.username.maxLength && errors.push('At least 5 characters long.')
+        !this.$v.username.maxLength && errors.push("Maximum 15 characters long.")
         !this.$v.username.required && errors.push('Username is required.')
         return errors
       }
