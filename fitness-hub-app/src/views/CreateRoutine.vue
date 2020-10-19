@@ -49,7 +49,22 @@
           return {
             sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"],
             title:'Routine name',
-            dialog: false
+            dialog: false,
+            warmUp: [],
+            mainExercise:[],
+            cooldown:[],
+          }
+        },
+        methods:{
+          warmUpAdd(exercise){
+            console.log(exercise);
+            //this.warmUp.push(exercise);
+          },
+          mainExerciseAdd(exercise){
+            //this.mainExercise.push(exercise);
+          },
+          cooldownAdd(exercise){
+            //this.cooldown.push(exercise);
           }
         }
       }

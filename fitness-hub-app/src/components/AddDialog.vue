@@ -81,14 +81,16 @@
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col cols="4">
+        <v-row class="align-center justify-center">
+          <v-col cols="4" class="d-flex align-center justify-center">
             <v-select
               :items="['exercise','rest']"
               label="Type"
               required
               v-model="exercise.type"
               color="#212529"
+              :error-messages="typeError"
+              @blur="$v.exercise.type.$touch()"
             ></v-select>
           </v-col>
         </v-row>
@@ -106,8 +108,7 @@
       <v-btn
         color="#212529"
         text
-        @click="addExercise"
-      >
+        @click="addExercise">
         ADD
       </v-btn>
     </v-card-actions>
