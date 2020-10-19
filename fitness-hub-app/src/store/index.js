@@ -6,7 +6,6 @@ import pathify from "vuex-pathify";
 import app from './modules/app/index.js';
 import user from './modules/user/index.js';
 import api from './modules/api/index.js';
-
 Vue.use(Vuex)
 
 const store = {

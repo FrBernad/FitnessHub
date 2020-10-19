@@ -10,8 +10,7 @@
           </v-card-title>
 
           <v-card color="rgb(73, 80, 87)" class="mx-2 mb-2 py-1">
-
-            <v-virtual-scroll height="250px" bench="0" item-height="50px">
+            <v-virtual-scroll height="250px"  bench="0" item-height="50px">
               <template v-slot="{ item }">
                 <v-list-item :key="item" >
                   <v-list-item-content>
@@ -19,7 +18,7 @@
                       <EditOverlay :is-on="editOverlay" @closeEditOverlay="editOverlay=false"></EditOverlay>
                       <v-row>
                         <v-col class="py-0 d-flex align-center" cols="10">
-                          <span class="pa-2 text-subtitle-2">{{item}}</span>
+                          <span class="pa-2 text-subtitle-2">{{item.name}}</span>
                         </v-col>
                         <v-col class="py-0 d-flex align-center" cols="2" v-if="canEdit">
                           <v-btn icon small color="black" v-bind="attrs" v-on="on" @click="editOverlay=true">
@@ -31,7 +30,6 @@
                   </v-list-item-content>
                 </v-list-item>
               </template>
-
             </v-virtual-scroll>
 
             <v-row align="center" justify="space-around" class="py-2">
@@ -62,7 +60,7 @@
     </v-row>
   </v-container>
  </template>
-    <AddDialog @exerciseClose="dialog=false"></AddDialog>
+    <AddDialog @exerciseClose="dialog=false" @addExercise="add" ></AddDialog>
   </v-dialog>
 
 </template>
@@ -77,15 +75,22 @@
     props: {
       title: {
         type: String
-      }
+      },
     },
     data() {
       return {
         editOverlay: false,
         canEdit: false,
         dialog:false,
+        exercises:[],
       }
     },
+    methods:{
+      add(exercise){
+        this.exercises.push(exercise);
+        this.$emit('pushExercise',exercise);
+      }
+    }
   }
 </script>
 

@@ -72,14 +72,16 @@
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col cols="4">
+        <v-row class="align-center justify-center">
+          <v-col cols="4" class="d-flex align-center justify-center">
             <v-select
               :items="['exercise','rest']"
               label="Type"
               required
               v-model="exercise.type"
               color="#212529"
+              :error-messages="typeError"
+              @blur="$v.exercise.type.$touch()"
             ></v-select>
           </v-col>
         </v-row>
@@ -97,8 +99,7 @@
       <v-btn
         color="#212529"
         text
-        @click="addExercise"
-      >
+        @click="addExercise">
         ADD
       </v-btn>
     </v-card-actions>
@@ -106,9 +107,8 @@
 </template>
 
 <script>
-import {maxLength, minLength,required,minValue,requiredIf,helpers} from 'vuelidate/lib/validators'
-
-
+import {maxLength, minLength,required,requiredIf} from 'vuelidate/lib/validators'
+import Exercise from "@/components/Exercise";
 
 export default {
 name: "AddDialog",
@@ -117,20 +117,17 @@ name: "AddDialog",
       this.resetForm();
       this.$emit('exerciseClose');
     },
-    async addExercise() {
+    addExercise() {
       if(this.$v.$invalid) {
         this.$v.$touch();
         console.log("the form is missing something");
         return;
       }
 
-      try {
-         console.log(this.exercise);
-        // await this.$store.dispatch('addExercise', this.exercise);
-        // await this.$router.replace('home/createRoutine');
-      } catch(e) {
-        console.log(e);
-      }
+      this.$emit('exerciseClose');
+      this.$emit('addExercise',this.exercise);
+      this.resetForm();
+
     },
     resetForm() {
       this.$v.$reset();
@@ -165,7 +162,8 @@ name: "AddDialog",
       name:{required,minLength: minLength(3),maxLength: maxLength(100)},
       detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
       duration:{required: requiredIf(function(){return this.radios==="time"})},
-      repetitions: {required: requiredIf(function(){return this.radios!=="time"})}
+      repetitions: {required: requiredIf(function(){return this.radios!=="time"})},
+      type:{required},
     }
   },
   computed: {
@@ -196,7 +194,7 @@ name: "AddDialog",
       if(!this.$v.exercise.duration.$dirty) {
         return errors;
       }
-      !this.$v.exercise.duration.minValue && errors.push('Value must be greater than 0');
+      !this.$v.exercise.duration.required && errors.push('Value must be greater than 0');
 
       return errors;
     },
@@ -205,7 +203,15 @@ name: "AddDialog",
       if(!this.$v.exercise.repetitions.$dirty) {
         return errors;
       }
-      !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
+      !this.$v.exercise.repetitions.required && errors.push('Value must be greater than 0');
+      return errors;
+    },
+    typeError(){
+      const errors = [];
+      if(!this.$v.exercise.type.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.type.required && errors.push('Must insert a type');
       return errors;
     },
   }

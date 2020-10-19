@@ -3,13 +3,13 @@
       <v-container fluid class="bg pa-0" style="height: 100%">
         <v-row align="center" justify="space-around" class="fill-height">
           <v-col cols="10" md="4">
-            <RoutineSection  title="WARM UP"></RoutineSection>
+            <RoutineSection title="WARM UP" @pushExercise="warmUpAdd"></RoutineSection>
           </v-col>
           <v-col cols="10" md="4">
-            <RoutineSection title="MAIN EXERCISES"></RoutineSection>
+            <RoutineSection title="MAIN EXERCISES" @pushExercise="mainExerciseAdd"></RoutineSection>
           </v-col>
           <v-col cols="10" md="4">
-            <RoutineSection title="COOL DOWN"></RoutineSection>
+            <RoutineSection title="COOL DOWN" @pushExercise="cooldownAdd"></RoutineSection>
           </v-col>
           <v-col class="d-flex align-center justify-center align-self-end py-6 bgColor" cols="12">
             <v-dialog v-model="dialog" persistent width="500px">
@@ -49,7 +49,22 @@
           return {
             sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"],
             title:'Routine name',
-            dialog: false
+            dialog: false,
+            warmUp: [],
+            mainExercise:[],
+            cooldown:[],
+          }
+        },
+        methods:{
+          warmUpAdd(exercise){
+            console.log(exercise);
+            //this.warmUp.push(exercise);
+          },
+          mainExerciseAdd(exercise){
+            //this.mainExercise.push(exercise);
+          },
+          cooldownAdd(exercise){
+            //this.cooldown.push(exercise);
           }
         }
       }
