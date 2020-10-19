@@ -19,7 +19,7 @@
           </v-col>
         </v-row>
         <v-row class="justify-center align-center">
-        <v-col cols="12">
+          <v-col cols="12">
             <v-textarea
               class="pa-0"
               light
@@ -36,7 +36,7 @@
           </v-col>
         </v-row>
         <v-row class="justify-center align-center">
-        <v-col cols="6" sm="6">
+          <v-col cols="6" sm="6">
             <v-select
               :items="[1,2,3,4]"
               label="Category"
@@ -92,124 +92,158 @@
 </template>
 
 <script>
-import {maxLength, minLength,required} from 'vuelidate/lib/validators'
+  import {maxLength, minLength, required} from 'vuelidate/lib/validators'
 
-export default {
-  name: "RoutineDetails",
-  data() {
-    return {
-      routine: {name: '', detail: '', category: {id:undefined},isPublic:true, difficulty:'',dateCreated: Date.now(), averageRating:0.0},
-    }
-  },
-  methods: {
-    routineClose() {
-      this.resetForm();
-      this.$emit('routineClose');
-    },
-    async createRoutine() {
-      if (this.$v.$invalid) {
-        this.$v.$touch();
-        console.log("the form is missing something");
-        return;
+  export default {
+    name: "RoutineDetails",
+    data() {
+      return {
+        routine: {
+          name: '',
+          detail: '',
+          category: {id: undefined},
+          isPublic: true,
+          difficulty: '',
+          dateCreated: Date.now(),
+          averageRating: 0.0
+        },
       }
-      try {
-
-        let routine = await this.$store.dispatch('createRoutine', {routine: this.routine});
-        let cycleWarmup = await this.$store.dispatch('createCycle',{routineId: routine.id, cycleName : "warmup"});
-        let exercises = this.$store.getters['routines/getCycles'];
-
-        for (const x of exercises.Warmup) {
-          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleWarmup.id, exercise: x})
-        }
-
-        let cycleMain = await this.$store.dispatch('createCycle',{routineId: routine.id,cycleName : "exercise"});
-
-        for (const x of exercises.Main) {
-          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleMain.id, exercise: x})
-        }
-
-
-        let cycleCooldown = await this.$store.dispatch('createCycle',{routineId: routine.id,cycleName : "cooldown"});
-
-        for (const x of exercises.Cooldown) {
-          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleCooldown.id, exercise: x})
-        }
-        console.log("rampo");
+    },
+    methods: {
+      routineClose() {
+        this.resetForm();
         this.$emit('routineClose');
-        await this.$router.replace('/home/myRoutines');
+      },
+      async createRoutine() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          console.log("the form is missing something");
+          return;
+        }
+        try {
 
-      } catch(e) {
-        console.log(e);
-      }
+          let routine = await this.$store.dispatch('createRoutine', this.routine);
 
+          let exercises = this.$store.getters['routines/getCycles'];
+
+          let cycleWarmup = await this.$store.dispatch('createCycle', {
+            routineId: routine.id,
+            cycle: {
+              name: "warmup",
+              order: 1
+            }
+          });
+          for (const x of exercises.Warmup) {
+            await this.$store.dispatch('addToCycleExercise', {
+              routineId: routine.id,
+              cycleId: cycleWarmup.id,
+              exercise: x
+            })
+          }
+
+          let cycleMain = await this.$store.dispatch('createCycle',
+            {
+              routineId: routine.id, cycle: {
+                name: "exercise",
+                order: 2
+              }
+            });
+          for (const x of exercises.Main) {
+            await this.$store.dispatch('addToCycleExercise', {
+              routineId: routine.id,
+              cycleId: cycleMain.id,
+              exercise: x
+            })
+          }
+
+          let cycleCooldown = await this.$store.dispatch('createCycle', {
+            routineId: routine.id, cycle: {
+              name: "cooldown",
+              order: 3
+            }
+          });
+          for (const x of exercises.Cooldown) {
+            await this.$store.dispatch('addToCycleExercise', {
+              routineId: routine.id,
+              cycleId: cycleCooldown.id,
+              exercise: x
+            })
+          }
+          this.$emit('routineClose');
+          await this.$router.replace('/home/myRoutines');
+
+        } catch (e) {
+          console.log(e);
+        }
+
+      },
+      resetForm() {
+        this.$v.$reset();
+        this.routine.name = "";
+        this.routine.detail = "";
+        this.routine.category.id = undefined;
+        this.routine.isPublic = true;
+        this.routine.difficulty = '';
+        this.routine.dateCreated = Date.now();
+      },
     },
-  resetForm() {
-      this.$v.$reset();
-      this.routine.name = "";
-      this.routine.detail = "";
-      this.routine.category.id = undefined;
-      this.routine.isPublic = true;
-      this.routine.difficulty = '';
-      this.routine.dateCreated = Date.now();
-    },
-},
-  validations: {
+    validations: {
       routine: {
-        name:{required,minLength: minLength(3),maxLength:maxLength(100)},
+        name: {required, minLength: minLength(3), maxLength: maxLength(100)},
         detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
         category: {
           id: {required}
         },
         difficulty: {required}
-    }
-  },
-  computed: {
-    detailError() {
-      const errors = [];
-      if(!this.$v.routine.detail.$dirty) {
-        return errors;
       }
-      !this.$v.routine.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
-      !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
-      !this.$v.routine.detail.required && errors.push('Detail is required');
-
-      return errors;
     },
-    nameError(){
-      const errors = [];
-      if(!this.$v.routine.name.$dirty) {
+    computed: {
+      detailError() {
+        const errors = [];
+        if (!this.$v.routine.detail.$dirty) {
+          return errors;
+        }
+        !this.$v.routine.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
+        !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+        !this.$v.routine.detail.required && errors.push('Detail is required');
+
+        return errors;
+      },
+      nameError() {
+        const errors = [];
+        if (!this.$v.routine.name.$dirty) {
+          return errors;
+        }
+        !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
+        !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
+        !this.$v.routine.name.required && errors.push('Name is required');
+
+        return errors;
+      },
+      categoryError() {
+        const errors = [];
+        if (!this.$v.routine.category.id.$dirty) {
+          return errors;
+        }
+        !this.$v.routine.category.id.required && errors.push('Category is required');
+
+        return errors;
+      },
+      difficultyError() {
+        const errors = [];
+        if (!this.$v.routine.difficulty.$dirty) {
+          return errors;
+        }
+        !this.$v.routine.difficulty.required && errors.push('Difficulty is required');
+
         return errors;
       }
-      !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
-      !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
-      !this.$v.routine.name.required && errors.push('Name is required');
-
-      return errors;
-    },
-    categoryError(){
-      const errors = [];
-      if(!this.$v.routine.category.id.$dirty) {
-        return errors;
-      }
-      !this.$v.routine.category.id.required && errors.push('Category is required');
-
-      return errors;
-    },
-    difficultyError(){
-      const errors = [];
-      if(!this.$v.routine.difficulty.$dirty) {
-        return errors;
-      }
-      !this.$v.routine.difficulty.required && errors.push('Difficulty is required');
-
-      return errors;
     }
   }
-}
 </script>
 
 <style scoped>
-.textColor {
-  color: #212529;
-}
+  .textColor {
+    color: #212529;
+  }
 </style>

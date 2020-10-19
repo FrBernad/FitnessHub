@@ -189,15 +189,11 @@ export default {
   },
 
   async createRoutine(context, payload) {
-    console.log(payload);
+
     let response = await fetch(`${context.getters.baseUrl}/routines`, {
       body: JSON.stringify(
         {
-          name: payload.routine.name,
-          detail: payload.routine.detail,
-          isPublic: payload.routine.isPublic,
-          difficulty: payload.routine.difficulty,
-          category: payload.routine.category,
+          ...payload
         }),
       method: 'POST',
       headers: {
@@ -220,11 +216,11 @@ export default {
     let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles`, {
       body: JSON.stringify(
         {
-          name: payload.cycleName,
-          detail: payload.cycleName,
-          type: payload.cycleName,
-          order:1,
-          repetitions:1,
+          name: payload.cycle.name,
+          detail: payload.cycle.name,
+          type: payload.cycle.name,
+          order: payload.cycle.order,
+          repetitions: 1,
         }),
       method: 'POST',
       headers: {
@@ -243,7 +239,7 @@ export default {
     return responseData;
   },
 
-  async addToCycleExercise(context,payload) {
+  async addToCycleExercise(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises`, {
       body: JSON.stringify(
         {
