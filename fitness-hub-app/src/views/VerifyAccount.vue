@@ -20,7 +20,7 @@
             <v-fade-transition>
               <v-col cols="8" v-if="errorMessage" class="mt-8">
                 <h2 v-if="error" class="text-h5 text-center red--text">{{errorMessage}}</h2>
-                <h2 v-else class="text-h5 text-center">{{errorMessage}}</h2>
+                <h2 v-else class="text-h5 text-cente light-green--textr">{{errorMessage}}</h2>
               </v-col>
             </v-fade-transition>
           </v-row>
@@ -97,7 +97,9 @@
     async mounted() {
       const email = this.$route.query.userEmail;
       const code = this.$route.query.code;
+
       const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
       if (email && code) {
         try {
           this.loading = true;

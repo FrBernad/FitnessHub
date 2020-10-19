@@ -106,9 +106,9 @@
       <v-btn
         color="#212529"
         text
-        @click="addExercise"
+        @click="applyEdit"
       >
-        ADD
+        Apply
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -118,37 +118,31 @@
   import {maxLength, minLength, required, requiredIf} from 'vuelidate/lib/validators'
 
   export default {
-    name: "AddDialog",
+    name: "EditDialog",
     props: {
-      addTo: {
-        type: String
+      exercise: {
+        type: Object,
+        required: true
       }
     },
     data() {
       return {
         title: 'Exercise name',
         radios: "time",
-        exercise: {name: '', detail: '', type: '', duration: 0, repetitions: 0},
       }
     },
     methods: {
-      addExercise() {
+      applyEdit() {
         if (this.$v.$invalid) {
           this.$v.$touch();
           console.log("the form is missing something");
           return;
         }
-        const copy = {
-          name: this.exercise.name, detail: this.exercise.detail, type: this.exercise.type,
-          duration: this.exercise.duration, repetitions: this.exercise.repetitions
-        }
-        this.$store.commit(`routines/addTo${this.addTo}`, copy);
-        this.exerciseClose()
-
+        this.exerciseClose();
       },
       exerciseClose() {
-        this.resetForm();
-        this.$emit('exerciseAddClose');
+        this.$emit('exerciseEditClose');
+
       },
       resetForm() {
         this.$v.$reset();

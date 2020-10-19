@@ -1,6 +1,4 @@
 <template>
-  <v-dialog v-model="dialog" persistent width="500px">
-    <template v-slot:activator="{ on, attrs }">
   <v-container fluid fill-height>
     <v-row class="align-center justify-center">
       <v-col cols="12" lg="11">
@@ -11,27 +9,36 @@
 
           <v-card color="rgb(73, 80, 87)" class="mx-2 mb-2 py-1">
 
-            <v-virtual-scroll height="250px" bench="0" item-height="50px">
-              <template v-slot="{ item }">
-                <v-list-item :key="item" >
-                  <v-list-item-content>
-                    <v-card color="rgb(248, 249, 250)">
-                      <EditOverlay :is-on="editOverlay" @closeEditOverlay="editOverlay=false"></EditOverlay>
-                      <v-row>
-                        <v-col class="py-0 d-flex align-center" cols="10">
-                          <span class="pa-2 text-subtitle-2">{{item}}</span>
-                        </v-col>
-                        <v-col class="py-0 d-flex align-center" cols="2" v-if="canEdit">
-                          <v-btn icon small color="black" v-bind="attrs" v-on="on" @click="editOverlay=true">
-                            <v-icon small>mdi-pencil</v-icon>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                    </v-card>
-                  </v-list-item-content>
-                </v-list-item>
-              </template>
+            <v-virtual-scroll height="250px" :items="exercises" bench="0" item-height="50px">
+              <template v-slot="{item,index}">
+                <v-fade-transition appear leave-absolute>
+                  <v-list-item :key="index">
+                    <v-list-item-content>
+                      <v-card color="rgb(248, 249, 250)" class="px-3">
+                        <v-row>
+                          <v-dialog v-model="canEditElem" persistent width="500px">
+                            <EditDialog @exerciseEditClose="canEditElem=false" :exercise="item"></EditDialog>
+                          </v-dialog>
 
+                          <v-col class="py-0 d-flex align-center" cols="8">
+                            <span class="pa-2 text-subtitle-2">{{item.name}}</span>
+                          </v-col>
+                          <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
+                            <v-btn icon small color="black" @click="canEditElem=true">
+                              <v-icon small>mdi-pencil</v-icon>
+                            </v-btn>
+                          </v-col>
+                          <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
+                            <v-btn icon small color="black" @click="removeExercise(index)">
+                              <v-icon small>mdi-trash-can-outline</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-fade-transition>
+              </template>
             </v-virtual-scroll>
 
             <v-row align="center" justify="space-around" class="py-2">
@@ -46,7 +53,10 @@
                 </v-btn>
               </v-col>
               <v-col cols="5" class="d-flex align-center justify-end">
-                <v-btn @click="addOverlay=true" v-bind="attrs" v-on="on" large width="80%" color="rgb(52, 58, 64)">
+                <v-dialog v-model="canAdd" persistent width="500px">
+                  <AddDialog @exerciseAddClose="canAdd=false" :add-to="section"></AddDialog>
+                </v-dialog>
+                <v-btn @click="canAdd=true" large width="80%" color="rgb(52, 58, 64)">
                   <v-row justify="space-around">
                     <span class="whiteCS--text">Add</span>
                     <v-icon right color="rgb(248, 249, 250)">
@@ -61,21 +71,20 @@
       </v-col>
     </v-row>
   </v-container>
- </template>
-    <AddDialog @exerciseClose="dialog=false"></AddDialog>
-  </v-dialog>
-
 </template>
 
 <script>
-  import EditOverlay from "./EditOverlay";
   import AddDialog from "@/components/AddDialog";
+  import EditDialog from "@/components/EditDialog";
 
   export default {
     name: "RoutineSection",
-    components: {EditOverlay,AddDialog},
+    components: {AddDialog, EditDialog},
     props: {
       title: {
+        type: String
+      },
+      section: {
         type: String
       }
     },
@@ -83,9 +92,20 @@
       return {
         editOverlay: false,
         canEdit: false,
-        dialog:false,
+        canEditElem: false,
+        canAdd: false,
       }
     },
+    methods: {
+      removeExercise(index) {
+        this.$store.commit(`routines/deleteFrom${this.section}`, {index: index})
+      }
+    },
+    computed: {
+      exercises() {
+        return this.$store.getters[`routines/${this.section}`]
+      }
+    }
   }
 </script>
 
