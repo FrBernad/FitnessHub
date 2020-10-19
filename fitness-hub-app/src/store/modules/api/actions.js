@@ -191,7 +191,14 @@ export default {
   async createRoutine(context, payload) {
     console.log(payload);
     let response = await fetch(`${context.getters.baseUrl}/routines`, {
-      body: JSON.stringify({...payload}),
+      body: JSON.stringify(
+        {
+          name: payload.routine.name,
+          detail: payload.routine.detail,
+          isPublic: payload.routine.isPublic,
+          difficulty: payload.routine.difficulty,
+          category: payload.routine.category,
+        }),
       method: 'POST',
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
@@ -206,12 +213,61 @@ export default {
       throw new Error(responseData.message);
     }
 
-    console.log(responseData);
-
+    return responseData;
   },
 
-  async addExercise(context, payload) {
+  async createCycle(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles`, {
+      body: JSON.stringify(
+        {
+          name: payload.cycleName,
+          detail: payload.cycleName,
+          type: payload.cycleName,
+          order:1,
+          repetitions:1,
+        }),
+      method: 'POST',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async addToCycleExercise(context,payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises`, {
+      body: JSON.stringify(
+        {
+          name: payload.exercise.name,
+          detail: payload.exercise.detail,
+          type: payload.exercise.type,
+          duration: payload.exercise.duration,
+          repetitions: payload.exercise.repetitions,
+        }),
+      method: 'POST',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
   },
 
   async seedDataBase(context) {

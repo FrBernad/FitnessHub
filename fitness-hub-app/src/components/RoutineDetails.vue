@@ -112,15 +112,38 @@ export default {
         console.log("the form is missing something");
         return;
       }
-
       try {
-        await this.$store.dispatch('createRoutine', this.routine);
+
+        let routine = await this.$store.dispatch('createRoutine', {routine: this.routine});
+        let cycleWarmup = await this.$store.dispatch('createCycle',{routineId: routine.id, cycleName : "warmup"});
+        let exercises = this.$store.getters['routines/getCycles'];
+
+        for (const x of exercises.Warmup) {
+          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleWarmup.id, exercise: x})
+        }
+
+        let cycleMain = await this.$store.dispatch('createCycle',{routineId: routine.id,cycleName : "exercise"});
+
+        for (const x of exercises.Main) {
+          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleMain.id, exercise: x})
+        }
+
+
+        let cycleCooldown = await this.$store.dispatch('createCycle',{routineId: routine.id,cycleName : "cooldown"});
+
+        for (const x of exercises.Cooldown) {
+          await this.$store.dispatch('addToCycleExercise',{routineId: routine.id, cycleId : cycleCooldown.id, exercise: x})
+        }
+        console.log("rampo");
+        this.$emit('routineClose');
         await this.$router.replace('/home/myRoutines');
+
       } catch(e) {
         console.log(e);
       }
+
     },
-    resetForm() {
+  resetForm() {
       this.$v.$reset();
       this.routine.name = "";
       this.routine.detail = "";
@@ -128,8 +151,8 @@ export default {
       this.routine.isPublic = true;
       this.routine.difficulty = '';
       this.routine.dateCreated = Date.now();
-    }
-  },
+    },
+},
   validations: {
       routine: {
         name:{required,minLength: minLength(3),maxLength:maxLength(100)},
