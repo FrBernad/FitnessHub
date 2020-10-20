@@ -10,7 +10,7 @@ export default {
       body: JSON.stringify({
         ...payload,
         fullName: "",
-        gender: "male",
+        gender: "other",
         birthdate: 284007600000,
       })
     })
@@ -33,7 +33,6 @@ export default {
   },
 
   async signIn(context, payload) {
-
     let response = await fetch(`${context.getters.baseUrl}/user/login`, {
       method: 'POST',
       headers: {
@@ -81,6 +80,7 @@ export default {
     if (!response.ok) {
       throw new Error("Failed to fetch data after login");
     }
+    console.log(responseData);
 
     context.commit("user/setUserData", responseData);
 
@@ -130,7 +130,7 @@ export default {
       if (!response.ok) {
         throw new Error("Could not auto login");
       }
-
+    console.log(responseData);
       context.commit("user/setUserData", responseData);
     }
   },

@@ -14,7 +14,7 @@ export default {
   },
   actions:{
     ...make.actions(state),
-    // actions
+    ...actions
   },
   getters:{
     ...make.getters(state),

@@ -31,7 +31,6 @@
                 v-model="password"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show ? 'text' : 'password'"
-                name="input-10-1"
                 label="Password"
                 hint="Al least 8 characters long."
                 outlined
