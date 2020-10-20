@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="px-8">
-      <span class="headline textColor">{{exercise.name}}</span>
+      <span class="headline textColor">{{ exercise.name }}</span>
     </v-card-title>
     <v-card-text class="pb-0">
       <v-container>
@@ -67,14 +67,14 @@
                 <v-radio color="#212529" value="reps" @click="cleanTime" label="REPETITIONS"></v-radio>
               </v-col>
               <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-if="radios==='time'">
-                <v-text-field color="#212529" label="SECS" hide-details :error-messages="timeError"
-                              @blur="$v.exercise.duration.$touch()" v-model="exercise.duration">{{exercise.duration}}
+                <v-text-field color="#212529" label="SECS" :error-messages="timeError"
+                              @blur="$v.exercise.duration.$touch()" v-model="exercise.duration">{{ exercise.duration }}
                 </v-text-field>
               </v-col>
               <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-else>
-                <v-text-field color="#212529" label="REPS" hide-details :error-messages="repsError"
+                <v-text-field color="#212529" label="REPS" :error-messages="repsError"
                               @blur="$v.exercise.repetitions.$touch()" v-model="exercise.repetitions">
-                  {{exercise.repetitions}}
+                  {{ exercise.repetitions }}
                 </v-text-field>
               </v-col>
             </v-radio-group>
@@ -115,129 +115,135 @@
   </v-card>
 </template>
 
+
 <script>
-  import {maxLength, minLength, required, requiredIf} from 'vuelidate/lib/validators'
+import {maxLength, minLength, required, minValue, helpers} from 'vuelidate/lib/validators'
 
-  export default {
-    name: "AddDialog",
-    props: {
-      addTo: {
-        type: String
-      }
-    },
-    data() {
-      return {
-        title: 'Exercise name',
-        radios: "time",
-        exercise: {name: '', detail: '', type: '', duration: 0, repetitions: 0},
-      }
-    },
-    methods: {
-      addExercise() {
-        if (this.$v.$invalid) {
-          this.$v.$touch();
-          console.log("the form is missing something");
-          return;
-        }
-        const copy = {
-          name: this.exercise.name, detail: this.exercise.detail, type: this.exercise.type,
-          duration: this.exercise.duration, repetitions: this.exercise.repetitions
-        }
-        this.$store.commit(`routines/addTo${this.addTo}`, copy);
-        this.exerciseClose()
+const validateIf = (prop, validator) =>
+  helpers.withParams({type: 'validatedIf', prop}, function (value, parentVm) {
+    return helpers.ref(prop, this, parentVm) ? validator(value) : true
+  })
 
-      },
-      exerciseClose() {
-        this.resetForm();
-        this.$emit('exerciseAddClose');
-      },
-      resetForm() {
-        this.$v.$reset();
-        this.exercise.name = "";
-        this.exercise.detail = "";
-        this.exercise.type = "";
-        this.exercise.duration = 0;
-        this.exercise.repetitions = 0;
-      },
-      cleanReps() {
-        this.exercise.repetitions = 0;
-      },
-      cleanTime() {
-        this.exercise.duration = 0;
-      },
-    },
-    validations: {
-      exercise: {
-        name: {required, minLength: minLength(3), maxLength: maxLength(100)},
-        detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
-        duration: {
-          required: requiredIf(function () {
-            return this.radios === "time"
-          })
-        },
-        repetitions: {
-          required: requiredIf(function () {
-            return this.radios !== "time"
-          })
-        },
-        type:{required},
-      }
-    },
-    computed: {
-      detailError() {
-        const errors = [];
-        if (!this.$v.exercise.detail.$dirty) {
-          return errors;
-        }
-        !this.$v.exercise.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
-        !this.$v.exercise.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
-        !this.$v.exercise.detail.required && errors.push('Detail is required');
-
-        return errors;
-      },
-      nameError() {
-        const errors = [];
-        if (!this.$v.exercise.name.$dirty) {
-          return errors;
-        }
-        !this.$v.exercise.name.minLength && errors.push('Name must be at least 3 characters long');
-        !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 100 characters");
-        !this.$v.exercise.name.required && errors.push('Name is required');
-
-        return errors;
-      },
-      timeError() {
-        const errors = [];
-        if (!this.$v.exercise.duration.$dirty) {
-          return errors;
-        }
-        !this.$v.exercise.duration.minValue && errors.push('Value must be greater than 0');
-
-        return errors;
-      },
-      repsError() {
-        const errors = [];
-        if (!this.$v.exercise.repetitions.$dirty) {
-          return errors;
-        }
-        !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
-        return errors;
-      },
-      typeError(){
-        const errors = [];
-        if(!this.$v.exercise.type.$dirty) {
-          return errors;
-        }
-        !this.$v.exercise.type.required && errors.push('Must insert a type');
-        return errors;
-      },
-
+export default {
+  name: "AddDialog",
+  props: {
+    addTo: {
+      type: String
     }
+  },
+  data() {
+    return {
+      title: 'Exercise name',
+      radios: "time",
+      exercise: {name: '', detail: '', type: '', duration: 0, repetitions: 0},
+    }
+  },
+  methods: {
+    addExercise() {
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        console.log("the form is missing something");
+        return;
+      }
+      const copy = {
+        name: this.exercise.name, detail: this.exercise.detail, type: this.exercise.type,
+        duration: this.exercise.duration, repetitions: this.exercise.repetitions
+      }
+      this.$store.commit(`routines/addTo${this.addTo}`, copy);
+      this.exerciseClose()
+
+    },
+    exerciseClose() {
+      this.resetForm();
+      this.$emit('exerciseAddClose');
+    },
+    resetForm() {
+      this.$v.$reset();
+      this.exercise.name = "";
+      this.exercise.detail = "";
+      this.exercise.type = "";
+      this.exercise.duration = 0;
+      this.exercise.repetitions = 0;
+    },
+    cleanReps() {
+      this.exercise.repetitions = 0;
+    },
+    cleanTime() {
+      this.exercise.duration = 0;
+    },
+  },
+  validations: {
+    exercise: {
+      name: {required, minLength: minLength(3), maxLength: maxLength(100)},
+      detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
+      duration: {
+        minValue: validateIf(function () {
+          return this.radios === "time"
+        }, minValue(1))
+      },
+      repetitions: {
+        minValue: validateIf(function () {
+          return this.radios !== "time"
+        }, minValue(1))
+      },
+      type: {required},
+    }
+  },
+  computed: {
+    detailError() {
+      const errors = [];
+      if (!this.$v.exercise.detail.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
+      !this.$v.exercise.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+      !this.$v.exercise.detail.required && errors.push('Detail is required');
+
+      return errors;
+    },
+    nameError() {
+      const errors = [];
+      if (!this.$v.exercise.name.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.name.minLength && errors.push('Name must be at least 3 characters long');
+      !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 100 characters");
+      !this.$v.exercise.name.required && errors.push('Name is required');
+
+      return errors;
+    },
+    timeError() {
+      const errors = [];
+      if (!this.$v.exercise.duration.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.duration.minValue && errors.push('Value must be greater than 0');
+
+      return errors;
+    },
+    repsError() {
+      const errors = [];
+      if (!this.$v.exercise.repetitions.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
+      return errors;
+    },
+    typeError() {
+      const errors = [];
+      if (!this.$v.exercise.type.$dirty) {
+        return errors;
+      }
+      !this.$v.exercise.type.required && errors.push('Must insert a type');
+      return errors;
+    },
+
   }
+}
 </script>
 
 <style scoped>
-  .textColor {
-    color: #212529;
-  }
+.textColor {
+  color: #212529;
+}
 </style>

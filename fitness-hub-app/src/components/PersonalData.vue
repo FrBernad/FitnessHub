@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
     <v-card-text class="font-weight-bold">{{ email }}</v-card-text>
-    <v-autocomplete
+    <v-select
       class="ma-4" style="width: 80%"
       ref="country"
       v-model="gender"
@@ -21,7 +21,8 @@
       :readonly="editData"
       label="Gender"
       placeholder="Select gender..."
-    ></v-autocomplete>
+      disable-lookup
+    ></v-select>
     <v-menu
       ref="menu"
       v-model="menu"
@@ -44,7 +45,7 @@
       <v-date-picker v-if="!editData"
                      ref="picker"
                      v-model="birthdate"
-                     :max="new Date().toISOString().substr(0, 10)"
+                     :max="maxDate()"
                      min="1950-01-01"
                      width="500px"
       ></v-date-picker>
@@ -141,24 +142,29 @@ export default {
       this.canEdit=false;
       this.password = '';
 
+    },
+    maxDate() {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() - 13);
+        return date.toISOString().substr(0, 10);
     }
   },
   computed: {
     ...sync("user/*"),
     phoneError(){
-      
+
       const errors = [];
-      if (!$v.phone.$dirty) {
+      if (!this.$v.phone.$dirty) {
         return errors;
       }
-      !$v.phone.minLength && errors.push(`Number must have at least 8 digits`);
-      !$v.phone.maxLength && errors.push(`Number must have at most 15 digits`);
+      !this.$v.phone.minLength && errors.push(`Number must have at least 8 digits`);
+      !this.$v.phone.maxLength && errors.push(`Number must have at most 15 digits`);
       return errors;
     }
 
   },
   validations:{
-    phoneNumber:{
+    phone:{
       minLength: minLength(8), maxLength: maxLength(15)
     },
   }
