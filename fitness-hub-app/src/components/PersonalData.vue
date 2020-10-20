@@ -12,11 +12,11 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-card-text class="font-weight-bold">{{email}}</v-card-text>
+    <v-card-text class="font-weight-bold">{{ email }}</v-card-text>
     <v-autocomplete
       class="ma-4" style="width: 80%"
       ref="country"
-      v-model="userExtraData.gender"
+      v-model="gender"
       :items="genders"
       :readonly="editData"
       label="Gender"
@@ -32,7 +32,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          v-model="userExtraData.birthdate"
+          v-model="birthdate"
           placeholder="Birthday"
           label="Birthday date"
           readonly
@@ -43,7 +43,7 @@
       </template>
       <v-date-picker v-if="!editData"
                      ref="picker"
-                     v-model="userExtraData.birthdate"
+                     v-model="birthdate"
                      :max="new Date().toISOString().substr(0, 10)"
                      min="1950-01-01"
                      width="500px"
@@ -53,7 +53,7 @@
       placeholder="Enter your phone here"
       label="Phone"
       class="ma-4" style="width: 80%;"
-      v-model="userExtraData.phone"
+      v-model="phone"
       :readonly="editData"
       no-resize
       dense
@@ -63,68 +63,81 @@
         <v-dialog v-model="canEdit" persistent width="500px">
           <v-card class="pa-5">
             <v-card-title class="pa-0">Insert password</v-card-title>
-            <v-text-field label="Password" @click:append="show = !show" v-model="password" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :type="show ? 'text' : 'password'"></v-text-field>
+            <v-text-field label="Password" @click:append="show = !show" v-model="password"
+                          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                          :type="show ? 'text' : 'password'"></v-text-field>
             <v-row class="align-center justify-space-around">
               <v-col cols="6" class="d-flex align-center justify-space-around offset-6">
-                <v-btn @click="canEdit=false">CANCEL</v-btn>
+                <v-btn @click="restoreData">CANCEL</v-btn>
                 <v-btn @click="updateProfile">APPLY</v-btn>
               </v-col>
             </v-row>
-
           </v-card>
         </v-dialog>
-        <v-btn @click="canEdit=true;editData=!editData" min-height="52px" v-if="!editData" outlined color="#212529" width="30%">
+        <v-btn @click="canEdit=true;editData=!editData" min-height="52px" v-if="!editData" outlined color="#212529"
+               width="30%">
           <v-icon class="mr-2">mdi-content-save-outline</v-icon>
           <span>SAVE</span>
         </v-btn>
       </v-col>
     </v-row>
 
-     </v-card>
+  </v-card>
 </template>
 
 <script>
+import {sync} from "vuex-pathify";
+
 export default {
-name: "PersonalData",
+  name: "PersonalData",
+
   data: () => ({
     date: null,
     menu: false,
-    genders: ['male','female','other'],
+    genders: ['male', 'female', 'other'],
     rules: [v => v.length <= 100 || 'Max 100 characters'],
-    password:'',
-    email: '',
-    userExtraData:{
-      gender: '',
-      phone: '',
-      birthdate: null,
-    },
-    show:false,
+    password: '',
+    show: false,
     editData: true,
-    canEdit : false,
+    canEdit: false,
   }),
+  methods: {
+    async updateProfile() {
 
-  created() {
-      this.userExtraData.gender = this.$store.getters["user/gender"];
-      this.userExtraData.phone = this.$store.getters["user/phone"];
-      this.userExtraData.birthdate = this.$store.getters["user/birthdate"];
-      this.email = this.$store.getters["user/email"];
-  },
-  methods:{
-     async updateProfile() {
+      let profile = {
+        ...this.$store.getters["user/userData"],
+        password: this.password
+      };
+      try {
+        let response = await this.$store.dispatch('user/updateProfile', profile);
+      }catch (e){
+        console.log(e);
+        try{
+          await this.$store.dispatch('user/restoreValues');
+        }catch(e){
+          console.log(e);
+        }
+      }
+      this.canEdit=false;
+      this.password = '';
 
-       this.$store.commit("user/setExtraData", this.userExtraData);
-       let profile = {
-         ...this.$store.getters["user/userData"],
-         password: this.password
-       };
-       let response = await this.$store.dispatch('user/updateProfile', profile);
-       this.password = '';
-
-     }
     },
+    async restoreData(){
+      try{
+        await this.$store.dispatch('user/restoreValues');
+      }catch(e){
+        console.log(e);
+      }
+      this.canEdit=false;
+      this.password = '';
 
-
+    }
+  },
+  computed: {
+    ...sync("user/*"),
   }
+
+}
 
 </script>
 

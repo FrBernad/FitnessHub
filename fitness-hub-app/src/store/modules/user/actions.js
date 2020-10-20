@@ -1,15 +1,15 @@
 export default {
   async updateProfile(context,payload){
-    console.log(payload);
-    let response = await fetch(`${context.rootGetters.baseUrl}/user/current`, {
+
+   let response = await fetch(`${context.rootGetters.baseUrl}/user/current`, {
       body: JSON.stringify(
         {
           username: payload.username,
           password:payload.password,
-          fullName:payload.fullName,
-          gender:payload.gender,
-          birthdate:payload.birthdate,
-          email:payload.email,
+          fullName: '',
+          gender : payload.gender,
+          birthdate:Date.parse(payload.birthdate),
+          email:'nico@yopmail.com',
           phone:payload.phone,
           avatarUrl:'',
         }),
@@ -26,8 +26,26 @@ export default {
       console.log(responseData);
       throw new Error(responseData.message);
     }
-
-    return responseData;
   },
+
+  async restoreValues(context){
+    const url = `${context.rootGetters.baseUrl}/user/current`
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `bearer ${context.rootGetters.token}`
+      },
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Could not auto login");
+    }
+    context.commit("setUserData", responseData);
+
+  }
+
+
 
 }

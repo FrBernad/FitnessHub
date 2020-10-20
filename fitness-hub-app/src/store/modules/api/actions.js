@@ -80,7 +80,6 @@ export default {
     if (!response.ok) {
       throw new Error("Failed to fetch data after login");
     }
-    console.log(responseData);
 
     context.commit("user/setUserData", responseData);
 
@@ -130,7 +129,6 @@ export default {
       if (!response.ok) {
         throw new Error("Could not auto login");
       }
-    console.log(responseData);
       context.commit("user/setUserData", responseData);
     }
   },
