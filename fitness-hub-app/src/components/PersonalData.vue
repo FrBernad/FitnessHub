@@ -55,6 +55,8 @@
       class="ma-4" style="width: 80%;"
       v-model="phone"
       :readonly="editData"
+      :error-messages="phoneError"
+      @blur="$v.phone.$touch()"
       no-resize
       dense
     ></v-text-field>
@@ -87,6 +89,8 @@
 
 <script>
 import {sync} from "vuex-pathify";
+import {maxLength, minLength} from 'vuelidate/lib/validators';
+import $v from "@/store/modules/user/state";
 
 export default {
   name: "PersonalData",
@@ -104,12 +108,18 @@ export default {
   methods: {
     async updateProfile() {
 
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        console.log("the form is missing something");
+        return;
+      }
+
       let profile = {
         ...this.$store.getters["user/userData"],
         password: this.password
       };
       try {
-        let response = await this.$store.dispatch('user/updateProfile', profile);
+        await this.$store.dispatch('user/updateProfile', profile);
       }catch (e){
         console.log(e);
         try{
@@ -135,7 +145,25 @@ export default {
   },
   computed: {
     ...sync("user/*"),
+    phoneError(){
+      
+      const errors = [];
+      if (!$v.phone.$dirty) {
+        return errors;
+      }
+      !$v.phone.minLength && errors.push(`Number must have at least 8 digits`);
+      !$v.phone.maxLength && errors.push(`Number must have at most 15 digits`);
+      return errors;
+    }
+
+  },
+  validations:{
+    phoneNumber:{
+      minLength: minLength(8), maxLength: maxLength(15)
+    },
   }
+
+
 
 }
 
