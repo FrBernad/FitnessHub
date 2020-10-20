@@ -61,6 +61,7 @@ const routes = [
         meta: {requiresAuth: true},
         path: 'routine',
         name: 'Routine',
+        props: true,
         component: () => import('../views/Routine')
       }
     ]
@@ -85,7 +86,7 @@ const router = new VueRouter({
   routes
 })
 
-store.dispatch('tryLogin').catch((e)=>{
+store.dispatch('tryLogin').catch((e) => {
   console.log(e);
 });
 

@@ -9,12 +9,17 @@ export default {
     state.Cooldown.push(payload)
   },
   deleteFromWarmup(state, payload) {
-    state.Warmup.splice(payload.index,1)
+    state.Warmup.splice(payload.index, 1)
   },
   deleteFromMain(state, payload) {
-    state.Main.splice(payload.index,1)
+    state.Main.splice(payload.index, 1)
   },
   deleteFromCooldown(state, payload) {
-    state.Cooldown.splice(payload.index,1)
+    state.Cooldown.splice(payload.index, 1)
+  },
+  resetExercises(state, payload) {
+    state.Main = [];
+    state.Cooldown = [];
+    state.Warmup = [];
   }
 };

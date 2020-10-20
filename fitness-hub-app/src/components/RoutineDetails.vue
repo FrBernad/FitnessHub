@@ -170,8 +170,8 @@
             })
           }
           this.$emit('routineClose');
+          this.$store.commit('routines/resetExercises');
           await this.$router.replace('/home/myRoutines');
-
         } catch (e) {
           console.log(e);
         }

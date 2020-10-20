@@ -168,6 +168,25 @@ export default {
     }
   },
 
+  async getCurrentUserRoutines(context, payload){
+    let response = await fetch(`${context.getters.baseUrl}/user/current/routines/?` + new URLSearchParams({
+      ...payload
+    }), {
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
   async getRoutines(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/routines?` + new URLSearchParams({
       ...payload

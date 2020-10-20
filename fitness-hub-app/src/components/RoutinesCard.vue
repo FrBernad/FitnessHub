@@ -1,6 +1,10 @@
 <template>
-  <v-card to="/home/routine" class=" iluminate pa-5 cardType">
-    <v-row align="start" justify="space-around">
+  <v-card :to="{
+      name: 'Routine',
+      params: { routineData: 'hola'}
+     }"
+          class=" iluminate pa-5 cardType">
+    <v-row align="start" justify="space-between">
       <v-col cols="12 d-flex justify-center align-center pt-0">
         <v-img class="rounded-corner "
                src="../assets/imgs/routineCard.jpg"
@@ -12,11 +16,11 @@
       </v-col>
       <v-col cols="5" class="d-flex justify-end align-center">
         <template v-for="num in 5">
-          <v-icon v-if="routineData.avarageRating>=num">mdi-star</v-icon>
+          <v-icon v-if="+routineData.avarageRating >= num">mdi-star</v-icon>
           <v-icon v-else>mdi-star-outline</v-icon>
         </template>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="6" class="d-flex align-center justify-start">
         <h5>by {{routineData.creator.username.toUpperCase()}}</h5>
       </v-col>
       <v-col cols="6" class="d-flex justify-end align-center">

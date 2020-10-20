@@ -3,9 +3,7 @@
     <AppBar></AppBar>
     <NavDrawer></NavDrawer>
     <v-main>
-      <v-fade-transition appear>
         <router-view></router-view>
-      </v-fade-transition>
     </v-main>
     <Footer></Footer>
   </v-app>

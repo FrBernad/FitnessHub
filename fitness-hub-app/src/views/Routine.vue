@@ -24,10 +24,10 @@
     </v-row>
     <v-row>
       <v-col cols="12" class="d-flex align-center justify-center">
-        <v-img src="../assets/imgs/routines.jpg" max-height="250" max-width="500" class="imgBorder" ></v-img>
+        <v-img src="../assets/imgs/routines.jpg" max-height="250" max-width="500" class="imgBorder"></v-img>
       </v-col>
     </v-row>
-
+  <h1>routine {{routineData}}</h1>
     <v-row class="align-center  textBG">
       <v-col cols="12">
         <h2 class="whiteCS--text text-center">DESCRIPTION</h2>
@@ -36,7 +36,9 @@
 
     <v-row class="align-center">
       <v-col cols="12">
-        <p class="text-center">Get your joints moving and your muscles burning with this strenght building routine. This routine will target your core, arms and legs. Short and straight to the point, you can do it with no equipment at all.
+        <p class="text-center">Get your joints moving and your muscles burning with this strenght building routine. This
+          routine will target your core, arms and legs. Short and straight to the point, you can do it with no equipment
+          at all.
         </p>
       </v-col>
     </v-row>
@@ -63,7 +65,7 @@
       </v-col>
     </v-row>
 
-    <v-list  class="pa-0" color="#F8F9FA">
+    <v-list class="pa-0" color="#F8F9FA">
       <Exercise></Exercise>
       <Exercise></Exercise>
     </v-list>
@@ -74,39 +76,40 @@
       </v-col>
     </v-row>
 
-    <v-list  class="pa-0" color="#F8F9FA">
+    <v-list class="pa-0" color="#F8F9FA">
       <Exercise></Exercise>
       <Exercise></Exercise>
     </v-list>
-
-
-
 
 
   </v-container>
 </template>
 
 <script>
-import Exercise from "@/components/Exercise";
-export default {
-name: "Routine",
-  components: {Exercise}
-}
+  import Exercise from "@/components/Exercise";
+
+  export default {
+    name: "Routine",
+    components: {Exercise},
+    props: ["routineData"],
+  }
+
 </script>
 
 <style scoped>
-.bg{
-  background-color: #E9ECEF;
-}
-.textBG{
-  background-color: #212529;
-}
+  .bg {
+    background-color: #E9ECEF;
+  }
 
-.textBG2{
-  background-color: #343A40;
-}
+  .textBG {
+    background-color: #212529;
+  }
 
-.imgBorder {
-  border-radius: 5%;
-}
+  .textBG2 {
+    background-color: #343A40;
+  }
+
+  .imgBorder {
+    border-radius: 5%;
+  }
 </style>

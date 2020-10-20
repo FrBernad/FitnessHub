@@ -17,7 +17,12 @@
 
     <SearchBar></SearchBar>
 
-    <v-row class="px-8 pt-4" justify="space-around">
+    <v-row class="px-8 pt-4" :justify="this.currentEntries.length ? 'start': 'center'">
+       <v-col v-if="!this.currentEntries.length" cols="10" sm="8">
+        <v-card :height="$vuetify.breakpoint.smAndDown ? '40vh' : '400px'" class="d-flex justify-center align-center mt-5">
+            <p class="ma-0 px-6 px-md-13 text-center text-body-1 text-sm-h6 text-md-h4 grey--text">Its seems no routines where created.</p>
+        </v-card>
+      </v-col>
       <v-col cols="12" md="6" lg="4" v-for="(entry,index) in currentEntries" :key="index">
         <RoutinesCard :routineData="entry"></RoutinesCard>
       </v-col>
@@ -54,10 +59,6 @@
 
     components: {RoutinesCard, SearchBar},
 
-    created() {
-      this.seedEntries();
-    },
-
     data: () => ({
       entries: [],
       currentEntries: [],
@@ -66,6 +67,10 @@
       itemsPerPage: 6,
       pages: 0
     }),
+
+    created() {
+      this.seedEntries();
+    },
 
     methods: {
       async seedEntries() {
@@ -77,7 +82,6 @@
         }
         try {
           const routines = await this.$store.dispatch('getRoutines', data);
-          console.log(routines);
           this.totalPages = routines.totalCount;
           this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
           this.currentEntries = routines.results;
