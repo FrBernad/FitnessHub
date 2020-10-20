@@ -61,7 +61,10 @@ const routes = [
         meta: {requiresAuth: true},
         path: 'routine',
         name: 'Routine',
-        props: true,
+        props: route => ({
+          routineData: route.query.routineData,
+          routineId: route.query.routineId,
+        }),
         component: () => import('../views/Routine')
       }
     ]

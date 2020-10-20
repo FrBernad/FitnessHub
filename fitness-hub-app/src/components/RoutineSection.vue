@@ -19,20 +19,23 @@
                           <v-dialog v-model="canEditElem" persistent width="500px">
                             <EditDialog @exerciseEditClose="canEditElem=false" :exercise="item"></EditDialog>
                           </v-dialog>
-
                           <v-col class="py-0 d-flex align-center" cols="8">
                             <span class="pa-2 text-subtitle-2">{{item.name}}</span>
                           </v-col>
-                          <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
-                            <v-btn icon small color="black" @click="canEditElem=true">
-                              <v-icon small>mdi-pencil</v-icon>
-                            </v-btn>
-                          </v-col>
-                          <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
-                            <v-btn icon small color="black" @click="removeExercise(index)">
-                              <v-icon small>mdi-trash-can-outline</v-icon>
-                            </v-btn>
-                          </v-col>
+                          <v-fade-transition appear>
+                            <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
+                              <v-btn icon small color="black" @click="canEditElem=true">
+                                <v-icon small>mdi-pencil</v-icon>
+                              </v-btn>
+                            </v-col>
+                          </v-fade-transition>
+                          <v-fade-transition>
+                            <v-col class="py-0 d-flex align-center justify-end" cols="2" v-if="canEdit">
+                              <v-btn icon small color="black" @click="removeExercise(index)">
+                                <v-icon small>mdi-trash-can-outline</v-icon>
+                              </v-btn>
+                            </v-col>
+                          </v-fade-transition>
                         </v-row>
                       </v-card>
                     </v-list-item-content>

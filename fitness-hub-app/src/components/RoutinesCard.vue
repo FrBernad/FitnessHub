@@ -1,7 +1,7 @@
 <template>
   <v-card :to="{
-      name: 'Routine',
-      params: { routineData: 'hola'}
+      path: '/home/routine/',
+      query: { routineData: routineData, routineId: routineData.id}
      }"
           class=" iluminate pa-5 cardType">
     <v-row align="start" justify="space-between">

@@ -166,7 +166,7 @@ export default {
     }
   },
 
-  async getCurrentUserRoutines(context, payload){
+  async getCurrentUserRoutines(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/user/current/routines/?` + new URLSearchParams({
       ...payload
     }), {
@@ -193,6 +193,102 @@ export default {
         'Authorization': `bearer ${context.getters.token}`,
       }
     });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+
+  async getFavouriteRoutines(context, payload) {
+    let response = await fetch(
+      `${context.getters.baseUrl}/user/current/routines/favourites?` + new URLSearchParams({
+      ...payload
+    }), {
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async getRoutineByID(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}?` + new URLSearchParams({
+      ...payload
+    }), {
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async addToFavourites(context, payload) {
+    let response = await fetch(
+      `${context.getters.baseUrl}/user/current/routines/${payload.routineId}/favourites?` + new URLSearchParams({
+        ...payload
+      }), {
+        method: "POST",
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
+
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(response.statusText);
+    }
+  },
+
+  async getRoutineCycles(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/?` + new URLSearchParams({
+      ...payload
+    }), {
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async getCycleExercises(context, payload) {
+    let response = await fetch(
+      `${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises?` + new URLSearchParams({
+        ...payload
+      }), {
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
 
     let responseData = await response.json();
 

@@ -5,7 +5,6 @@
       </v-col>
     </v-row>
 
-
     <v-row class="bgText justify-center">
       <v-col cols="10" class="d-flex justify-center align-center">
         <h1 class="font-weight-bold font-italic text-body-1 text-sm-h5 text-md-h4  whiteCS--text text-center">Fueled by
@@ -60,7 +59,6 @@
     components: {RoutinesCard, SearchBar},
 
     data: () => ({
-      entries: [],
       currentEntries: [],
       page: 1,
       totalPages: 0,
