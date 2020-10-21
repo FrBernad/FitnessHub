@@ -183,8 +183,7 @@
     background-color: rgb(52, 58, 64);
   }
 
-  #create {
-    background-color: rgba(248, 249, 250, 0.25);
+  .buttonColour {
     color: #F8F9FA;
     border: thin solid #F8F9FA;
   }
