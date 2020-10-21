@@ -11,7 +11,7 @@
         <v-btn href="https://www.twitter.com/" target="_blank" icon color="rgb(173, 181, 189)">
           <v-icon>mdi-twitter</v-icon>
         </v-btn>
-        <v-btn href="https://www.instragram.com/" target="_blank" icon color="rgb(173, 181, 189)">
+        <v-btn href="https://www.instagram.com/" target="_blank" icon color="rgb(173, 181, 189)">
           <v-icon>mdi-instagram</v-icon>
         </v-btn>
       </v-col>
