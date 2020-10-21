@@ -77,8 +77,8 @@
 </template>
 
 <script>
-  import AddDialog from "@/components/AddDialog";
-  import EditDialog from "@/components/EditDialog";
+  import AddDialog from "../components/AddDialog";
+  import EditDialog from "../components/EditDialog";
 
   export default {
     name: "RoutineSection",

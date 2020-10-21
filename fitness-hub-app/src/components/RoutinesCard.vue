@@ -1,6 +1,6 @@
 <template>
   <v-card :to="{
-      path: '/home/routine/',
+      path: '/home/communityWorkouts/routine',
       query: { routineData: routineData, routineId: routineData.id}
      }"
           class=" iluminate pa-5 cardType">

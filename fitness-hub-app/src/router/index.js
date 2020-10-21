@@ -35,8 +35,12 @@ const routes = [
       },
       {
         meta: {requiresAuth: true},
-        path: 'createRoutine',
+        path: 'myRoutines/createRoutine',
         name: 'CreateRoutine',
+        beforeEnter: (to, from, next) => {
+          store.commit('routines/resetExercises');
+          next();
+        },
         component: () => import('../views/CreateRoutine')
       },
       {
@@ -59,8 +63,12 @@ const routes = [
       },
       {
         meta: {requiresAuth: true},
-        path: 'editRoutine',
+        path: 'myRoutines/editRoutine',
         name: 'EditRoutine',
+        beforeEnter: (to, from, next) => {
+          store.commit('routines/resetExercises');
+          next();
+        },
         props: route => ({
           routineData: route.query.routineData,
           routineId: route.query.routineId,
@@ -69,7 +77,7 @@ const routes = [
       },
       {
         meta: {requiresAuth: true},
-        path: 'routine',
+        path: 'communityWorkouts/routine',
         name: 'Routine',
         props: route => ({
           routineData: route.query.routineData,

@@ -15,10 +15,10 @@
         <v-list-item to="/home" exact>
           <v-list-item-title>HOME</v-list-item-title>
         </v-list-item>
-        <v-list-item to="/home/communityWorkouts" exact>
+        <v-list-item to="/home/communityWorkouts">
           <v-list-item-title>COMMUNITY WORKOUTS</v-list-item-title>
         </v-list-item>
-        <v-list-item to="/home/myRoutines" exact>
+        <v-list-item to="/home/myRoutines">
           <v-list-item-title>MY ROUTINES</v-list-item-title>
         </v-list-item>
         <v-list-item @click="logout">

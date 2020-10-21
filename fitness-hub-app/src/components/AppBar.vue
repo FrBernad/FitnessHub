@@ -12,8 +12,8 @@
       <template v-if="$vuetify.breakpoint.mdAndUp">
         <v-tabs fixed-tabs color="rgb(248, 249, 250)" dark>
           <v-tab to="/home" exact>HOME</v-tab>
-          <v-tab to="/home/communityWorkouts" exact>COMMUNITY WORKOUTS</v-tab>
-          <v-tab to="/home/myRoutines" exact>MY ROUTINES</v-tab>
+          <v-tab to="/home/communityWorkouts">COMMUNITY WORKOUTS</v-tab>
+          <v-tab to="/home/myRoutines">MY ROUTINES</v-tab>
           <v-tab to="/home/profile" exact>
             <v-icon class="px-1">mdi-account</v-icon>
             {{username}}

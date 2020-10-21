@@ -10,7 +10,7 @@
         </v-card>
       </v-col>
       <v-col cols="4" class="fill-height pa-0">
-        <v-card to="/home/createRoutine" rounded="0" height="100%"
+        <v-card to="/home/myRoutines/createRoutine" rounded="0" height="100%"
                 class="createRoutineBG iluminate d-flex align-center text-center justify-center">
           <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h4 whiteCS--text shadow">
             CREATE <br v-if="$vuetify.breakpoint.smAndDown">ROUTINE
