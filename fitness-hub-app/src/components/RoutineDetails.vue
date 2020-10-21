@@ -140,17 +140,17 @@
             })
           }
 
-          let cycleMain = await this.$store.dispatch('createCycle',
+          let cycleExercise = await this.$store.dispatch('createCycle',
             {
               routineId: routine.id, cycle: {
                 name: "exercise",
                 order: 2
               }
             });
-          for (const x of exercises.Main) {
+          for (const x of exercises.Exercise) {
             await this.$store.dispatch('addToCycleExercise', {
               routineId: routine.id,
-              cycleId: cycleMain.id,
+              cycleId: cycleExercise.id,
               exercise: x
             })
           }

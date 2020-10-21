@@ -9,7 +9,8 @@
         <v-btn icon :color="fav ? '#84419D' : '#F8F9FA'" @click="toogleFavourite">
           <v-icon>mdi-heart</v-icon>
         </v-btn>
-        <v-btn icon color="#F8F9FA" v-if="canEdit">
+        <v-btn :to="{ path: '/home/editRoutine/',query: { routineData: routineData, routineId: routineData.id}}"
+               icon color="#F8F9FA" v-if="canEdit">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn @click="rate=true" icon color="#F8F9FA">
@@ -147,6 +148,7 @@
 
     methods: {
       async seedRoutine() {
+
         if (typeof this.routineId !== "undefined") {
           if (!this.routineData.id) {
             const routine = await this.$store.dispatch("getRoutineByID", {

@@ -420,10 +420,67 @@ export default {
           name: payload.exercise.name,
           detail: payload.exercise.detail,
           type: payload.exercise.type,
-          duration: payload.exercise.duration,
-          repetitions: payload.exercise.repetitions,
+          duration: parseInt(payload.exercise.duration),
+          repetitions: parseInt(payload.exercise.repetitions),
         }),
       method: 'POST',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async removeExerciseFromCycle(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}`,{
+      method: 'DELETE',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async removeCycle(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}`,{
+      method: 'DELETE',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async removeRoutine(context, payload){
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}`,{
+      method: 'DELETE',
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
         'Content-Type': 'application/json'

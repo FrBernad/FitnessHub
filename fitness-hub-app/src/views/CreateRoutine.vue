@@ -6,7 +6,7 @@
         <RoutineSection title="WARM UP" section="Warmup"></RoutineSection>
       </v-col>
       <v-col cols="10" md="4">
-        <RoutineSection title="MAIN EXERCISES" section="Main"></RoutineSection>
+        <RoutineSection title="MAIN EXERCISES" section="Exercise"></RoutineSection>
       </v-col>
       <v-col cols="10" md="4">
         <RoutineSection title="COOL DOWN" section="Cooldown"></RoutineSection>
@@ -36,13 +36,12 @@
 </template>
 
 <script>
-  import Footer from "../components/LandingFooter";
   import RoutineSection from "../components/RoutineSection";
   import RoutineDetails from "@/components/RoutineDetails";
 
   export default {
     name: "CreateRoutine",
-    components: {Footer, RoutineSection, RoutineDetails},
+    components: {RoutineSection, RoutineDetails},
     data() {
       return {
         sections: ["WARMP UP", "MAIN EXERCISES", "COOLDOWN"],

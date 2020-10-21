@@ -1,5 +1,5 @@
 export default {
-  Main:[],
+  Exercise:[],
   Warmup:[],
   Cooldown:[],
 }

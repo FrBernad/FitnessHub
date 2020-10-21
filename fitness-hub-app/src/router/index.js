@@ -59,6 +59,16 @@ const routes = [
       },
       {
         meta: {requiresAuth: true},
+        path: 'editRoutine',
+        name: 'EditRoutine',
+        props: route => ({
+          routineData: route.query.routineData,
+          routineId: route.query.routineId,
+        }),
+        component: () => import('../views/EditRoutine')
+      },
+      {
+        meta: {requiresAuth: true},
         path: 'routine',
         name: 'Routine',
         props: route => ({
