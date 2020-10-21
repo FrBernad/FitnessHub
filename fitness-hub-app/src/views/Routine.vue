@@ -6,14 +6,40 @@
       </v-col>
       <v-col cols="6" sm="4"
              class="d-flex align-center justify-space-around offset-sm-0 pb-4 pb-sm-0 order-3 order-sm-0">
-        <v-btn icon color="#F8F9FA" @click="addToFavourite">
+        <v-btn icon :color="fav ? '#84419D' : '#F8F9FA'" @click="toogleFavourite">
           <v-icon>mdi-heart</v-icon>
         </v-btn>
         <v-btn icon color="#F8F9FA" v-if="canEdit">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn icon color="#F8F9FA">
+        <v-btn @click="rate=true" icon color="#F8F9FA">
           <v-icon>mdi-star</v-icon>
+          <v-dialog
+            v-model="rate"
+            width="400px"
+            persistent
+          >
+            <v-card color="#E9ECEF" width="400px" height="250px">
+              <v-container fill-height fluid>
+                <v-row justify="center" align="center">
+                  <v-col cols="10" class="d-flex justify-center align-center">
+                    <v-rating
+                      v-model="rating"
+                      color="yellow darken-3"
+                      background-color="grey darken-1"
+                      empty-icon="$ratingFull"
+                      hover
+                      x-large
+                    ></v-rating>
+                  </v-col>
+                  <v-col cols="9" class="d-flex mt-5 justify-space-around align-center">
+                    <v-btn large @click="applyRating">APPLY</v-btn>
+                    <v-btn large @click="rate=false">CANCEL</v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card>
+          </v-dialog>
         </v-btn>
         <v-btn icon color="#F8F9FA">
           <v-icon>mdi-share-variant</v-icon>
@@ -101,7 +127,10 @@
         creator: "",
         creatorID: null,
         detail: "",
-        id: null
+        id: null,
+        fav: false,
+        rate: false,
+        rating: 0.0
       }
     },
 
@@ -113,6 +142,7 @@
 
     created() {
       this.seedRoutine();
+      this.checkFav();
     },
 
     methods: {
@@ -151,13 +181,47 @@
         }
       },
 
-      async addToFavourite() {
+      async toogleFavourite() {
+        if (this.fav) {
+          try {
+            await this.$store.dispatch("removeFromFavourites", {routineId: this.id});
+            this.fav = false;
+          } catch (e) {
+            this.fav = true;
+            console.log(e);
+          }
+        } else {
+          try {
+            await this.$store.dispatch("addToFavourites", {routineId: this.id});
+            this.fav = true;
+          } catch (e) {
+            this.fav = false;
+            console.log(e);
+          }
+        }
+      },
+
+      async checkFav() {
         try {
-          await this.$store.dispatch("addToFavourites", {routineId:this.id});
+          this.fav = await this.$store.dispatch("checkIfFav", {routineId: this.id});
+        } catch (e) {
+          console.log(e);
+          this.fav = false;
+        }
+      },
+
+      async applyRating() {
+        try {
+          await this.$store.dispatch("rateRoutine", {
+            routineId: this.id,
+            score: this.rating
+          });
         } catch (e) {
           console.log(e);
         }
-      }
+        this.rate = false;
+      },
+
     }
   }
 

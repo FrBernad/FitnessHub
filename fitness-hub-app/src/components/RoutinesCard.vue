@@ -16,8 +16,8 @@
       </v-col>
       <v-col cols="5" class="d-flex justify-end align-center">
         <template v-for="num in 5">
-          <v-icon v-if="+routineData.avarageRating >= num">mdi-star</v-icon>
-          <v-icon v-else>mdi-star-outline</v-icon>
+          <v-icon v-if="num <= routineData.averageRating" color="yellow darken-3">mdi-star</v-icon>
+          <v-icon v-else color="yellow darken-3">mdi-star-outline</v-icon>
         </template>
       </v-col>
       <v-col cols="6" class="d-flex align-center justify-start">

@@ -4,7 +4,7 @@
       <v-col cols="9" class="py-0">
         <v-card-title class="pb-0">Favorite routines</v-card-title>
       </v-col>
-      <v-col cols="12" class="pb-0 d-flex align-self-start align-center" style="height: 300px">
+      <v-col cols="12" class="pb-0 d-flex align-self-start align-start" style="height: 300px">
         <v-container class="pa-0">
           <v-row justify="center">
             <v-col v-if="!this.currentEntries.length" cols="10" sm="8">
@@ -27,7 +27,6 @@
               <v-container class="max-width">
                 <v-pagination
                   v-model="page"
-                  class="my-4"
                   :length="pages"
                   total-visible="5"
                   @input="changePage"
@@ -78,7 +77,6 @@
         } catch (e) {
           console.log(e);
         }
-
       },
 
       async changePage() {

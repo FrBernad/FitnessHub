@@ -2,9 +2,9 @@
   <v-list-item class="listItem ma-0">
     <v-list-item-content class="justify-center">
       <v-row>
-        <v-col cols="3" class="d-flex align-center justify-start pr-0">
-          <h4 v-if="info.repetitions" >{{info.repetitions}} REPS</h4>
-          <h4 v-else >{{info.duration}} MINS</h4>
+        <v-col cols="3" class="d-flex align-center justify-center pr-0 text-center">
+          <h4 v-if="info.repetitions" class="text-center">{{info.repetitions}} REPS</h4>
+          <h4 v-else class="text-center">{{info.duration}} MINS</h4>
         </v-col>
         <v-col cols="6" class="d-flex px-0 align-center justify-center">
           <h3>{{info.name}}</h3></v-col>

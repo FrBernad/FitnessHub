@@ -36,10 +36,10 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-card-text v-if="info.repetitions" class="text-h5 font-weight-bold d-flex align-center justify-center pa-0">
+        <v-card-text v-if="info.repetitions" class="text-h5 font-weight-bold text-center pa-0">
           REPS: {{info.repetitions}}
         </v-card-text>
-        <v-card-text v-else class="text-h5 font-weight-bold d-flex align-center justify-center pa-0">
+        <v-card-text v-else class="text-h5 font-weight-bold text-center pa-0">
           TIME: {{info.duration}}
         </v-card-text>
       </v-col>

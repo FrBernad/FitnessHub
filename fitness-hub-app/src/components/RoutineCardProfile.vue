@@ -10,8 +10,8 @@
         </v-col>
         <v-col cols="4" md="4" class="d-flex pb-0 justify-md-center justify-sm-end justify-start align-center">
           <template v-for="num in 5">
-            <v-icon v-if="routineData.rating>=num">mdi-star</v-icon>
-            <v-icon v-else>mdi-star-outline</v-icon>
+            <v-icon v-if="num<=routineData.averageRating" color="yellow darken-3">mdi-star</v-icon>
+            <v-icon v-else color="yellow darken-3">mdi-star-outline</v-icon>
           </template>
         </v-col>
         <v-col cols="9">

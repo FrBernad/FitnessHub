@@ -204,16 +204,36 @@ export default {
     return responseData;
   },
 
+  async checkIfFav(context, payload) {
+    let routinesData;
+    try {
+      routinesData = await context.dispatch("getFavouriteRoutines", {
+        page: 0,
+        size: 1000,
+        orderBy: `id`,
+        direction: `desc`
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
+    const routines = routinesData.results;
+    for (const routine of routines) {
+      if (routine.id === payload.routineId) {
+        return true;
+      }
+    }
+    return false;
+  },
 
   async getFavouriteRoutines(context, payload) {
     let response = await fetch(
       `${context.getters.baseUrl}/user/current/routines/favourites?` + new URLSearchParams({
-      ...payload
-    }), {
-      headers: {
-        'Authorization': `bearer ${context.getters.token}`,
-      }
-    });
+        ...payload
+      }), {
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
 
     let responseData = await response.json();
 
@@ -222,6 +242,31 @@ export default {
       throw new Error(responseData.message);
     }
 
+    return responseData;
+  },
+
+  async rateRoutine(context, payload) {
+    let response = await fetch(
+      `${context.getters.baseUrl}/routines/${payload.routineId}/ratings?`
+      + new URLSearchParams({routineId: payload.routineId}),
+      {
+        body: JSON.stringify({
+          score: parseInt(payload.score),
+          review: ""
+        }),
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `bearer ${context.getters.token}`,
+        },
+      });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
     return responseData;
   },
 
@@ -250,6 +295,23 @@ export default {
         ...payload
       }), {
         method: "POST",
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
+
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(response.statusText);
+    }
+  },
+
+  async removeFromFavourites(context, payload) {
+    let response = await fetch(
+      `${context.getters.baseUrl}/user/current/routines/${payload.routineId}/favourites?` + new URLSearchParams({
+        ...payload
+      }), {
+        method: "DELETE",
         headers: {
           'Authorization': `bearer ${context.getters.token}`,
         }

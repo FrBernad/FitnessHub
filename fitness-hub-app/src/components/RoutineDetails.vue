@@ -121,7 +121,6 @@
           return;
         }
         try {
-
           let routine = await this.$store.dispatch('createRoutine', this.routine);
 
           let exercises = this.$store.getters['routines/getCycles'];

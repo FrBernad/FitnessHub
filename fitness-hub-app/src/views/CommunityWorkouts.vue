@@ -86,7 +86,6 @@
         } catch (e) {
           console.log(e);
         }
-
       },
 
       async changePage() {
