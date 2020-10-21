@@ -9,7 +9,7 @@
         <v-btn icon :color="fav ? '#84419D' : '#F8F9FA'" @click="toogleFavourite">
           <v-icon>mdi-heart</v-icon>
         </v-btn>
-        <v-btn :to="{ path: '/home/editRoutine/',query: { routineData: routineData, routineId: routineData.id}}"
+        <v-btn :to="{ path: '/home/myRoutines/editRoutine/',query: { routineData: routineData, routineId: routineData.id}}"
                icon color="#F8F9FA" v-if="canEdit">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
