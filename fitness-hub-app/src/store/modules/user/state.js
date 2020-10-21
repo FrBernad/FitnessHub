@@ -4,7 +4,7 @@ const state = {
   email: "",
   phone: '',
   gender: '',
-  birthdate: "",
+  birthdate: " ",
   avatarUrl: "",
 };
 

@@ -5,7 +5,7 @@ export default {
     state.email = payload.email ? payload.email: `user${state.userID}@email.com`;
     state.phone = payload.phone ? payload.phone:"";
     state.gender = payload.gender;
-    state.birthdate = payload.birthdate ? payload.birthdate : "";
+    state.birthdate = payload.birthdate ? payload.birthdate : " ";
     state.avatarUrl = payload.avatarUrl;
   },
 

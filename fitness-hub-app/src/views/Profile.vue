@@ -146,7 +146,9 @@
             ...this.$store.getters["user/userData"],
             password: this.password
           };
+          //TODO: ARREGLAROO ESTOOO
           data.avatarUrl = this.url;
+          data.birthdate = Date.now();
           await this.$store.dispatch("user/updateProfile", data);
           this.picDialog = false;
           this.askPass = false;
