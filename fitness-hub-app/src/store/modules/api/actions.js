@@ -441,60 +441,47 @@ export default {
   },
 
   async removeExerciseFromCycle(context, payload) {
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}`,{
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
-        'Content-Type': 'application/json'
       }
     });
 
-    let responseData = await response.json();
-
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
+      throw new Error(response.statusText);
     }
 
-    return responseData;
   },
 
   async removeCycle(context, payload) {
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}`,{
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
-        'Content-Type': 'application/json'
       }
     });
 
-    let responseData = await response.json();
 
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
+      throw new Error(response.statusText);
     }
 
-    return responseData;
   },
 
-  async removeRoutine(context, payload){
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}`,{
+  async removeRoutine(context, payload) {
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `bearer ${context.getters.token}`,
-        'Content-Type': 'application/json'
       }
     });
 
-    let responseData = await response.json();
 
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
+      throw new Error(response.statusText);
     }
 
-    return responseData;
   },
 
   async seedDataBase(context) {

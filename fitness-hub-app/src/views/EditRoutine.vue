@@ -58,9 +58,6 @@ export default {
     }
   },
   created() {
-      console.log('aaaaa');
-      console.log(this.routineData);
-      console.log(this.routineId);
       this.initialize();
   },
 
@@ -78,7 +75,6 @@ export default {
             cycleId: cycle.id,
           });
           for (const ex of exercises.results) {
-            console.log(ex);
             this.$store.commit(`routines/addTo${cycle.type.charAt(0).toUpperCase() + cycle.type.slice(1)}`, ex);
           }
         }
@@ -104,7 +100,6 @@ export default {
     },
     async deleteExercises(){
       try {
-        console.log('start exercise');
         const cyclesData = await this.$store.dispatch("getRoutineCycles", {
           routineId: this.routineId,
         });
@@ -121,7 +116,6 @@ export default {
             });
           }
         }
-        console.log('finish exercise');
 
       } catch (e) {
         console.log(e);
@@ -131,18 +125,17 @@ export default {
 
     async deleteCycle(){
       try {
-        console.log('s  c');
 
         const cyclesData = await this.$store.dispatch("getRoutineCycles", {
           routineId: this.routineId,
         });
         for (const cycle of cyclesData.results) {
-          await this.$store.dispatch('removeCycle', {
+
+            await this.$store.dispatch('removeCycle', {
             routineId: this.routineId,
-            cycleId: this.cycleId,
+            cycleId: cycle.id,
           });
         }
-        console.log('f  c');
 
       } catch (e) {
         console.log(e);
@@ -155,14 +148,14 @@ export default {
         const cyclesData = await this.$store.dispatch("getRoutineCycles", {
           routineId: this.routineId,
         });
-        console.log(cyclesData.results);
         for (const cycle of cyclesData.results) {
-          console.log(cycle);
-          let exercises = this.$store.getters["routine"]
-          for (const ex of exercises.results) {
-             this.$store.commit(`routines/addTo${cycle.type.charAt(0).toUpperCase() + cycle.type.slice(1)}`, ex);
+          let exercises = this.$store.getters[`routines/${cycle.type.charAt(0).toUpperCase() + cycle.type.slice(1)}`];
+          console.log(exercises);
+          for (const ex of exercises) {
+             await this.$store.dispatch('addToCycleExercise', {routineId: this.routineId, cycleId: cycle.id, exercise: ex });
           }
         }
+
       } catch (e) {
         console.log(e);
       }
