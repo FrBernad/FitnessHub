@@ -1,39 +1,35 @@
 <template>
-  <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3">
+  <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3" height="450">
     <v-row align="center" justify="space-between">
-      <v-col cols="9" class="pt-0">
+      <v-col cols="10" class="pt-0">
         <v-card-title>
           Personal data
         </v-card-title>
       </v-col>
-      <v-col cols="3" class="d-flex justify-center">
-        <v-btn icon v-if="editData" @click="editData = !editData; ">
+      <v-col cols="2" class="d-flex justify-center">
+        <v-btn icon @click="editData = !editData; ">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </v-col>
     </v-row>
-    <v-card-text class="font-weight-bold">{{ email }}</v-card-text>
     <v-select
       class="ma-4" style="width: 80%"
       ref="country"
       v-model="gender"
       :items="genders"
-      :readonly="editData"
+      :readonly="!editData"
       label="Gender"
       placeholder="Select gender..."
-      disable-lookup
     ></v-select>
     <v-menu
-      ref="menu"
       v-model="menu"
       :close-on-content-click="false"
       transition="scale-transition"
       offset-y
-      :disabled="editData"
+      :disabled="!editData"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          v-model="birthdate"
           placeholder="Birthday"
           label="Birthday date"
           readonly
@@ -42,8 +38,7 @@
           class="ma-4" style="width: 80%"
         ></v-text-field>
       </template>
-      <v-date-picker v-if="!editData"
-                     ref="picker"
+      <v-date-picker v-if="editData"
                      v-model="birthdate"
                      :max="maxDate()"
                      min="1950-01-01"
@@ -55,7 +50,7 @@
       label="Phone"
       class="ma-4" style="width: 80%;"
       v-model="phone"
-      :readonly="editData"
+      :readonly="!editData"
       :error-messages="phoneError"
       @blur="$v.phone.$touch()"
       no-resize
@@ -77,7 +72,7 @@
             </v-row>
           </v-card>
         </v-dialog>
-        <v-btn @click="canEdit=true;editData=!editData" min-height="52px" v-if="!editData" outlined color="#212529"
+        <v-btn @click="canEdit=true;editData=!editData" min-height="52px" v-if="editData" outlined color="#212529"
                width="30%">
           <v-icon class="mr-2">mdi-content-save-outline</v-icon>
           <span>SAVE</span>
