@@ -13,29 +13,23 @@
     </v-row>
 
     <v-row class="align-self-end justify-space-around bgColor">
-      <v-col cols="12" class="d-flex align-self-end justify-center">
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="modifyRoutine" x-large min-height="45px" elevation="5">
-              APPLY CHANGES
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="deleteRoutine" x-large min-height="45px" elevation="5">
-              DELETE
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="restore" x-large min-height="45px" elevation="5">
-              CANCEL
-            </v-btn>
-          </v-col>
-        </v-row>
-
+      <v-col class="d-flex justify-center" cols="12" sm="4">
+        <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="restore" x-large min-height="45px"
+               width="200px" elevation="5">
+          CANCEL
+        </v-btn>
+      </v-col>
+      <v-col class="d-flex justify-center" cols="12" sm="4">
+        <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="modifyRoutine" x-large min-height="45px"
+               width="200px" elevation="5">
+          APPLY CHANGES
+        </v-btn>
+      </v-col>
+      <v-col class="d-flex justify-center" cols="12" sm="4">
+        <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="deleteRoutine" x-large min-height="45px"
+               width="200px" elevation="5">
+          DELETE
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
