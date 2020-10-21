@@ -3,7 +3,7 @@
     <v-row align="start" justify="center">
       <v-col cols="12" class="pa-0">
         <v-card color="rgb(233 236 239)">
-          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" aspect-ratio="5:2" height="400px"
+          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" height="400px"
           >
           </v-img>
           <v-row>
@@ -16,7 +16,7 @@
                                 class="avBorder elevation-5">
                         <v-img alt="profile picture"
                                class="ma-0 pa-0"
-                               :src="{profilePic}"
+                               :src="profilePic"
                                lazy-src="../assets/imgs/emptyUser.png"
                         />
                       </v-avatar>
@@ -28,11 +28,44 @@
                         color="#f8f9fa"
                         elevation="5"
                         style="position:absolute; bottom:0;right:10px"
-                        @click="openPicPicker"
+                        @click="picDialog=true"
                       >
                         <v-icon color="#202121">mdi-camera</v-icon>
                       </v-btn>
-                      <input type="file" style="display: none" ref="picInput" @change="changePicture">
+
+                      <v-dialog v-model="picDialog" width="550">
+                        <v-dialog v-model="askPass" persistent width="550">
+                          <v-card class="pa-6">
+                            <v-card-title class="pa-0">Insert password</v-card-title>
+                            <v-text-field label="Password" @click:append="show = !show" v-model="password"
+                                          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                                          :type="show ? 'text' : 'password'"></v-text-field>
+                            <v-row class="align-center justify-space-around">
+                              <v-col cols="6" class="d-flex align-center justify-space-around offset-6">
+                                <v-btn @click="askPass=false">CANCEL</v-btn>
+                                <v-btn @click="changePic">APPLY</v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-card>
+                        </v-dialog>
+                        <v-card class="pa-6">
+                          <v-row align="center" justify="center">
+                            <v-col cols="8">
+                              <v-text-field
+                                v-model="url"
+                                label="URL"
+                                placeholder="URL"
+                                outlined
+                                :error-messages="urlErrors"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="8" class="d-flex justify-space-around align-center">
+                              <v-btn @click="cancelPicChange">CANCEL</v-btn>
+                              <v-btn @click="askPass=true">CHANGE</v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-card>
+                      </v-dialog>
                     </div>
                   </v-col>
                   <v-col cols="12" class="pa-0">
@@ -59,25 +92,67 @@
 <script>
   import PersonalData from "../components/PersonalData";
   import FavoriteProfile from "../components/FavoriteProfile";
+  import {minLength, required} from 'vuelidate/lib/validators'
 
   export default {
     name: "Profile",
     components: {FavoriteProfile, PersonalData},
+    data() {
+      return {
+        picDialog: false,
+        askPass: false,
+        password: "",
+        show: false,
+        url: "",
+      }
+    },
+
+    validations: {
+      url: {required, minLength: minLength(4)}
+    },
+
     computed: {
       username() {
         return this.$store.getters["user/username"].toUpperCase();
       },
       profilePic() {
         return this.$store.getters["user/avatarUrl"];
-      }
-    },
-    methods: {
-      openPicPicker() {
-        this.$refs.picInput.click();
       },
-      changePicture(event) {
-        console.log(event.target.files);
-        console.log(event.target.value);
+      urlErrors() {
+        const errors = [];
+        if (!this.$v.url.$dirty) {
+          return errors;
+        }
+        !this.$v.url.minLength && errors.push(`URL must be at least 4 characters long`);
+        !this.$v.url.required && errors.push('URL is required');
+        return errors;
+      },
+    },
+
+    methods: {
+      cancelPicChange() {
+        this.url = "";
+        this.picDialog = false;
+      },
+      async changePic() {
+        this.$v.url.$touch();
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          console.log("the form is missing something");
+          return;
+        }
+        try {
+          const data = {
+            ...this.$store.getters["user/userData"],
+            password: this.password
+          };
+          data.avatarUrl = this.url;
+          await this.$store.dispatch("user/updateProfile", data);
+          this.picDialog = false;
+          this.askPass = false;
+        } catch (e) {
+          console.log(e)
+        }
       },
     }
   }

@@ -190,11 +190,8 @@
     background-position: center;
     background-position-y: 25%;
     margin: 0 auto;
-    height: 400px;
+    height: 45vh;
     width: auto;
     background-size: cover;
-
   }
-
-
 </style>

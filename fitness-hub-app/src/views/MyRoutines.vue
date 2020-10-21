@@ -171,8 +171,6 @@
           console.log(e);
         }
       }
-
-
     },
   }
 </script>
@@ -192,11 +190,9 @@
     border: thin solid #F8F9FA;
   }
 
-
   .routinesBG {
-
     background-image: url("../assets/imgs/myRoutines.jpg");
-    height: 400px;
+    height: 45vh;
     background-position: center;
     background-position-y: 25%;
     margin: 0 auto;

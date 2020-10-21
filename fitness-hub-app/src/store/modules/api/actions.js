@@ -28,8 +28,6 @@ export default {
       }
       throw new Error(errorMessage);
     }
-
-    context.commit("user/setUserData", responseData);
   },
 
   async signIn(context, payload) {
@@ -66,7 +64,7 @@ export default {
 
     context.commit('setUser', userAuth);
 
-    const url = `${context.getters.baseUrl}/user/current`
+    let url = `${context.getters.baseUrl}/user/current`
 
     response = await fetch(url, {
       headers: {
@@ -82,8 +80,6 @@ export default {
     }
 
     context.commit("user/setUserData", responseData);
-
-    // await context.dispatch("seedDataBase");
   },
 
   async logout(context, payload) {
@@ -116,19 +112,18 @@ export default {
         token: token,
       });
 
-      const url = `${context.getters.baseUrl}/user/current`
-
-      const response = await fetch(url, {
+      let url = `${context.getters.baseUrl}/user/current`
+      let response = await fetch(url, {
         headers: {
-          'Authorization': `bearer ${token}`
+          'Content-Type': 'application/json',
+          'Authorization': `bearer ${context.getters.token}`
         },
       });
-
-      const responseData = await response.json();
-
+      let responseData = await response.json();
       if (!response.ok) {
-        throw new Error("Could not auto login");
+        throw new Error("Failed to autologin");
       }
+
       context.commit("user/setUserData", responseData);
     }
   },

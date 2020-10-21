@@ -6,11 +6,12 @@
       </v-col>
       <v-col cols="6" sm="4"
              class="d-flex align-center justify-space-around offset-sm-0 pb-4 pb-sm-0 order-3 order-sm-0">
-        <v-btn icon :color="fav ? '#84419D' : '#F8F9FA'" @click="toogleFavourite">
+        <v-btn icon :color="fav ? 'red' : '#F8F9FA'" @click="toogleFavourite">
           <v-icon>mdi-heart</v-icon>
         </v-btn>
-        <v-btn :to="{ path: '/home/myRoutines/editRoutine/',query: { routineData: routineData, routineId: routineData.id}}"
-               icon color="#F8F9FA" v-if="canEdit">
+        <v-btn
+          :to="{ path: '/home/myRoutines/editRoutine/',query: { routineData: routineData, routineId: routineData.id}}"
+          icon color="#F8F9FA" v-if="canEdit">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn @click="rate=true" icon color="#F8F9FA">
@@ -42,7 +43,27 @@
             </v-card>
           </v-dialog>
         </v-btn>
-        <v-btn icon color="#F8F9FA">
+        <v-btn icon color="#F8F9FA" @click="share = true">
+          <v-dialog
+            v-model="share"
+            width="400px"
+          >
+            <v-card color="#E9ECEF" width="400px" height="250px" class="pa-6">
+              <v-row justify="center" align="center">
+                <v-col cols="12" class="d-flex justify-end align-start pa-0">
+                  <v-btn icon class="pb-4">
+                    <v-icon @click="share = false" color="#B9BABB">
+                      mdi-alpha-x-circle-outline
+                    </v-icon>
+                  </v-btn>
+                </v-col>
+                <v-col cols="12">
+                  <h1 class="text-center">Share link:</h1>
+                  <p class="text-center mt-2 font-weight-medium"><a :href="routineLink">${{routineLink}}</a></p>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-dialog>
           <v-icon>mdi-share-variant</v-icon>
         </v-btn>
       </v-col>
@@ -140,6 +161,10 @@
     computed: {
       canEdit() {
         return this.creatorID === this.$store.get("user/userID");
+      },
+      routineLink() {
+        return this.$store.getters['hostUrl']+ this.$router.currentRoute.path+"?routineId="+
+          this.$router.currentRoute.query.routineId;
       }
     },
 
@@ -150,9 +175,8 @@
 
     methods: {
       async seedRoutine() {
-
         if (typeof this.routineId !== "undefined") {
-          if (!this.routineData.id) {
+          if (!this.routineData || !this.routineData.id) {
             const routine = await this.$store.dispatch("getRoutineByID", {
               routineId: this.routineId
             });

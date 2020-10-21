@@ -103,7 +103,7 @@ export default {
     rules: [v => v.length <= 100 || 'Max 100 characters'],
     password: '',
     show: false,
-    editData: true,
+    editData: false,
     canEdit: false,
   }),
   methods: {
@@ -131,7 +131,6 @@ export default {
       }
       this.canEdit=false;
       this.password = '';
-
     },
     async restoreData(){
       try{

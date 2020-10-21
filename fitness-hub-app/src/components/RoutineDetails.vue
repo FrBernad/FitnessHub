@@ -106,7 +106,7 @@
           {option: 'Lower Body', value: 3},
           {option: 'Legs', value: 4},
           {option: 'Chest', value: 5},
-          {option: 'Abbs', value: 6},
+          {option: 'Abs', value: 6},
           {option: 'Arms', value: 7}
         ],
         routine: {

@@ -1,17 +1,11 @@
 export default {
-  async updateProfile(context,payload){
-
-   let response = await fetch(`${context.rootGetters.baseUrl}/user/current`, {
+  async updateProfile(context, payload) {
+    console.log(payload);
+    let response = await fetch(`${context.rootGetters.baseUrl}/user/current`, {
       body: JSON.stringify(
         {
-          username: payload.username,
-          password:payload.password,
+          ...payload,
           fullName: '',
-          gender : payload.gender,
-          birthdate:Date.parse(payload.birthdate),
-          email:'nico@yopmail.com',
-          phone:payload.phone,
-          avatarUrl:'',
         }),
       method: 'PUT',
       headers: {
@@ -21,14 +15,15 @@ export default {
     });
 
     let responseData = await response.json();
-
+    console.log(responseData);
     if (!response.ok) {
       console.log(responseData);
       throw new Error(responseData.message);
     }
+    context.commit("setUserData",responseData);
   },
 
-  async restoreValues(context){
+  async restoreValues(context) {
     const url = `${context.rootGetters.baseUrl}/user/current`
 
     const response = await fetch(url, {
@@ -45,7 +40,6 @@ export default {
     context.commit("setUserData", responseData);
 
   }
-
 
 
 }
