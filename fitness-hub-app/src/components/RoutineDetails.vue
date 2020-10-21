@@ -132,6 +132,7 @@
           return;
         }
         try {
+          this.routine.name = this.routine.name.toUpperCase();
           let routine = await this.$store.dispatch('createRoutine', this.routine);
 
           let exercises = this.$store.getters['routines/getCycles'];

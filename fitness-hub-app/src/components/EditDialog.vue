@@ -80,18 +80,6 @@
             </v-radio-group>
           </v-col>
         </v-row>
-
-        <v-row>
-          <v-col cols="4">
-            <v-select
-              :items="['exercise','rest']"
-              label="Type"
-              required
-              v-model="exercise.type"
-              color="#212529"
-            ></v-select>
-          </v-col>
-        </v-row>
       </v-container>
     </v-card-text>
     <v-card-actions>
@@ -153,7 +141,7 @@ export default {
       this.$v.$reset();
       this.exercise.name = "";
       this.exercise.detail = "";
-      this.exercise.type = "";
+      this.exercise.type = "exercise";
       this.exercise.duration = 0;
       this.exercise.repetitions = 0;
     },
@@ -166,8 +154,8 @@ export default {
   },
   validations: {
     exercise: {
-      name: {required, minLength: minLength(3), maxLength: maxLength(100)},
-      detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
+      name: {required, minLength: minLength(3), maxLength: maxLength(15)},
+      detail: {required, minLength: minLength(5), maxLength: maxLength(50)},
       duration: {
         minValue: validateIf(function () {
           return this.radios === "time"
@@ -189,7 +177,7 @@ computed: {
       return errors;
     }
     !this.$v.exercise.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
-    !this.$v.exercise.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+    !this.$v.exercise.detail.maxLength && errors.push(`Detail can't have more than 50 characters`);
     !this.$v.exercise.detail.required && errors.push('Detail is required');
 
     return errors;
@@ -202,7 +190,7 @@ computed: {
       return errors;
     }
     !this.$v.exercise.name.minLength && errors.push('Name must be at least 3 characters long');
-    !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 100 characters");
+    !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 15 characters");
     !this.$v.exercise.name.required && errors.push('Name is required');
 
     return errors;

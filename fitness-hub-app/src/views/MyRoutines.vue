@@ -2,7 +2,7 @@
   <v-container fluid style="height: 100%" class="pa-0 bg">
     <v-row class="routinesBG">
       <v-col cols="12" class=" d-flex justify-center align-center">
-        <v-btn to="/home/createRoutine" exact
+        <v-btn to="/home/myRoutines/createRoutine" exact
                x-large min-height="70px" min-width="35%" elevation="5" id="create"
                class="align-center justify-center"
         >CREATE ROUTINE

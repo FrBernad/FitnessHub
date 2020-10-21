@@ -32,7 +32,7 @@
                     </div>
                   </v-col>
                   <v-col cols="12" class="pa-0">
-                    <h1 class="nameProfile text-center">FAUS</h1>
+                    <h1 class="nameProfile text-center">{{username}}</h1>
                   </v-col>
                 </v-row>
               </v-container>
@@ -58,6 +58,11 @@
   export default {
     name: "Profile",
     components: {FavoriteProfile, PersonalData},
+    computed:{
+      username(){
+        return this.$store.getters["user/username"].toUpperCase();
+      }
+    },
     methods: {
       openPicPicker() {
         this.$refs.picInput.click();
