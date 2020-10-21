@@ -14,12 +14,14 @@
       </v-col>
     </v-row>
 
-    <SearchBar></SearchBar>
+    <SearchBar @sort="sort($event)" @order="order($event)" @filter="filter($event)"></SearchBar>
 
     <v-row class="px-8 pt-4" :justify="this.currentEntries.length ? 'start': 'center'">
-       <v-col v-if="!this.currentEntries.length" cols="10" sm="8">
-        <v-card :height="$vuetify.breakpoint.smAndDown ? '40vh' : '400px'" class="d-flex justify-center align-center mt-5">
-            <p class="ma-0 px-6 px-md-13 text-center text-body-1 text-sm-h6 text-md-h4 grey--text">Its seems no routines where created.</p>
+      <v-col v-if="!this.currentEntries.length" cols="10" sm="8">
+        <v-card :height="$vuetify.breakpoint.smAndDown ? '40vh' : '400px'"
+                class="d-flex justify-center align-center mt-5">
+          <p class="ma-0 px-6 px-md-13 text-center text-body-1 text-sm-h6 text-md-h4 grey--text">
+            No routines where found, check again later.</p>
         </v-card>
       </v-col>
       <v-col cols="12" md="6" lg="4" v-for="(entry,index) in currentEntries" :key="index">
@@ -51,7 +53,7 @@
 
 <script>
   import RoutinesCard from "../components/RoutinesCard";
-  import SearchBar from "@/components/SearchBar";
+  import SearchBar from "../components/SearchBar";
 
   export default {
     name: "Workouts.vue",
@@ -63,7 +65,10 @@
       page: 1,
       totalPages: 0,
       itemsPerPage: 6,
-      pages: 0
+      pages: 0,
+      direction: 'desc',
+      orderBy: "averageRating",
+      filterBy: undefined,
     }),
 
     created() {
@@ -73,10 +78,11 @@
     methods: {
       async seedEntries() {
         const data = {
-          page: this.page-1,
+          ...(!!this.filterBy && {difficulty: this.filterBy}),
+          page: this.page - 1,
           size: this.itemsPerPage,
-          orderBy: `id`,
-          direction: `desc`
+          orderBy: this.orderBy,
+          direction: this.direction
         }
         try {
           const routines = await this.$store.dispatch('getRoutines', data);
@@ -90,22 +96,81 @@
 
       async changePage() {
         const data = {
-          page: this.page-1,
+          page: this.page - 1,
           size: this.itemsPerPage,
-          orderBy: `id`,
-          direction: `desc`
+          orderBy: this.orderBy,
+          direction: this.direction,
+          ...(!!this.filterBy && {difficulty: this.filterBy}),
         };
-
         try {
-
           const routines = await this.$store.dispatch('getRoutines', data);
+          this.totalPages = routines.totalCount;
+          this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
           this.currentEntries = routines.results;
+        } catch (e) {
+          console.log(e);
+        }
+      },
 
+      async sort(criteria) {
+        this.page = 1;
+        this.orderBy = criteria;
+        const data = {
+          ...(!!this.filterBy && {difficulty: this.filterBy}),
+          page: this.page - 1,
+          size: this.itemsPerPage,
+          orderBy: this.orderBy,
+          direction: this.direction,
+        };
+        try {
+          const routines = await this.$store.dispatch('getRoutines', data);
+          this.totalPages = routines.totalCount;
+          this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
+          this.currentEntries = routines.results;
+        } catch (e) {
+          console.log(e);
+        }
+      },
+
+      async order(direction) {
+        this.page = 1;
+        this.direction = direction;
+        const data = {
+          ...(!!this.filterBy && {difficulty: this.filterBy}),
+          page: this.page - 1,
+          size: this.itemsPerPage,
+          orderBy: this.orderBy,
+          direction: direction
+        };
+        try {
+          const routines = await this.$store.dispatch('getRoutines', data);
+          this.totalPages = routines.totalCount;
+          this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
+          this.currentEntries = routines.results;
+        } catch (e) {
+          console.log(e);
+        }
+      },
+
+      async filter(filterBy) {
+        this.page = 1;
+        this.filterBy = filterBy;
+        const data = {
+          page: this.page - 1,
+          size: this.itemsPerPage,
+          orderBy: this.orderBy,
+          direction: this.direction,
+          ...(!!this.filterBy && {difficulty: this.filterBy}),
+        };
+        try {
+          const routines = await this.$store.dispatch('getRoutines', data);
+          this.totalPages = routines.totalCount;
+          this.pages = Math.ceil((this.totalPages / this.itemsPerPage));
+          this.currentEntries = routines.results;
         } catch (e) {
           console.log(e);
         }
       }
-
     },
   }
 </script>

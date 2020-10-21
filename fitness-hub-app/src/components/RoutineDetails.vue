@@ -38,10 +38,12 @@
         <v-row class="justify-center align-center">
           <v-col cols="6" sm="6">
             <v-select
-              :items="[1,2,3,4]"
+              :items="categoryOptions"
+              item-text="option"
+              item-value="value"
+              v-model="routine.category.id"
               label="Category"
               required
-              v-model="routine.category.id"
               color="#212529"
               :error-messages="categoryError"
               @blur="$v.routine.category.id.$touch()"
@@ -98,6 +100,15 @@
     name: "RoutineDetails",
     data() {
       return {
+        categoryOptions: [
+          {option: 'Full Body', value: 1},
+          {option: 'Upper Body', value: 2},
+          {option: 'Lower Body', value: 3},
+          {option: 'Legs', value: 4},
+          {option: 'Chest', value: 5},
+          {option: 'Abbs', value: 6},
+          {option: 'Arms', value: 7}
+        ],
         routine: {
           name: '',
           detail: '',

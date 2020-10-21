@@ -37,7 +37,7 @@
 
 <script>
   import RoutineSection from "../components/RoutineSection";
-  import RoutineDetails from "@/components/RoutineDetails";
+  import RoutineDetails from "../components/RoutineDetails";
 
   export default {
     name: "CreateRoutine",
