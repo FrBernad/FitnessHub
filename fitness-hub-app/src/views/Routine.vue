@@ -153,8 +153,8 @@
         fav: false,
         rate: false,
         rating: 0.0,
+        share: false,
         cyclesId: [],
-
         }
     },
 
