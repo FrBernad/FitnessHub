@@ -6,6 +6,7 @@ export default {
     state.phone = payload.phone;
     state.gender = payload.gender;
     state.birthdate = payload.birthdate;
+    state.avatarUrl = payload.avatarUrl;
   },
 
 };

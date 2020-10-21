@@ -14,7 +14,11 @@
                     <div style="position: absolute; bottom: 15px">
                       <v-avatar size="200px"
                                 class="avBorder elevation-5">
-                        <img src="../assets/imgs/fausDuro.jpg">
+                        <v-img alt="profile picture"
+                               class="ma-0 pa-0"
+                               :src="{profilePic}"
+                               lazy-src="../assets/imgs/emptyUser.png"
+                        />
                       </v-avatar>
                       <v-btn
                         class="mx-2"
@@ -53,14 +57,18 @@
 </template>
 
 <script>
-  import PersonalData from "@/components/PersonalData";
-  import FavoriteProfile from "@/components/FavoriteProfile";
+  import PersonalData from "../components/PersonalData";
+  import FavoriteProfile from "../components/FavoriteProfile";
+
   export default {
     name: "Profile",
     components: {FavoriteProfile, PersonalData},
-    computed:{
-      username(){
+    computed: {
+      username() {
         return this.$store.getters["user/username"].toUpperCase();
+      },
+      profilePic() {
+        return this.$store.getters["user/avatarUrl"];
       }
     },
     methods: {
@@ -71,9 +79,6 @@
         console.log(event.target.files);
         console.log(event.target.value);
       },
-      print(aux){
-        console.log(aux);
-      }
     }
   }
 </script>
@@ -86,8 +91,9 @@
   .avBorder {
     border: 4px solid white;
   }
-  .nameProfile{
-    color:#212529;
+
+  .nameProfile {
+    color: #212529;
   }
 </style>
 
