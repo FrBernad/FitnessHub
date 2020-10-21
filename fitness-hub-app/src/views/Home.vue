@@ -53,7 +53,7 @@
 
   .workoutsBG {
     height: 100%;
-    background: url("../assets/imgs/WorkoutsHome.png") no-repeat center;
+    background: url("../assets/imgs/WorkoutsHome.jpg") no-repeat center;
     background-size: cover;
     opacity: 1;
   }
