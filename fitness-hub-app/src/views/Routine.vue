@@ -79,7 +79,7 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0" color="#F8F9FA">
-          <Exercise v-for="(entry,index) in exercises.warmup" :key="index" :info="entry"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.warmup" :key="index" :info="entry" :cycleId="cyclesId[0]" :routineId="routineId"></Exercise>
         </v-list>
       </v-col>
     </v-row>
@@ -90,7 +90,7 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0" color="#F8F9FA">
-          <Exercise v-for="(entry,index) in exercises.exercise" :key="index" :info="entry"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.exercise" :key="index" :cycleId="cyclesId[1]" :routineId="routineId" :info="entry"></Exercise>
         </v-list>
       </v-col>
 
@@ -102,7 +102,7 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0">
-          <Exercise v-for="(entry,index) in exercises.cooldown" :key="index" :info="entry"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.cooldown" :key="index"   :cycleId="cyclesId[2]" :routineId="routineId" :info="entry"></Exercise>
         </v-list>
       </v-col>
     </v-row>
@@ -131,8 +131,10 @@
         id: null,
         fav: false,
         rate: false,
-        rating: 0.0
-      }
+        rating: 0.0,
+        cyclesId: [],
+
+        }
     },
 
     computed: {
@@ -175,6 +177,7 @@
                 routineId: this.id,
                 cycleId: cycle.id,
               });
+              this.cyclesId.push(cycle.id);
               this.exercises[cycle.type].push(...exercises.results);
             }
           } catch (e) {

@@ -18,10 +18,12 @@
     </v-row>
     <v-row class="align-center justify-center">
       <v-col cols="6" class="d-flex align-center justify-center">
-        <v-img src="../assets/imgs/routines.jpg" contain max-height="200"></v-img>
+        <v-img :src="imgUrl" contain max-height="200"></v-img>
       </v-col>
       <v-col cols="6" class="d-flex align-center justify-center">
-        <v-img src="../assets/imgs/routines.jpg" contain max-height="200"></v-img>
+        <v-btn :href="videoUrl" target="_blank" x-large icon color="rgb(173, 181, 189)">
+          <v-icon x-large>mdi-play-circle</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
     <v-row class="align-center justify-center">
@@ -50,13 +52,32 @@
 <script>
   export default {
     name: "ExerciseInformation",
-    props: ["info"],
+    props: ["info","cycleId","routineId"],
+    data(){
+      return {
+        videoUrl: '',
+        imgUrl: '',
+
+      }
+    },
+
+
+    async created(){
+      try{
+        this.videoUrl = (await this.$store.dispatch('getVideo',{cycleId: this.cycleId,routineId: this.routineId,exerciseId: this.info.id})).results[0].url;
+        this.imgUrl = (await this.$store.dispatch('getImage',{cycleId: this.cycleId,routineId: this.routineId,exerciseId: this.info.id})).results[0].url;
+
+      }catch(e){
+        console.log(e);
+      }
+    },
+
     methods: {
       exerciseClose() {
         this.$emit('exerciseClose')
       }
+    },
 
-    }
   }
 
 </script>

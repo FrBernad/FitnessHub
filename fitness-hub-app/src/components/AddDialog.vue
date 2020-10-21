@@ -28,16 +28,22 @@
           </v-col>
 
           <v-col cols="6" class="d-flex align-center justify-center">
-            <v-btn>
+            <v-btn @click="addPhoto=!addPhoto">
               <v-icon>mdi-plus-thick</v-icon>
             </v-btn>
+          </v-col>
+          <v-col cols="6" class="d-flex align-center justify-center">
+            <v-btn @click="addVideo=!addVideo">
+              <v-icon>mdi-plus-thick</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="6" class="d-flex align-center justify-center">
+              <v-text-field v-model="exercise.photo" label="Insert URL" v-if="addPhoto"></v-text-field>
+          </v-col>
+          <v-col cols="6" class="d-flex align-center justify-center">
+            <v-text-field v-model="exercise.video" label="Insert URL" v-if="addVideo"></v-text-field>
           </v-col>
 
-          <v-col cols="6" class="d-flex align-center justify-center">
-            <v-btn>
-              <v-icon>mdi-plus-thick</v-icon>
-            </v-btn>
-          </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
@@ -121,7 +127,9 @@ export default {
     return {
       title: 'Exercise name',
       radios: "time",
-      exercise: {name: '', detail: '', type: 'exercise', duration: 0, repetitions: 0},
+      exercise: {name: '', detail: '', type: 'exercise', duration: 0, repetitions: 0,photo: '',video:''},
+      addPhoto: false,
+      addVideo:false,
     }
   },
   methods: {
@@ -133,7 +141,7 @@ export default {
       }
       const copy = {
         name: this.exercise.name, detail: this.exercise.detail, type: this.exercise.type,
-        duration: this.exercise.duration, repetitions: this.exercise.repetitions
+        duration: this.exercise.duration, repetitions: this.exercise.repetitions, photo: this.exercise.photo, video: this.exercise.video
       }
       this.$store.commit(`routines/addTo${this.addTo}`, copy);
       this.exerciseClose()
@@ -150,7 +158,12 @@ export default {
       this.exercise.type = "";
       this.exercise.duration = 0;
       this.exercise.repetitions = 0;
+      this.exercise.photo = '';
+      this.exercise.video = '';
+      this.addVideo = false;
+      this.addPhoto = false;
     },
+
     cleanReps() {
       this.exercise.repetitions = 0;
     },

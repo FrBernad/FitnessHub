@@ -16,7 +16,7 @@
               </v-btn>
             </v-col>
           </template>
-          <ExerciseInformation @exerciseClose="dialog=false" :info="info"></ExerciseInformation>
+          <ExerciseInformation @exerciseClose="dialog=false" :info="info" :cycleId="cycleId" :routineId="routineId"></ExerciseInformation>
         </v-dialog>
       </v-row>
     </v-list-item-content>
@@ -29,7 +29,7 @@
   export default {
     name: "Exercise",
     components: {ExerciseInformation},
-    props:["info"],
+    props:["info","cycleId","routineId"],
     data() {
       return {
         title: '',

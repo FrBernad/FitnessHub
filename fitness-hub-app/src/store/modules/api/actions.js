@@ -440,6 +440,94 @@ export default {
     return responseData;
   },
 
+  async addExercisePhoto(context,payload){
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/images`,
+      {
+      body: JSON.stringify(
+        {
+          number: payload.number,
+          url: payload.url,
+        }),
+      method: 'POST',
+      headers: {
+        'Authorization': `bearer ${context.getters.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  },
+
+  async getImage(context,payload){
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/images`,
+      {
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+    console.log(responseData);
+
+    return responseData;
+  },
+
+
+  async getVideo(context,payload){
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/videos`,
+      {
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+        }
+      });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+    console.log(responseData);
+    return responseData;
+  },
+
+
+  async addExerciseVideo(context,payload){
+    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/videos`,
+      {
+        body: JSON.stringify(
+          {
+            number: payload.number,
+            url: payload.url,
+          }),
+        method: 'POST',
+        headers: {
+          'Authorization': `bearer ${context.getters.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+    let responseData = await response.json();
+
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message);
+    }
+    return responseData;
+  },
+
   async removeExerciseFromCycle(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}`, {
       method: 'DELETE',

@@ -145,11 +145,29 @@
             }
           });
           for (const x of exercises.Warmup) {
-            await this.$store.dispatch('addToCycleExercise', {
+            let aux = await this.$store.dispatch('addToCycleExercise', {
               routineId: routine.id,
               cycleId: cycleWarmup.id,
               exercise: x
             })
+            if(x.photo.length !== 0){
+              await this.$store.dispatch('addExercisePhoto', {
+                routineId: routine.id,
+                cycleId: cycleWarmup.id,
+                exerciseId : aux.id,
+                url : x.photo,
+                number: 1,
+              })
+            }
+            if(x.video.length !== 0){
+                await this.$store.dispatch('addExerciseVideo', {
+                  routineId: routine.id,
+                  cycleId: cycleWarmup.id,
+                  exerciseId : aux.id,
+                  url : x.video,
+                  number: 1,
+                })
+            }
           }
 
           let cycleExercise = await this.$store.dispatch('createCycle',
@@ -160,11 +178,29 @@
               }
             });
           for (const x of exercises.Exercise) {
-            await this.$store.dispatch('addToCycleExercise', {
+            let aux = await this.$store.dispatch('addToCycleExercise', {
               routineId: routine.id,
               cycleId: cycleExercise.id,
               exercise: x
             })
+            if(x.photo.length !== 0){
+              await this.$store.dispatch('addExercisePhoto', {
+                routineId: routine.id,
+                cycleId: cycleExercise.id,
+                exerciseId : aux.id,
+                url : x.photo,
+                number: 1,
+              })
+            }
+            if(x.video.length !== 0){
+              let aux = await this.$store.dispatch('addExerciseVideo', {
+                routineId: routine.id,
+                cycleId: cycleExercise.id,
+                exerciseId : aux.id,
+                url : x.video,
+                number: 1,
+              })
+            }
           }
 
           let cycleCooldown = await this.$store.dispatch('createCycle', {
@@ -179,7 +215,26 @@
               cycleId: cycleCooldown.id,
               exercise: x
             })
+            if(x.photo.length !== 0){
+              await this.$store.dispatch('addExercisePhoto', {
+                routineId: routine.id,
+                cycleId: cycleCooldown.id,
+                exerciseId : aux.id,
+                url : x.photo,
+                number: 1,
+              })
+            }
+            if(x.video.length !== 0){
+              await this.$store.dispatch('addExerciseVideo', {
+                routineId: routine.id,
+                cycleId: cycleCooldown.id,
+                exerciseId : aux.id,
+                url : x.video,
+                number: 1,
+              })
+            }
           }
+
           this.$emit('routineClose');
           this.$store.commit('routines/resetExercises');
           await this.$router.replace('/home/myRoutines');

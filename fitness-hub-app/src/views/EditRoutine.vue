@@ -13,19 +13,19 @@
     </v-row>
 
     <v-row class="align-self-end justify-space-around bgColor">
-      <v-col class="d-flex justify-center" cols="12" sm="4">
+      <v-col class="d-flex align-center justify-center py-6" cols="12" sm="4">
         <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="restore" x-large min-height="45px"
                width="200px" elevation="5">
           CANCEL
         </v-btn>
       </v-col>
-      <v-col class="d-flex justify-center" cols="12" sm="4">
+      <v-col class="d-flex align-center justify-center py-6" cols="12" sm="4">
         <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="modifyRoutine" x-large min-height="45px"
                width="200px" elevation="5">
           APPLY CHANGES
         </v-btn>
       </v-col>
-      <v-col class="d-flex justify-center" cols="12" sm="4">
+      <v-col class="d-flex align-center justify-center py-6" cols="12" sm="4">
         <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="deleteRoutine" x-large min-height="45px"
                width="200px" elevation="5">
           DELETE
