@@ -1,4 +1,4 @@
-![alt fitnessHub logo](fitness-hub-app/src/assets/imgs/brand.png)
+![alt fitnessHub logo](fitness-hub-app/src/assets/imgs/LongBrandBlack.png)
 ## Authors
 - [Francisco Bernad](https://github.com/FrBernad)
 - [Nicolás Rampoldi](https://github.com/NicolasRampoldi) 
