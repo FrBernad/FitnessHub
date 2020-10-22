@@ -50,7 +50,7 @@
             </v-btn>
           </template>
 
-          <v-card class="pa-3">
+          <v-card class="pa-5">
             <v-row class="pa-0 align-center justify-center">
               <v-col cols="10" class="py-0 d-flex align-center justify-end">
                 <v-select
