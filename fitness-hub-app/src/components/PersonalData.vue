@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3" height="460">
+  <v-card class="pa-2 ma-8" color="rgb(248 249 250)" elevation="3" height="462">
     <v-row align="center" justify="space-between">
       <v-col cols="10" class="pt-0">
         <v-card-title>

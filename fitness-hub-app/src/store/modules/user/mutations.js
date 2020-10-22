@@ -6,7 +6,7 @@ export default {
     state.phone = payload.phone ? payload.phone:"";
     state.gender = payload.gender;
     state.birthdate = payload.birthdate ? `${new Date(payload.birthdate).toISOString().substr(0, 10)}` : "";
-    state.avatarUrl = payload.avatarUrl;
+    state.avatarUrl = payload.avatarUrl ? payload.avatarUrl : "";
     state.fullName = payload.fullName ? payload.fullName : "";
   },
 
