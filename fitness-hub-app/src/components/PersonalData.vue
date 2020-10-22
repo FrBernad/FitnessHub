@@ -155,7 +155,7 @@
           return errors;
         }
         !this.$v.fullName.minLength && errors.push(`Fullname must be al least 2 charactes long`);
-        !this.$v.fullName.maxLength && errors.push(`Fullname must have at most 15 characters`);
+        !this.$v.fullName.maxLength && errors.push(`Fullname must have at most 25 characters`);
         return errors;
       }
 
@@ -165,7 +165,7 @@
         minLength: minLength(8), maxLength: maxLength(15)
       },
       fullName: {
-        minLength: minLength(2), maxLength: maxLength(15)
+        minLength: minLength(2), maxLength: maxLength(25)
       },
     }
 

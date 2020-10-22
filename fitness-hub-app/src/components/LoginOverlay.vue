@@ -74,8 +74,8 @@
                 <h2 class="text-h5 text-center red--text">Your account is not verified</h2>
               </v-col>
               <v-col cols="9" md="6" class="mt-8 d-flex justify-space-between">
-                <v-btn to="verifyAccount">VERIFY</v-btn>
-                <v-btn @click="verf=false;loading=false;errorMessage=''">CANCEL</v-btn>
+                <v-btn @click="verf=false;loading=false;errorMessage=''" width="40%">CANCEL</v-btn>
+                <v-btn to="verifyAccount"  width="40%">VERIFY</v-btn>
               </v-col>
             </template>
           </v-row>
