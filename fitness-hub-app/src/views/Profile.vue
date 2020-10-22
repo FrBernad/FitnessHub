@@ -43,8 +43,8 @@
                                           :type="show ? 'text' : 'password'"></v-text-field>
                             <v-row class="align-center justify-space-around">
                               <v-col cols="6" class="d-flex align-center justify-space-around offset-6">
-                                <v-btn @click="askPass=false">CANCEL</v-btn>
-                                <v-btn @click="changePic">APPLY</v-btn>
+                                <v-btn @click="askPass=false;password=''">CANCEL</v-btn>
+                                <v-btn @click="changePic" :disabled="password.length===0">APPLY</v-btn>
                               </v-col>
                             </v-row>
                           </v-card>
@@ -57,12 +57,13 @@
                                 label="URL"
                                 placeholder="URL"
                                 outlined
+                                clearable
                                 :error-messages="urlErrors"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="8" class="d-flex justify-space-around align-center">
                               <v-btn @click="cancelPicChange">CANCEL</v-btn>
-                              <v-btn @click="askPass=true">CHANGE</v-btn>
+                              <v-btn @click="askPass=true" :disabled="url===null ? true : url.length===0 " >CHANGE</v-btn>
                             </v-col>
                           </v-row>
                         </v-card>
