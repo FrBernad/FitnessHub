@@ -151,6 +151,7 @@ export default {
       this.resetForm();
       this.$emit('exerciseAddClose');
     },
+
     resetForm() {
       this.$v.$reset();
       this.exercise.name = "";
@@ -228,15 +229,6 @@ export default {
       !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
       return errors;
     },
-    typeError() {
-      const errors = [];
-      if (!this.$v.exercise.type.$dirty) {
-        return errors;
-      }
-      !this.$v.exercise.type.required && errors.push('Must insert a type');
-      return errors;
-    },
-
   }
 }
 </script>
