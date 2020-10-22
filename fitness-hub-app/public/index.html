@@ -7,12 +7,26 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-        Please enable it to continue.</strong>
+    <div style="width: 100%; height: 100vh; display: flex; align-items:center; justify-content: center">
+        <div style="border: solid black 1px; width: 80vw; height:50vh; background-color: #E9ECEF;
+         display: flex; align-items:center;justify-content: center">
+            <div>
+                <h1 style="text-align: center; font-size: 3rem; font-weight: bold">Error...</h1>
+
+                <p style="text-align: center;font-size: 1.5rem; padding: 0 20px">We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
+                    work
+                    properly without JavaScript enabled.
+                    Please enable it to continue.
+                </p>
+
+            </div>
+        </div>
+    </div>
 </noscript>
 <div id="app"></div>
 <!-- built files will be auto injected -->
