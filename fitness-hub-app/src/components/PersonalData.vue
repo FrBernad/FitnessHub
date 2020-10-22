@@ -70,7 +70,7 @@
     ></v-text-field>
     <v-row class="align-center justify-center">
       <v-col cols="10" class="d-flex pt-0 justify-space-around">
-        <v-btn @click="restoreData;editData=false" min-height="52px" v-if="editData" outlined color="#212529"
+        <v-btn @click="restoreData" min-height="52px" v-if="editData" outlined color="#212529"
                width="42%">
           <v-icon class="mr-2" left>mdi-cancel</v-icon>
           CANCEL
@@ -98,7 +98,6 @@
       genders: ['male', 'female', 'other'],
       show: false,
       editData: false,
-      canEdit: false,
     }),
     methods: {
       async updateProfile() {
@@ -124,13 +123,14 @@
         }
         this.editData = false;
       },
+
       async restoreData() {
         try {
           await this.$store.dispatch('user/restoreValues');
         } catch (e) {
           console.log(e);
         }
-        this.canEdit = false;
+        this.editData = false
       },
       maxDate() {
         const date = new Date();
