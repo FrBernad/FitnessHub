@@ -62,11 +62,23 @@
               </v-col>
             </v-fade-transition>
             <v-fade-transition>
-              <v-col cols="8" v-if="errorMessage" class="mt-8">
-                <h2 v-if="error" class="text-h5 text-center red--text">{{errorMessage}}</h2>
-                <h2 v-else class="text-h5 text-center light-green--text">{{errorMessage}}</h2>
-              </v-col>
+              <template v-if="!verf">
+                <v-col cols="8" v-if="errorMessage" class="mt-8">
+                  <h2 v-if="error" class="text-h5 text-center red--text">{{errorMessage}}</h2>
+                  <h2 v-else class="text-h5 text-center light-green--text">{{errorMessage}}</h2>
+                </v-col>
+              </template>
             </v-fade-transition>
+            <template v-if="verf">
+              <v-col cols="8" class="mt-8">
+                <h2 class="text-h5 text-center red--text">Your account is not verified</h2>
+              </v-col>
+              <v-col cols="6" class="mt-8 d-flex justify-space-around">
+                <v-btn to="verifyAccount">VERIFY</v-btn>
+                <v-btn @click="verf=false;loading=false;errorMessage=''">CANCEL</v-btn>
+              </v-col>
+            </template>
+
           </v-row>
         </v-container>
       </v-card>
@@ -93,7 +105,8 @@
         username: '',
         loading: false,
         errorMessage: "",
-        error: false
+        error: false,
+        verf: false
       }
     },
 
@@ -120,14 +133,19 @@
           this.loading = false;
           await this.$router.replace('/home');
         } catch (e) {
-          this.error = true;
-          this.errorMessage = e;
-          await setTimeout(() => {
-            this.errorMessage = "";
-            this.loading = false;
-            this.error = false;
-            this.resetForm();
-          }, 4000);
+          if (e.message === "verif") {
+            this.verf = true;
+            this.errorMessage = e;
+          } else {
+            this.error = true;
+            this.errorMessage = e;
+            await setTimeout(() => {
+              this.errorMessage = "";
+              this.loading = false;
+              this.error = false;
+              this.resetForm();
+            }, 4000);
+          }
         }
       },
       resetForm() {

@@ -61,9 +61,7 @@
           const cyclesData = await this.$store.dispatch("getRoutineCycles", {
             routineId: this.routineId,
           });
-
           for (const cycle of cyclesData.results) {
-
             let exercises = await this.$store.dispatch("getCycleExercises", {
               routineId: this.routineId,
               cycleId: cycle.id,
@@ -116,7 +114,6 @@
               });
             }
           }
-
         } catch (e) {
           console.log(e);
         }

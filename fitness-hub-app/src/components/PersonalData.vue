@@ -7,7 +7,7 @@
         </v-card-title>
       </v-col>
       <v-col cols="2" class="d-flex justify-center">
-        <v-btn icon @click="editData = !editData; ">
+        <v-btn v-if="!editData" icon @click="editData = true; ">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </v-col>
@@ -39,7 +39,6 @@
         ></v-text-field>
       </template>
       <v-date-picker v-if="editData"
-                     v-model="birthdate"
                      :max="maxDate()"
                      min="1950-01-01"
                      width="500px"
@@ -56,26 +55,17 @@
       no-resize
       dense
     ></v-text-field>
-    <v-row class="align-center justify-end">
-      <v-col cols="8">
-        <v-dialog v-model="canEdit" persistent width="500px">
-          <v-card class="pa-5">
-            <v-card-title class="pa-0">Insert password</v-card-title>
-            <v-text-field label="Password" @click:append="show = !show" v-model="password"
-                          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                          :type="show ? 'text' : 'password'"></v-text-field>
-            <v-row class="align-center justify-space-around">
-              <v-col cols="6" class="d-flex align-center justify-space-around offset-6">
-                <v-btn @click="restoreData">CANCEL</v-btn>
-                <v-btn @click="updateProfile">APPLY</v-btn>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-dialog>
-        <v-btn @click="canEdit=true;editData=!editData" min-height="52px" v-if="editData" outlined color="#212529"
-               width="30%">
+    <v-row class="align-center justify-center">
+      <v-col cols="10" class="d-flex justify-space-around">
+        <v-btn @click="updateProfile" min-height="52px" v-if="editData" outlined color="#212529"
+               width="42%">
           <v-icon class="mr-2">mdi-content-save-outline</v-icon>
-          <span>SAVE</span>
+          SAVE
+        </v-btn>
+        <v-btn @click="restoreData;editData=false" min-height="52px" v-if="editData" outlined color="#212529"
+               width="42%">
+          <v-icon class="mr-2">mdi-content-save-outline</v-icon>
+          CANCEL
         </v-btn>
       </v-col>
     </v-row>
@@ -95,24 +85,20 @@ export default {
     date: null,
     menu: false,
     genders: ['male', 'female', 'other'],
-    rules: [v => v.length <= 100 || 'Max 100 characters'],
-    password: '',
     show: false,
     editData: false,
     canEdit: false,
   }),
   methods: {
     async updateProfile() {
-
       if (this.$v.$invalid) {
         this.$v.$touch();
         console.log("the form is missing something");
         return;
       }
-
       let profile = {
         ...this.$store.getters["user/userData"],
-        password: this.password
+        password: "pass"
       };
       try {
         await this.$store.dispatch('user/updateProfile', profile);
@@ -124,7 +110,7 @@ export default {
           console.log(e);
         }
       }
-      this.canEdit=false;
+      this.editData=false;
       this.password = '';
     },
     async restoreData(){
@@ -134,8 +120,6 @@ export default {
         console.log(e);
       }
       this.canEdit=false;
-      this.password = '';
-
     },
     maxDate() {
         const date = new Date();

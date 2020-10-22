@@ -62,7 +62,6 @@
                     <v-text-field placeholder="email"
                                   outlined v-model="email"
                                   :error-messages="emailErrors"
-                                  @blur="$v.email.$touch()"
                                   dense
                     ></v-text-field>
                   </v-col>
@@ -156,6 +155,7 @@
         }
       },
       async resendVerification() {
+        this.$v.email.$touch();
         if (this.$v.email.$invalid) {
           this.$v.email.$touch();
           console.log("invalid");

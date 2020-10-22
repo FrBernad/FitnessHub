@@ -1,7 +1,6 @@
 export default {
 
   async signUp(context, payload) {
-
     let response = await fetch(`${context.getters.baseUrl}/user`, {
       method: 'POST',
       headers: {
@@ -14,7 +13,7 @@ export default {
         birthdate: 284007600000,
       })
     })
-
+    context.commit("user/setUserData",payload);
     let responseData = await response.json();
     let errorMessage = "";
     if (!response.ok) {
@@ -49,6 +48,9 @@ export default {
         case 4:
           errorMessage = "Username or password incorrect"
           break;
+        case 8:
+          errorMessage = "verif"
+          break;
         default:
           errorMessage = responseData.description;
           break;
@@ -80,6 +82,8 @@ export default {
     }
 
     context.commit("user/setUserData", responseData);
+
+    // await context.dispatch("seedDataBase")
   },
 
   async logout(context, payload) {
@@ -154,7 +158,7 @@ export default {
         email: payload.email,
       })
     })
-
+    await context.dispatch("user/setUserData",payload);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -434,94 +438,6 @@ export default {
     return responseData;
   },
 
-  async addExercisePhoto(context,payload){
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/images`,
-      {
-      body: JSON.stringify(
-        {
-          number: payload.number,
-          url: payload.url,
-        }),
-      method: 'POST',
-      headers: {
-        'Authorization': `bearer ${context.getters.token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    let responseData = await response.json();
-
-    if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
-    }
-
-    return responseData;
-  },
-
-  async getImage(context,payload){
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/images`,
-      {
-        headers: {
-          'Authorization': `bearer ${context.getters.token}`,
-        }
-      });
-
-    let responseData = await response.json();
-
-    if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
-    }
-    console.log(responseData);
-
-    return responseData;
-  },
-
-
-  async getVideo(context,payload){
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/videos`,
-      {
-        headers: {
-          'Authorization': `bearer ${context.getters.token}`,
-        }
-      });
-
-    let responseData = await response.json();
-
-    if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
-    }
-    console.log(responseData);
-    return responseData;
-  },
-
-
-  async addExerciseVideo(context,payload){
-    let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}/videos`,
-      {
-        body: JSON.stringify(
-          {
-            number: payload.number,
-            url: payload.url,
-          }),
-        method: 'POST',
-        headers: {
-          'Authorization': `bearer ${context.getters.token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-    let responseData = await response.json();
-
-    if (!response.ok) {
-      console.log(responseData);
-      throw new Error(responseData.message);
-    }
-    return responseData;
-  },
-
   async removeExerciseFromCycle(context, payload) {
     let response = await fetch(`${context.getters.baseUrl}/routines/${payload.routineId}/cycles/${payload.cycleId}/exercises/${payload.exerciseId}`, {
       method: 'DELETE',
@@ -544,7 +460,6 @@ export default {
       }
     });
 
-
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -558,7 +473,6 @@ export default {
         'Authorization': `bearer ${context.getters.token}`,
       }
     });
-
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -714,16 +628,64 @@ export default {
         }
       }
     ]
+    //
+    // for (let routine of routines) {
+    //   let response = await fetch(`${context.getters.baseUrl}/routines`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `bearer ${context.getters.token}`
+    //     },
+    //     body: JSON.stringify({
+    //       ...routine
+    //     })
+    //   });
+    //   const responseData = await response.json();
+    //   if (!response.ok) {
+    //     console.log(responseData);
+    //     throw new Error(response.statusText);
+    //   }
 
-    for (let routine of routines) {
-      let response = await fetch(`${context.getters.baseUrl}/routines`, {
+    const categories = [
+      {
+        name: "Full Body",
+        detail: "Full Body",
+      },
+      {
+        name: "Upper Body",
+        detail: "Upper Body",
+      },
+      {
+        name: "Lower Body",
+        detail: "Lower Body",
+      },
+      {
+        name: "Legs",
+        detail: "Legs",
+      },
+      {
+        name: "Chest",
+        detail: "Chest",
+      },
+      {
+        name: "Abs",
+        detail: "Abs",
+      },
+      {
+        name: "Arms",
+        detail: "Arms",
+      }
+    ]
+
+    for (let category of categories) {
+      let response = await fetch(`${context.getters.baseUrl}/categories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `bearer ${context.getters.token}`
         },
         body: JSON.stringify({
-          ...routine
+          ...category
         })
       });
       const responseData = await response.json();
@@ -732,5 +694,7 @@ export default {
         throw new Error(response.statusText);
       }
     }
-  },
+  }
+  ,
 }
+

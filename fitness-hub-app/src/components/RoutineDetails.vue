@@ -52,7 +52,7 @@
           </v-col>
           <v-col cols="6" sm="6">
             <v-select
-              :items="['rookie','beginner','intermediate','advanced','expert']"
+              :items="['rookie','beginner','intermediate','advanced']"
               label="Difficulty"
               required
               v-model="routine.difficulty"
@@ -150,24 +150,6 @@
               cycleId: cycleWarmup.id,
               exercise: x
             })
-            if(x.photo.length !== 0){
-              await this.$store.dispatch('addExercisePhoto', {
-                routineId: routine.id,
-                cycleId: cycleWarmup.id,
-                exerciseId : aux.id,
-                url : x.photo,
-                number: 1,
-              })
-            }
-            if(x.video.length !== 0){
-                await this.$store.dispatch('addExerciseVideo', {
-                  routineId: routine.id,
-                  cycleId: cycleWarmup.id,
-                  exerciseId : aux.id,
-                  url : x.video,
-                  number: 1,
-                })
-            }
           }
 
           let cycleExercise = await this.$store.dispatch('createCycle',
@@ -177,30 +159,13 @@
                 order: 2
               }
             });
+
           for (const x of exercises.Exercise) {
             let aux = await this.$store.dispatch('addToCycleExercise', {
               routineId: routine.id,
               cycleId: cycleExercise.id,
               exercise: x
             })
-            if(x.photo.length !== 0){
-              await this.$store.dispatch('addExercisePhoto', {
-                routineId: routine.id,
-                cycleId: cycleExercise.id,
-                exerciseId : aux.id,
-                url : x.photo,
-                number: 1,
-              })
-            }
-            if(x.video.length !== 0){
-                await this.$store.dispatch('addExerciseVideo', {
-                routineId: routine.id,
-                cycleId: cycleExercise.id,
-                exerciseId : aux.id,
-                url : x.video,
-                number: 1,
-              })
-            }
           }
 
           let cycleCooldown = await this.$store.dispatch('createCycle', {
@@ -215,26 +180,7 @@
               cycleId: cycleCooldown.id,
               exercise: x
             })
-            if(x.photo.length !== 0){
-              await this.$store.dispatch('addExercisePhoto', {
-                routineId: routine.id,
-                cycleId: cycleCooldown.id,
-                exerciseId : aux.id,
-                url : x.photo,
-                number: 1,
-              })
-            }
-            if(x.video.length !== 0){
-              await this.$store.dispatch('addExerciseVideo', {
-                routineId: routine.id,
-                cycleId: cycleCooldown.id,
-                exerciseId : aux.id,
-                url : x.video,
-                number: 1,
-              })
-            }
           }
-
           this.$emit('routineClose');
           this.$store.commit('routines/resetExercises');
           await this.$router.replace('/home/myRoutines');
@@ -242,7 +188,8 @@
           console.log(e);
         }
 
-      },
+      }
+      ,
       resetForm() {
         this.$v.$reset();
         this.routine.name = "";
@@ -251,60 +198,89 @@
         this.routine.isPublic = true;
         this.routine.difficulty = '';
         this.routine.dateCreated = Date.now();
-      },
-    },
+      }
+      ,
+    }
+    ,
     validations: {
       routine: {
-        name: {required, minLength: minLength(3), maxLength: maxLength(100)},
-        detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
-        category: {
-          id: {required}
-        },
-        difficulty: {required}
-      }
-    },
-    computed: {
-      detailError() {
-        const errors = [];
-        if (!this.$v.routine.detail.$dirty) {
-          return errors;
-        }
-        !this.$v.routine.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
-        !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
-        !this.$v.routine.detail.required && errors.push('Detail is required');
-
-        return errors;
-      },
-      nameError() {
-        const errors = [];
-        if (!this.$v.routine.name.$dirty) {
-          return errors;
-        }
-        !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
-        !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
-        !this.$v.routine.name.required && errors.push('Name is required');
-
-        return errors;
-      },
-      categoryError() {
-        const errors = [];
-        if (!this.$v.routine.category.id.$dirty) {
-          return errors;
-        }
-        !this.$v.routine.category.id.required && errors.push('Category is required');
-
-        return errors;
-      },
-      difficultyError() {
-        const errors = [];
-        if (!this.$v.routine.difficulty.$dirty) {
-          return errors;
-        }
-        !this.$v.routine.difficulty.required && errors.push('Difficulty is required');
-
-        return errors;
-      }
+        name: {
+          required, minLength
+  :
+  minLength(3), maxLength
+  :
+  maxLength(100)
+  }
+  ,
+  detail: {
+    required, minLength
+  :
+    minLength(5), maxLength
+  :
+    maxLength(200)
+  }
+  ,
+  category: {
+    id: {
+      required
     }
+  }
+  ,
+  difficulty: {
+    required
+  }
+  }
+  }
+  ,
+  computed: {
+    detailError()
+    {
+      const errors = [];
+      if (!this.$v.routine.detail.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
+      !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+      !this.$v.routine.detail.required && errors.push('Detail is required');
+
+      return errors;
+    }
+  ,
+    nameError()
+    {
+      const errors = [];
+      if (!this.$v.routine.name.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
+      !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
+      !this.$v.routine.name.required && errors.push('Name is required');
+
+      return errors;
+    }
+  ,
+    categoryError()
+    {
+      const errors = [];
+      if (!this.$v.routine.category.id.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.category.id.required && errors.push('Category is required');
+
+      return errors;
+    }
+  ,
+    difficultyError()
+    {
+      const errors = [];
+      if (!this.$v.routine.difficulty.$dirty) {
+        return errors;
+      }
+      !this.$v.routine.difficulty.required && errors.push('Difficulty is required');
+
+      return errors;
+    }
+  }
   }
 </script>
 
