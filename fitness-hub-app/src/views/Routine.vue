@@ -51,7 +51,7 @@
             <v-card color="#E9ECEF" width="400px" height="250px" class="pa-6">
               <v-row justify="center" align="center">
                 <v-col cols="12" class="d-flex justify-end align-start pa-0">
-                  <v-btn icon class="pb-4">
+                  <v-btn icon>
                     <v-icon @click="share = false" color="#B9BABB">
                       mdi-close-circle-outline
                     </v-icon>

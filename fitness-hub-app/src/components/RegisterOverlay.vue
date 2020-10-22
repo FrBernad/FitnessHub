@@ -9,9 +9,11 @@
                 <h1 class="text-left">REGISTER</h1>
               </v-col>
               <v-col cols="2">
-                <v-icon @click="closeOverlay" color="#B9BABB">
-                  mdi-alpha-x-circle-outline
-                </v-icon>
+                <v-btn icon>
+                  <v-icon @click="closeOverlay" color="#B9BABB">
+                    mdi-close-circle-outline
+                  </v-icon>
+                </v-btn>
               </v-col>
             </v-row>
             <v-divider class="mb-8 mt-2"></v-divider>
@@ -48,7 +50,7 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn color="primary" class="my-2" large width="80%" @click="processData">REGISTER</v-btn>
+              <v-btn id="register" class="my-2" large width="80%" @click="processData">REGISTER</v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -59,7 +61,7 @@
       v-model="loading"
       width="500px"
     >
-      <v-card color="#E9ECEF" width="500px" height="250px">
+      <v-card color="#212529" width="500px" height="250px">
         <v-container fill-height fluid>
           <v-row align="center" justify="center">
             <v-fade-transition>
@@ -196,7 +198,9 @@
 </script>
 
 <style scoped>
-  #forgot {
-    color: #1D50AE;
+  #register {
+    background-color: rgba(248, 249, 250, 0.25);
+    color: #F8F9FA;
+    border: thin solid #F8F9FA;
   }
 </style>
