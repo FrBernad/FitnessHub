@@ -41,10 +41,10 @@
 </template>
 
 <script>
-  import RoutineCardProfile from "@/components/RoutineCardProfile";
+  import RoutineCardProfile from "../components/RoutineCardProfile";
 
   export default {
-    name: "FavoriteProfile",
+    wname: "FavoriteProfile",
 
     components: {RoutineCardProfile},
     data() {

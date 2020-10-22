@@ -194,4 +194,17 @@
     width: auto;
     background-size: cover;
   }
+
+  @media only screen and (max-width: 700px) {
+    .communityWorkoutsBG {
+      height: 25vh;
+    }
+  }
+
+   @media only screen and (max-width: 550px) {
+    .communityWorkoutsBG {
+      height: 20vh;
+    }
+  }
+
 </style>

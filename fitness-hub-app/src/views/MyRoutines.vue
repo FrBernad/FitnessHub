@@ -199,4 +199,16 @@
     background-size: cover;
   }
 
+  @media only screen and (max-width: 700px) {
+    .routinesBG {
+      height: 25vh;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .routinesBG {
+      height: 20vh;
+    }
+  }
+
 </style>

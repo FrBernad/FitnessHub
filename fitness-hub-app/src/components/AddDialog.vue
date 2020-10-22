@@ -151,6 +151,7 @@ export default {
       this.resetForm();
       this.$emit('exerciseAddClose');
     },
+
     resetForm() {
       this.$v.$reset();
       this.exercise.name = "";

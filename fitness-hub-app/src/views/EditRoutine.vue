@@ -14,7 +14,7 @@
 
     <v-row class="align-self-end justify-space-around bgColor">
       <v-col class="d-flex align-center justify-center py-6" cols="12" sm="4">
-        <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="restore" x-large min-height="45px"
+        <v-btn class="buttonColour" color="rgba(248, 249, 250, 0.25)" @click="cancelEdit" x-large min-height="45px"
                width="200px" elevation="5">
           CANCEL
         </v-btn>
@@ -86,8 +86,12 @@
         } catch (e) {
           console.log(e);
         }
-
         await this.$router.replace('/home/myRoutines');
+      },
+
+      cancelEdit(){
+        this.restore();
+        this.$router.replace('/home/myRoutines');
       },
 
       restore() {
@@ -145,7 +149,6 @@
           });
           for (const cycle of cyclesData.results) {
             let exercises = this.$store.getters[`routines/${cycle.type.charAt(0).toUpperCase() + cycle.type.slice(1)}`];
-            console.log(exercises);
             for (const ex of exercises) {
               await this.$store.dispatch('addToCycleExercise', {
                 routineId: this.routineId,
