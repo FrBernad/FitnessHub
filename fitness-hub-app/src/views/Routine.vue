@@ -68,7 +68,7 @@
         </v-btn>
       </v-col>
       <v-col cols="12" class="pt-0 pb-0 pb-sm-4">
-        <h2 class="text-center whiteCS--text">by {{creator}}</h2>
+        <h2 class="text-center whiteCS--text">by {{creator.toUpperCase()}}</h2>
       </v-col>
     </v-row>
 
