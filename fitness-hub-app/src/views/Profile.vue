@@ -35,20 +35,6 @@
                       </v-btn>
 
                       <v-dialog v-model="picDialog" width="550">
-                        <v-dialog v-model="askPass" persistent width="550">
-                          <v-card class="pa-6">
-                            <v-card-title class="pa-0">Insert password</v-card-title>
-                            <v-text-field label="Password" @click:append="show = !show" v-model="password"
-                                          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                                          :type="show ? 'text' : 'password'"></v-text-field>
-                            <v-row class="align-center justify-space-around">
-                              <v-col cols="6" class="d-flex align-center justify-space-around offset-6">
-                                <v-btn @click="askPass=false;password=''">CANCEL</v-btn>
-                                <v-btn @click="changePic" :disabled="password.length===0">APPLY</v-btn>
-                              </v-col>
-                            </v-row>
-                          </v-card>
-                        </v-dialog>
                         <v-card class="pa-6">
                           <v-row align="center" justify="center">
                             <v-col cols="8">
@@ -63,7 +49,7 @@
                             </v-col>
                             <v-col cols="8" class="d-flex justify-space-around align-center">
                               <v-btn @click="cancelPicChange">CANCEL</v-btn>
-                              <v-btn @click="askPass=true" :disabled="url===null ? true : url.length===0 " >CHANGE</v-btn>
+                              <v-btn @click="changePic">CHANGE</v-btn>
                             </v-col>
                           </v-row>
                         </v-card>
@@ -102,8 +88,7 @@
     data() {
       return {
         picDialog: false,
-        askPass: false,
-        password: "",
+        password: "pass",
         show: false,
         url: "",
       }
@@ -152,7 +137,6 @@
           data.birthdate = Date.now();
           await this.$store.dispatch("user/updateProfile", data);
           this.picDialog = false;
-          this.askPass = false;
         } catch (e) {
           console.log(e)
         }

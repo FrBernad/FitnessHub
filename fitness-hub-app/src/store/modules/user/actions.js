@@ -1,6 +1,5 @@
 export default {
   async updateProfile(context, payload) {
-    console.log(payload);
     let response = await fetch(`${context.rootGetters.baseUrl}/user/current`, {
       body: JSON.stringify(
         {
@@ -15,7 +14,6 @@ export default {
     });
 
     let responseData = await response.json();
-    console.log(responseData);
     if (!response.ok) {
       console.log(responseData);
       throw new Error(responseData.message);
@@ -38,7 +36,6 @@ export default {
       throw new Error("Could not auto login");
     }
     context.commit("setUserData", responseData);
-
   }
 
 
