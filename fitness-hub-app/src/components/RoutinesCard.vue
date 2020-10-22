@@ -6,7 +6,7 @@
           class=" iluminate pa-5 cardType">
     <v-row align="start" justify="space-between">
       <v-col cols="12 d-flex justify-center align-center pt-0">
-        <v-img class="rounded-corner "
+        <v-img class="rounded-corner imgBorder"
                :src="categoryImg"
                max-height="200">
         </v-img>
@@ -57,5 +57,9 @@
 
   .iluminate:hover {
     box-shadow: 0px 20px 30px 0px;
+  }
+  .imgBorder{
+    border-radius: 5%;
+
   }
 </style>

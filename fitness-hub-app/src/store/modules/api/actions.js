@@ -83,7 +83,7 @@ export default {
 
     context.commit("user/setUserData", responseData);
 
-    // await context.dispatch("seedDataBase")
+   // await context.dispatch("seedDataBase")
   },
 
   async logout(context, payload) {
