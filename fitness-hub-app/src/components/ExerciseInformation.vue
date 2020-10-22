@@ -24,7 +24,7 @@
           REPS: {{info.repetitions}}
         </v-card-text>
         <v-card-text v-else class="text-h5 font-weight-bold text-center pa-0">
-          SEGS: {{info.duration}}
+          SECS: {{info.duration}}
         </v-card-text>
       </v-col>
     </v-row>
