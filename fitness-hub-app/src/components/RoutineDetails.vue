@@ -205,32 +205,19 @@
     validations: {
       routine: {
         name: {
-          required, minLength
-  :
-  minLength(3), maxLength
-  :
-  maxLength(100)
-  }
-  ,
-  detail: {
-    required, minLength
-  :
-    minLength(5), maxLength
-  :
-    maxLength(200)
-  }
-  ,
-  category: {
-    id: {
-      required
+          required, minLength: minLength(3), maxLength: maxLength(15)
+        },
+        detail: {required, minLength: minLength(5), maxLength: maxLength(50)},
+        category: {
+          id: {
+            required
+          }
+        },
+        difficulty: {
+          required
+        }
+      }
     }
-  }
-  ,
-  difficulty: {
-    required
-  }
-  }
-  }
   ,
   computed: {
     detailError()
@@ -240,7 +227,7 @@
         return errors;
       }
       !this.$v.routine.detail.minLength && errors.push(`Detail must be at least 5 characters long`);
-      !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 200 characters`);
+      !this.$v.routine.detail.maxLength && errors.push(`Detail can't have more than 50 characters`);
       !this.$v.routine.detail.required && errors.push('Detail is required');
 
       return errors;
@@ -253,7 +240,7 @@
         return errors;
       }
       !this.$v.routine.name.minLength && errors.push('Name must be at least 3 characters long');
-      !this.$v.routine.name.maxLength && errors.push("Name can't have more than 100 characters");
+      !this.$v.routine.name.maxLength && errors.push("Name can't have more than 15 characters");
       !this.$v.routine.name.required && errors.push('Name is required');
 
       return errors;
