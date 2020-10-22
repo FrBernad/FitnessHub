@@ -35,8 +35,8 @@
                     ></v-rating>
                   </v-col>
                   <v-col cols="9" class="d-flex mt-5 justify-space-around align-center">
-                    <v-btn large @click="applyRating">APPLY</v-btn>
-                    <v-btn large @click="rate=false">CANCEL</v-btn>
+                    <v-btn large outlined color="#212529" @click="rate=false">CANCEL</v-btn>
+                    <v-btn large outlined color="#212529" @click="applyRating">APPLY</v-btn>
                   </v-col>
                 </v-row>
               </v-container>
@@ -53,7 +53,7 @@
                 <v-col cols="12" class="d-flex justify-end align-start pa-0">
                   <v-btn icon class="pb-4">
                     <v-icon @click="share = false" color="#B9BABB">
-                      mdi-alpha-x-circle-outline
+                      mdi-close-circle-outline
                     </v-icon>
                   </v-btn>
                 </v-col>

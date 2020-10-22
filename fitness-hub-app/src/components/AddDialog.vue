@@ -68,14 +68,14 @@
       <v-spacer></v-spacer>
       <v-btn
         color="#212529"
-        text
+        outlined
         @click="exerciseClose"
       >
         Close
       </v-btn>
       <v-btn
         color="#212529"
-        text
+        outlined
         @click="addExercise">
         ADD
       </v-btn>

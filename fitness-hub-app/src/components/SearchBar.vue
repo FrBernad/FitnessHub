@@ -64,8 +64,8 @@
             </v-row>
             <v-row class="align-center justify-center">
               <v-col cols="10" class="d-flex align-center justify-space-around">
-                <v-btn color="#212529" text @click="dialog=false">CLOSE</v-btn>
-                <v-btn color="#212529" text @click="applyFilter">FILTER</v-btn>
+                <v-btn outlined color="#212529"  @click="dialog=false">CLOSE</v-btn>
+                <v-btn outlined color="#212529"  @click="applyFilter">FILTER</v-btn>
               </v-col>
             </v-row>
           </v-card>

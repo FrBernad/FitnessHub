@@ -77,14 +77,14 @@
       <v-spacer></v-spacer>
       <v-btn
         color="#212529"
-        text
+        outlined
         @click="routineClose"
       >
         Close
       </v-btn>
       <v-btn
         color="#212529"
-        text
+        outlined
         @click="createRoutine"
       >
         Create
