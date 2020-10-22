@@ -228,6 +228,7 @@ export default {
       !this.$v.exercise.repetitions.minValue && errors.push('Value must be greater than 0');
       return errors;
     },
+
   }
 }
 </script>

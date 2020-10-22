@@ -10,6 +10,7 @@
                :src="categoryImg"
                max-height="200">
         </v-img>
+
       </v-col>
       <v-col cols="7" class="d-flex align-center justify-start" lg="6">
         <h4>{{ routineData.name.toUpperCase() }}</h4>
