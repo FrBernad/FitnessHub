@@ -37,7 +37,7 @@
                       <v-dialog v-model="picDialog" width="550">
                         <v-card class="pa-6">
                           <v-row align="center" justify="center">
-                            <v-col cols="8">
+                            <v-col cols="12" md="8">
                               <v-text-field
                                 v-model="url"
                                 label="URL"
@@ -47,9 +47,15 @@
                                 :error-messages="urlErrors"
                               ></v-text-field>
                             </v-col>
-                            <v-col cols="8" class="d-flex justify-space-around align-center">
-                              <v-btn @click="cancelPicChange">CANCEL</v-btn>
-                              <v-btn @click="changePic">CHANGE</v-btn>
+                            <v-col cols="12" md="8" class="d-flex justify-space-between align-center">
+                              <v-btn @click="cancelPicChange" outlined color="#212529">
+                                <v-icon class="mr-2" left>mdi-cancel</v-icon>
+                                CANCEL
+                              </v-btn>
+                              <v-btn @click="changePic" outlined color="#212529">
+                                <v-icon class="mr-2">mdi-content-save-outline</v-icon>
+                                CHANGE
+                              </v-btn>
                             </v-col>
                           </v-row>
                         </v-card>

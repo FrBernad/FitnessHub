@@ -70,15 +70,15 @@
     ></v-text-field>
     <v-row class="align-center justify-center">
       <v-col cols="10" class="d-flex pt-0 justify-space-around">
+        <v-btn @click="restoreData;editData=false" min-height="52px" v-if="editData" outlined color="#212529"
+               width="42%">
+          <v-icon class="mr-2" left>mdi-cancel</v-icon>
+          CANCEL
+        </v-btn>
         <v-btn @click="updateProfile" min-height="52px" v-if="editData" outlined color="#212529"
                width="42%">
           <v-icon class="mr-2">mdi-content-save-outline</v-icon>
           SAVE
-        </v-btn>
-        <v-btn @click="restoreData;editData=false" min-height="52px" v-if="editData" outlined color="#212529"
-               width="42%">
-          <v-icon class="mr-2">mdi-content-save-outline</v-icon>
-          CANCEL
         </v-btn>
       </v-col>
     </v-row>
