@@ -126,6 +126,7 @@
         this.$v.$reset();
         this.exercise.name = "";
         this.exercise.detail = "";
+        this.exercise.type = "";
         this.exercise.duration = 0;
         this.exercise.repetitions = 0;
       },
