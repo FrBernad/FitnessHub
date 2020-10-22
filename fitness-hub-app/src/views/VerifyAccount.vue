@@ -139,7 +139,7 @@
             email: userData.email,
             code: this.code
           });
-          this.errorMessage = "Your account is now verified, redirecting to home";
+          this.errorMessage = "Your account is now verified, redirecting to login page";
           await sleep(2000);
           this.loading = false;
           this.errorMessage = "";

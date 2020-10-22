@@ -10,7 +10,7 @@ export default {
         ...payload,
         fullName: "",
         gender: "other",
-        birthdate: 284007600000,
+        birthdate: 0,
       })
     })
     context.commit("user/setUserData",payload);
@@ -481,153 +481,153 @@ export default {
   },
 
   async seedDataBase(context) {
-    let routines = [
-      {
-        name: "Get ripped",
-        detail: "Get ripped with this awesome routine",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Bulking season",
-        detail: "Bulk up and fill your muscles",
-        isPublic: true,
-        difficulty: "advanced",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Abs for days",
-        detail: "Get your 6 pack ready for summer",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Gain it",
-        detail: "Gain muscle and strenght with this routine",
-        isPublic: true,
-        difficulty: "advanced",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Explosive action",
-        detail: "Burn your legs with this non stop routine",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "abbs",
-        detail: "Full abbs Challenge",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 1
-        }
-      },
-
-      {
-        name: "Squat",
-        detail: "A squat is a strength exercise in which the trainee lowers their hips from a standing position and then stands back up",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Leg press",
-        detail: "The leg press is a compound weight training exercise in which the individual pushes a weight or resistance away from them using their legs.",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Lunge",
-        detail: "A lunge can refer to any position of the human body where one leg is positioned forward with knee bent and foot flat on the ground while the other leg is positioned behind.",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Standing calf raise",
-        detail: "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension",
-        isPublic: true,
-        difficulty: "beginner",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Abs-Abs-Abs",
-        detail: "You want a sixpack, you need this routine",
-        isPublic: true,
-        difficulty: "intermediate",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Intense UpperBody Workout",
-        detail: "Work all your UpperBody like never before",
-        isPublic: true,
-        difficulty: "advanced",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Chest Day",
-        detail: "Intense routine focused on increasing muscle mass and chest strenght",
-        isPublic: true,
-        difficulty: "advanced",
-        category: {
-          id: 2
-        }
-      },
-      {
-        name: "Legs Day",
-        detail: "Grow your legs like never before",
-        isPublic: true,
-        difficulty: "advanced",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Quick Warm Up",
-        detail: "Warmp up yor entire body easly",
-        isPublic: true,
-        difficulty: "intermediate",
-        category: {
-          id: 1
-        }
-      },
-      {
-        name: "Quick Warm Up",
-        detail: "Warmp up yor entire body easly",
-        isPublic: true,
-        difficulty: "intermediate",
-        category: {
-          id: 1
-        }
-      }
-    ]
+    // let routines = [
+    //   {
+    //     name: "Get ripped",
+    //     detail: "Get ripped with this awesome routine",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Bulking season",
+    //     detail: "Bulk up and fill your muscles",
+    //     isPublic: true,
+    //     difficulty: "advanced",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Abs for days",
+    //     detail: "Get your 6 pack ready for summer",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Gain it",
+    //     detail: "Gain muscle and strenght with this routine",
+    //     isPublic: true,
+    //     difficulty: "advanced",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Explosive action",
+    //     detail: "Burn your legs with this non stop routine",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "abbs",
+    //     detail: "Full abbs Challenge",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //
+    //   {
+    //     name: "Squat",
+    //     detail: "A squat is a strength exercise in which the trainee lowers their hips from a standing position and then stands back up",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Leg press",
+    //     detail: "The leg press is a compound weight training exercise in which the individual pushes a weight or resistance away from them using their legs.",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Lunge",
+    //     detail: "A lunge can refer to any position of the human body where one leg is positioned forward with knee bent and foot flat on the ground while the other leg is positioned behind.",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Standing calf raise",
+    //     detail: "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension",
+    //     isPublic: true,
+    //     difficulty: "beginner",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Abs-Abs-Abs",
+    //     detail: "You want a sixpack, you need this routine",
+    //     isPublic: true,
+    //     difficulty: "intermediate",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Intense UpperBody Workout",
+    //     detail: "Work all your UpperBody like never before",
+    //     isPublic: true,
+    //     difficulty: "advanced",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Chest Day",
+    //     detail: "Intense routine focused on increasing muscle mass and chest strenght",
+    //     isPublic: true,
+    //     difficulty: "advanced",
+    //     category: {
+    //       id: 2
+    //     }
+    //   },
+    //   {
+    //     name: "Legs Day",
+    //     detail: "Grow your legs like never before",
+    //     isPublic: true,
+    //     difficulty: "advanced",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Quick Warm Up",
+    //     detail: "Warmp up yor entire body easly",
+    //     isPublic: true,
+    //     difficulty: "intermediate",
+    //     category: {
+    //       id: 1
+    //     }
+    //   },
+    //   {
+    //     name: "Quick Warm Up",
+    //     detail: "Warmp up yor entire body easly",
+    //     isPublic: true,
+    //     difficulty: "intermediate",
+    //     category: {
+    //       id: 1
+    //     }
+    //   }
+    // ]
     //
     // for (let routine of routines) {
     //   let response = await fetch(`${context.getters.baseUrl}/routines`, {

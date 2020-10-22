@@ -67,7 +67,7 @@
       itemsPerPage: 6,
       pages: 0,
       direction: 'desc',
-      orderBy: "averageRating",
+      orderBy: "dateCreated",
       filterBy: undefined,
     }),
 

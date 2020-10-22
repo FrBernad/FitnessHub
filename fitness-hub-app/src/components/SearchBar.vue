@@ -90,7 +90,7 @@
         {option: 'Name', value: 'name'},
         {option: 'Category', value: 'categoryId'}],
       sortBy: {
-        option: "Rating", value: "averageRating"
+        option: "Creation date", value: "dateCreated"
       },
 
       orderOptions: [
