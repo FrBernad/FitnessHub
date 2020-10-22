@@ -142,7 +142,7 @@
     },
     validations: {
       exercise: {
-        name: {required, minLength: minLength(3), maxLength: maxLength(100)},
+        name: {required, minLength: minLength(3), maxLength: maxLength(15)},
         detail: {required, minLength: minLength(5), maxLength: maxLength(200)},
         duration: {
           minValue: validateIf(function () {
@@ -174,7 +174,7 @@
           return errors;
         }
         !this.$v.exercise.name.minLength && errors.push('Name must be at least 3 characters long');
-        !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 100 characters");
+        !this.$v.exercise.name.maxLength && errors.push("Name can't have more than 15 characters");
         !this.$v.exercise.name.required && errors.push('Name is required');
 
         return errors;
