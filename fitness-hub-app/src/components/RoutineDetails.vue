@@ -4,7 +4,7 @@
       <span class="headline textColor">{{ routine.name }}</span>
     </v-card-title>
     <v-card-text class="pb-0">
-      <v-container>
+      <v-container class="pb-0">
         <v-row class="justify-center align-center">
           <v-col cols="12">
             <v-text-field
@@ -64,7 +64,7 @@
           </v-col>
         </v-row>
         <v-row class="justify-center align-center">
-          <v-col cols="4">
+          <v-col cols="4" class="pa-0 d-flex justify-center">
             <v-checkbox
               v-model="routine.isPublic"
               label="Public"
