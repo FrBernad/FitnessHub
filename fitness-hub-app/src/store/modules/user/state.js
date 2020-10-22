@@ -4,8 +4,9 @@ const state = {
   email: "",
   phone: '',
   gender: '',
-  birthdate: " ",
+  birthdate: "",
   avatarUrl: "",
+  fullName: "",
 };
 
 export default state

@@ -4,7 +4,6 @@ export default {
       body: JSON.stringify(
         {
           ...payload,
-          fullName: '',
         }),
       method: 'PUT',
       headers: {
