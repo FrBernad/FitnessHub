@@ -193,7 +193,7 @@
               })
             }
             if(x.video.length !== 0){
-              let aux = await this.$store.dispatch('addExerciseVideo', {
+                await this.$store.dispatch('addExerciseVideo', {
                 routineId: routine.id,
                 cycleId: cycleExercise.id,
                 exerciseId : aux.id,
@@ -210,7 +210,7 @@
             }
           });
           for (const x of exercises.Cooldown) {
-            await this.$store.dispatch('addToCycleExercise', {
+            let aux = await this.$store.dispatch('addToCycleExercise', {
               routineId: routine.id,
               cycleId: cycleCooldown.id,
               exercise: x
