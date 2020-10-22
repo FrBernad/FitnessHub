@@ -17,47 +17,49 @@
               clearable
             ></v-text-field>
           </v-col>
-            <v-col cols="12">
-              <v-textarea
-                class="pa-0"
-                light
-                no-resize
-                filled
-                height="150px"
-                pb-0
-                v-model="exercise.detail"
-                color="rgb(33, 37, 41)"
-                background-color="rgb(248, 249, 250)"
-                label="Description"
-                :error-messages="detailError"
-                @blur="$v.exercise.detail.$touch()"
-              ></v-textarea>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <v-radio-group row class="mt-0" light v-model="radios">
+          <v-col cols="12">
+            <v-textarea
+              class="pa-0"
+              light
+              no-resize
+              filled
+              height="150px"
+              pb-0
+              v-model="exercise.detail"
+              color="rgb(33, 37, 41)"
+              background-color="rgb(248, 249, 250)"
+              label="Description"
+              :error-messages="detailError"
+              @blur="$v.exercise.detail.$touch()"
+            ></v-textarea>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-radio-group row class="mt-0" light v-model="radios">
+              <v-row align="center" justify="space-around">
                 <v-col cols="3" class="ma-0 pa-0 d-flex align-center justify-start">
                   <v-radio color="#212529" value="time" @click="cleanReps" label="TIME"></v-radio>
                 </v-col>
-                <v-col cols="5" class="ma-0 pa-0 d-flex align-center justify-center">
+                <v-col cols="5" class="ma-0 pa-0 d-flex align-center justify-start">
                   <v-radio color="#212529" value="reps" @click="cleanTime" label="REPETITIONS"></v-radio>
                 </v-col>
-                <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-if="radios==='time'">
-                  <v-text-field color="#212529" label="SECS" hide-details :error-messages="timeError"
+                <v-col cols="2" class="ma-0 pa-0 d-flex justify-start" v-if="radios==='time'">
+                  <v-text-field color="#212529" label="SECS" :error-messages="timeError"
                                 @blur="$v.exercise.duration.$touch()" v-model="exercise.duration">{{ exercise.duration
                     }}
                   </v-text-field>
                 </v-col>
                 <v-col cols="2" class="ma-0 pa-0 d-flex justify-end" v-else>
-                  <v-text-field color="#212529" label="REPS" hide-details :error-messages="repsError"
+                  <v-text-field color="#212529" label="REPS" :error-messages="repsError"
                                 @blur="$v.exercise.repetitions.$touch()" v-model="exercise.repetitions">
                     {{ exercise.repetitions }}
                   </v-text-field>
                 </v-col>
-              </v-radio-group>
-            </v-col>
-          </v-row>
+              </v-row>
+            </v-radio-group>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
     <v-card-actions>
