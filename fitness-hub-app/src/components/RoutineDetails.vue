@@ -38,6 +38,7 @@
         <v-row class="justify-center align-center">
           <v-col cols="6" sm="6">
             <v-select
+              outlined
               :items="categoryOptions"
               item-text="option"
               item-value="value"
@@ -52,6 +53,7 @@
           </v-col>
           <v-col cols="6" sm="6">
             <v-select
+              outlined
               :items="['rookie','beginner','intermediate','advanced']"
               label="Difficulty"
               required

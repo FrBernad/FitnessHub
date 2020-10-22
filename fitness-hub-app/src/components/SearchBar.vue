@@ -54,6 +54,7 @@
             <v-row class="pa-0 align-center justify-center">
               <v-col cols="10" class="py-0 d-flex align-center justify-end">
                 <v-select
+                  outlined
                   :items="filterOptions"
                   item-text="option"
                   item-value="value"
