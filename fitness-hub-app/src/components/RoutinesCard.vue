@@ -7,9 +7,10 @@
     <v-row align="start" justify="space-between">
       <v-col cols="12 d-flex justify-center align-center pt-0">
         <v-img class="rounded-corner "
-               src="../assets/imgs/routineCard.jpg"
+               src="../assets/imgs/7.jpg"
                max-height="200">
         </v-img>
+
       </v-col>
       <v-col cols="7" class="d-flex align-center justify-start" lg="6">
         <h4>{{ routineData.name.toUpperCase() }}</h4>
@@ -35,6 +36,12 @@
   export default {
     name: "RoutinesCard",
     props: ["routineData"],
+    computed: {
+      imgCard() {
+        console.log(`../assets/imgs/${this.routineData.category.id}.jpg`);
+        return '../assets/imgs/fausDuro.jpg';
+      }
+    }
   }
 
 </script>

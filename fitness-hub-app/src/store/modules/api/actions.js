@@ -123,7 +123,6 @@ export default {
       if (!response.ok) {
         throw new Error("Failed to autologin");
       }
-
       context.commit("user/setUserData", responseData);
     }
   },
