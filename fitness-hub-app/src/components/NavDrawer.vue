@@ -10,7 +10,7 @@
           <v-list-item-icon>
             <v-icon class="px-1">mdi-account</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>{{username}}</v-list-item-title>
+          <v-list-item-title>{{username.toUpperCase()}}</v-list-item-title>
         </v-list-item>
         <v-list-item to="/home" exact>
           <v-list-item-title>HOME</v-list-item-title>

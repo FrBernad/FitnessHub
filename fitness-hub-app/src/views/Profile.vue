@@ -3,7 +3,8 @@
     <v-row align="start" justify="center">
       <v-col cols="12" class="pa-0">
         <v-card color="rgb(233 236 239)">
-          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3" height="400px"
+          <v-img src="../assets/imgs/profileBG.jpg" class="elevation-3"
+                 :height="this.$vuetify.breakpoint.smAndDown ? '300px' : '400px'"
           >
           </v-img>
           <v-row>
@@ -146,7 +147,6 @@
             ...this.$store.getters["user/userData"],
             password: this.password
           };
-          //TODO: ARREGLAROO ESTOOO
           data.avatarUrl = this.url;
           data.birthdate = Date.now();
           await this.$store.dispatch("user/updateProfile", data);

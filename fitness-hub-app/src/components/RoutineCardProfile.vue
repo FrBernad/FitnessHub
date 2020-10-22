@@ -5,10 +5,10 @@
       query: { routineData: routineData, routineId: routineData.id}}"
             class=" iluminate px-4" width="100%">
       <v-row align="start" justify="space-between">
-        <v-col cols="6" class="d-flex align-center justify-start pb-0" lg="6">
+        <v-col cols="6" class="d-flex align-center justify-start pb-0">
           <h4>{{ routineData.name.toUpperCase()}}</h4>
         </v-col>
-        <v-col cols="4" md="4" class="d-flex pb-0 justify-md-center justify-sm-end justify-start align-center">
+        <v-col cols="6" class="d-flex pb-0 justify-end align-center">
           <template v-for="num in 5">
             <v-icon v-if="num<=routineData.averageRating" color="yellow darken-3">mdi-star</v-icon>
             <v-icon v-else color="yellow darken-3">mdi-star-outline</v-icon>
