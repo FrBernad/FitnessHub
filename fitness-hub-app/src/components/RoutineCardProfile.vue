@@ -1,7 +1,7 @@
 <template>
   <v-list-item class="ma-2">
     <v-card :to="{
-      path: '/home/routine/',
+      path: '/home/communityWorkouts/routine/',
       query: { routineData: routineData, routineId: routineData.id}}"
             class=" iluminate px-4" width="100%">
       <v-row align="start" justify="space-between">

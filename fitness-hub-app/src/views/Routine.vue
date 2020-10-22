@@ -74,7 +74,7 @@
 
     <v-row>
       <v-col cols="12" class="d-flex align-center justify-center">
-        <v-img src="../assets/imgs/routines.jpg" max-height="250" max-width="500" class="imgBorder"></v-img>
+        <v-img :src="categoryImg" max-height="250" max-width="500" class="imgBorder"></v-img>
       </v-col>
     </v-row>
 
@@ -100,7 +100,8 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0" color="#F8F9FA">
-          <Exercise v-for="(entry,index) in exercises.warmup" :key="index" :info="entry" :cycleId="cyclesId[0]" :routineId="routineId"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.warmup" :key="index" :info="entry" :cycleId="cyclesId[0]"
+                    :routineId="routineId"></Exercise>
         </v-list>
       </v-col>
     </v-row>
@@ -111,7 +112,8 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0" color="#F8F9FA">
-          <Exercise v-for="(entry,index) in exercises.exercise" :key="index" :cycleId="cyclesId[1]" :routineId="routineId" :info="entry"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.exercise" :key="index" :cycleId="cyclesId[1]"
+                    :routineId="routineId" :info="entry"></Exercise>
         </v-list>
       </v-col>
 
@@ -123,7 +125,8 @@
       </v-col>
       <v-col cols="12" class="py-0">
         <v-list class="pa-0">
-          <Exercise v-for="(entry,index) in exercises.cooldown" :key="index"   :cycleId="cyclesId[2]" :routineId="routineId" :info="entry"></Exercise>
+          <Exercise v-for="(entry,index) in exercises.cooldown" :key="index" :cycleId="cyclesId[2]"
+                    :routineId="routineId" :info="entry"></Exercise>
         </v-list>
       </v-col>
     </v-row>
@@ -150,12 +153,13 @@
         creatorID: null,
         detail: "",
         id: null,
+        categoryId: 1,
         fav: false,
         rate: false,
         rating: 0.0,
         share: false,
         cyclesId: [],
-        }
+      }
     },
 
     computed: {
@@ -163,9 +167,12 @@
         return this.creatorID === this.$store.get("user/userID");
       },
       routineLink() {
-        return this.$store.getters['hostUrl']+ this.$router.currentRoute.path+"?routineId="+
+        return this.$store.getters['hostUrl'] + this.$router.currentRoute.path + "?routineId=" +
           this.$router.currentRoute.query.routineId;
-      }
+      },
+      categoryImg() {
+        return require(`../assets/imgs/${this.categoryId}.jpg`);
+      },
     },
 
     created() {
@@ -180,12 +187,14 @@
             const routine = await this.$store.dispatch("getRoutineByID", {
               routineId: this.routineId
             });
+            this.categoryId = routine.category.id;
             this.name = routine.name;
             this.creator = routine.creator.username;
             this.creatorID = routine.creatorID;
             this.detail = routine.detail;
             this.id = routine.id;
           } else {
+            this.categoryId = this.routineData.category.id;
             this.name = this.routineData.name;
             this.creator = this.routineData.creator.username;
             this.creatorID = this.routineData.creator.id;

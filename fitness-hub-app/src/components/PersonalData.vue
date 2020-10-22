@@ -146,7 +146,6 @@ export default {
   computed: {
     ...sync("user/*"),
     phoneError(){
-
       const errors = [];
       if (!this.$v.phone.$dirty) {
         return errors;

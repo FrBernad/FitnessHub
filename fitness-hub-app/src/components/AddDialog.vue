@@ -186,7 +186,6 @@ export default {
           return this.radios !== "time"
         }, minValue(1))
       },
-      type: {required},
     }
   },
   computed: {

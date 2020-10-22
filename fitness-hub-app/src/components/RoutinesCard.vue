@@ -7,7 +7,7 @@
     <v-row align="start" justify="space-between">
       <v-col cols="12 d-flex justify-center align-center pt-0">
         <v-img class="rounded-corner "
-               src="../assets/imgs/routineCard.jpg"
+               :src="categoryImg"
                max-height="200">
         </v-img>
       </v-col>
@@ -35,6 +35,11 @@
   export default {
     name: "RoutinesCard",
     props: ["routineData"],
+    computed: {
+      categoryImg() {
+        return require(`../assets/imgs/${this.routineData.category.id}.jpg`);
+      }
+    }
   }
 
 </script>
