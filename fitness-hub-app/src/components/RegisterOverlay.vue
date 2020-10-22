@@ -3,7 +3,7 @@
     <v-container fluid fill-height>
       <v-row justify="center" align="center">
         <v-col cols="11" sm="8" md="5" lg="4">
-          <v-card class="px-8 pb-8 pt-4 text-center" color="#212529">
+          <v-card class="px-8 pb-8 pt-4 text-center" light color="#F8F9FA">
             <v-row justify="start" align="center">
               <v-col cols="10">
                 <h1 class="text-left">REGISTER</h1>
@@ -50,7 +50,7 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn id="register" class="my-2" large width="80%" @click="processData">REGISTER</v-btn>
+              <v-btn light outlined class="my-2" large width="80%" @click="processData">REGISTER</v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -61,7 +61,7 @@
       v-model="loading"
       width="500px"
     >
-      <v-card color="#212529" width="500px" height="250px">
+      <v-card light color="#F8F9FA" width="500px" height="250px">
         <v-container fill-height fluid>
           <v-row align="center" justify="center">
             <v-fade-transition>
@@ -198,9 +198,5 @@
 </script>
 
 <style scoped>
-  #register {
-    background-color: rgba(248, 249, 250, 0.25);
-    color: #F8F9FA;
-    border: thin solid #F8F9FA;
-  }
+
 </style>

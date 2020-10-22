@@ -4,7 +4,7 @@
       v-model="loading"
       width="500px"
     >
-      <v-card color="#212529" width="500px" height="250px">
+      <v-card light color="#F8F9FA" width="500px" height="250px">
         <v-container fill-height fluid>
           <v-row align="center" justify="center">
             <v-fade-transition>
@@ -30,7 +30,7 @@
 
     <v-row align="center" justify="center">
       <v-col cols="10" sm="10" md="7" lg="6">
-        <v-card dark color="#212529" class="pa-4">
+        <v-card light color="#F8F9FA" class="pa-4">
           <v-container fluid>
             <v-row align="center" justify="center">
               <v-col cols="12">
@@ -52,7 +52,7 @@
                 </v-form>
               </v-col>
               <v-col cols="6" class="d-flex align-center justify-center pt-0">
-                <v-btn dark outlined large width="50%" @click="verifyUser">VERIFY</v-btn>
+                <v-btn light outlined large width="50%" @click="verifyUser">VERIFY</v-btn>
               </v-col>
               <v-col cols="12" class="pb-0">
                 <v-divider class="mb-5"></v-divider>
@@ -66,7 +66,7 @@
                     ></v-text-field>
                   </v-col>
                   <v-col cols="4" class="d-flex align-center justify-center pa-0 pb-7">
-                    <v-btn dark outlined width="50%" @click="resendVerification">RESEND</v-btn>
+                    <v-btn light outlined width="50%" @click="resendVerification">RESEND</v-btn>
                   </v-col>
                 </v-row>
               </v-col>

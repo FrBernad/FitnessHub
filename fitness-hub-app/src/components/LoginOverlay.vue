@@ -3,7 +3,7 @@
     <v-container fluid fill-height>
       <v-row justify="center" align="center">
         <v-col cols="11" sm="8" md="5" lg="4">
-          <v-card class="px-8 pb-8 pt-4 text-center" color="#212529">
+          <v-card light class="px-8 pb-8 pt-4 text-center" color="#F8F9FA">
             <v-row justify="start" align="center">
               <v-col cols="10">
                 <h1 class="text-left">LOGIN</h1>
@@ -39,7 +39,7 @@
                 counter
                 @click:append="show = !show"
               ></v-text-field>
-              <v-btn id="signIn" class="mt-3" large width="80%" @click="processData">Sign in</v-btn>
+              <v-btn light outlined class="mt-3" large width="80%" @click="processData">Sign in</v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -50,7 +50,7 @@
       v-model="loading"
       width="500px"
     >
-      <v-card color="#212529" width="500px" height="250px">
+      <v-card light color="#F8F9FA" width="500px" height="250px">
         <v-container fill-height fluid>
           <v-row align="center" justify="center">
             <v-fade-transition>
@@ -76,8 +76,8 @@
                 <h2 class="text-h5 text-center red--text">Your account is not verified</h2>
               </v-col>
               <v-col cols="9" md="6" class="mt-8 d-flex justify-space-between">
-                <v-btn dark @click="verf=false;loading=false;errorMessage=''" width="40%" outlined>CANCEL</v-btn>
-                <v-btn dark to="verifyAccount" width="40%" outlined>VERIFY</v-btn>
+                <v-btn light @click="verf=false;loading=false;errorMessage=''" width="40%" outlined>CANCEL</v-btn>
+                <v-btn light to="verifyAccount" width="40%" outlined>VERIFY</v-btn>
               </v-col>
             </template>
           </v-row>
@@ -187,11 +187,5 @@
 </script>
 
 <style scoped>
-
-  #signIn {
-    background-color: rgba(248, 249, 250, 0.25);
-    color: #F8F9FA;
-    border: thin solid #F8F9FA;
-  }
 
 </style>
