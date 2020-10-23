@@ -94,7 +94,6 @@
     data() {
       return {
         picDialog: false,
-        password: "pass",
         show: false,
         url: "",
       }
@@ -137,7 +136,6 @@
         try {
           const data = {
             ...this.$store.getters["user/userData"],
-            password: this.password
           };
           data.avatarUrl = this.url;
           data.birthdate = Date.now();

@@ -13,7 +13,7 @@ export default {
         birthdate: 0,
       })
     })
-    context.commit("user/setUserData",payload);
+    context.commit("user/setUserData", payload);
     let responseData = await response.json();
     let errorMessage = "";
     if (!response.ok) {
@@ -83,7 +83,7 @@ export default {
 
     context.commit("user/setUserData", responseData);
 
-   // await context.dispatch("seedDataBase")
+    // await context.dispatch("seedDataBase")
   },
 
   async logout(context, payload) {
@@ -104,6 +104,7 @@ export default {
       token: null,
     }
 
+    context.commit('user/resetData')
     context.commit('setUser', userAuth);
     context.commit('setAutoLogout');
   },
@@ -158,7 +159,7 @@ export default {
         email: payload.email,
       })
     })
-    await context.dispatch("user/setUserData",payload);
+    await context.commit("user/setUserData", payload);
     if (!response.ok) {
       throw new Error(response.statusText);
     }

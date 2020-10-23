@@ -108,7 +108,6 @@
         }
         let profile = {
           ...this.$store.getters["user/userData"],
-          password: "pass"
         };
         profile.birthdate = new Date(profile.birthdate).getTime();
         try {
